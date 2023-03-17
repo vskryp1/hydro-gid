@@ -1,0 +1,6 @@
+traefik_dir: /home/{{ project_name }}/traefik
+traefik_hostname: "{{ domain }}"
+traefik_https_redirect: false
+traefik_image: traefik:alpine
+traefik_log_level: ERROR
+traefik_network: traefik

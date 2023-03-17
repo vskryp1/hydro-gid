@@ -1,0 +1,17 @@
+@extends('backend.layouts.backend')
+
+@section('content')
+
+    <div class="page-error centered">
+        <div class="error-symbol">
+            <i class="fa fa-warning"></i>
+        </div>
+        <h2>
+            Error 404
+            <small>Page not found!</small>
+        </h2>
+        <p>We did not find the page you were looking for!</p>
+        <p>You can search again or contact one of our agents to help you!</p>
+    </div>
+
+@endsection

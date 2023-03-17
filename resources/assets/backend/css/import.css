@@ -1,0 +1,6 @@
+.sorter ul {padding: 0; list-style: none}
+.sorter li {background: #fff; min-height: 20px; cursor: pointer; transition: .3s}
+.sorter .arr li {display: flex; align-items: center; justify-content: space-between;}
+.sorter .arr li .fa {font-size: 10px; margin: 0 10px; }
+.sorter li:nth-of-type(2n) {background: #e0f2be;}
+.sorter li:hover {background: #eeeeee;}

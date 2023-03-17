@@ -1,0 +1,7 @@
+composer.lock
+package-lock.json
+/docker/ansible
+make
+docker-compose.yml
+docker-compose.prod.yml
+.gitignore 

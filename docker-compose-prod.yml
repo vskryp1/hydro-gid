@@ -1,0 +1,109 @@
+version: '3'
+
+
+networks:
+  backend-network:
+    driver: bridge
+  traefik:
+    external: true
+
+volumes:
+  redis-data:
+  mysql-data:
+  home-dir:
+
+services:
+  &app-service app: &app-service-template
+    image: registry.example.com/group/user:latest
+#    build:
+#      context: ./
+#      dockerfile: docker/sources/Dockerfile
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+    - /etc/passwd:/etc/passwd:ro
+    - /etc/group:/etc/group:ro
+    - ./storage:/app/storage:rw
+    - home-dir:/home/user
+    hostname: *app-service
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: &redis-port 6379
+#      DB_HOST: mysql
+#      DB_PORT: &db-port 3306
+      SCHEDULE_PERIOD: 30
+      FPM_PORT: &php-fpm-port 9000
+      FPM_USER: "${UID:-1000}"
+      FPM_GROUP: "${GID:-1000}"
+      FPM_UPSTREAM_PARAMS: " "
+      HOME: /home/user
+      ROOT_DIR: '/app/public'
+    env_file:
+    - .env
+    command: keep-alive.sh
+    depends_on:
+    - redis
+    - mysql
+    labels:
+    - traefik.enable=false
+    networks:
+    - backend-network
+
+  &queue-service queue:
+    <<: *app-service-template
+    restart: always
+    hostname: *queue-service
+    command: php /app/artisan queue:work --tries=3 --queue=default,mail,mail2
+
+  &scheduler-service scheduler:
+    <<: *app-service-template
+    restart: always
+    hostname: *scheduler-service
+    command: scheduler.sh "php /app/artisan schedule:run"
+
+  &php-fpm-service php-fpm:
+    <<: *app-service-template
+    user: 'root:root'
+    restart: always
+    hostname: *php-fpm-service
+    entrypoint: /app-entrypoint.sh
+    command: []
+    labels:
+    - "traefik.docker.network=traefik"
+    - traefik.port=80
+    - "traefik.frontend.passHostHeader=true"
+    - "traefik.frontend.headers.SSLProxyHeaders=X-Forwarded-Proto:https"
+    - "traefik.frontend.headers.SSLProxyHeaders=HTTPS:on"
+    - 'traefik.enable=true'
+    - "traefik.frontend.rule=Host:example.com"
+    
+    networks:
+    - backend-network
+    - traefik
+
+  redis:
+    image: redis:4.0.11-alpine
+    restart: always
+    command: redis-server
+    volumes:
+    - redis-data:/data:rw
+    labels:
+    - traefik.enable=false
+    networks:
+    - backend-network
+
+  mysql:
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      MYSQL_DATABASE: hydro_gid_DB
+      MYSQL_USER: hydro_gid_DB
+      MYSQL_PASSWORD: yIyb504DChJ6QdLD
+      MYSQL_ROOT_PASSWORD: yIyb504DChJ6QdLD
+    volumes:
+      - 'mysql-data:/var/lib/mysql'
+      - './backup.sql:/docker-entrypoint-initdb.d/init.sql'
+#    ports: [*db-port, '3306:3306'] # Port 3307 for connecting from localhost using, for example, data-grip
+    labels:
+    - traefik.enable=false
+    networks:
+    - backend-network

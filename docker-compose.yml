@@ -1,0 +1,135 @@
+version: '3.2'
+
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  mysql-data:
+  home-dir:
+
+services:
+  &app-service app: &app-service-template
+    image: artjoker/laravel_app:latest
+    #build:
+    #  context: ./docker/app
+    #  dockerfile: Dockerfile
+    user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
+    volumes:
+    - /etc/passwd:/etc/passwd:ro
+    - /etc/group:/etc/group:ro
+    - ./:/app:rw
+    - home-dir:/home/user
+    hostname: *app-service
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: &redis-port 6379
+      DB_HOST: mysql
+      DB_PORT: &db-port 3306
+      DB_DATABASE: &db-name homestead
+      DB_USERNAME: &db-username homestead
+      DB_PASSWORD: &db-password secret
+      SCHEDULE_PERIOD: 30
+      FPM_PORT: &php-fpm-port 9000
+      FPM_USER: "${USER_ID:-1000}"
+      FPM_GROUP: "${GROUP_ID:-1000}"
+      APP_ENV: local
+      APP_DEBUG: 'true'
+      HOME: /home/user
+    command: keep-alive.sh
+    depends_on:
+    - redis
+    - mysql
+    networks:
+    - backend-network
+
+  &test-service test:
+    <<: *app-service-template
+    hostname: *test-service
+    volumes:
+    - '.:/app'
+    - /etc/passwd:/etc/passwd:ro
+    - /etc/group:/etc/group:ro
+    - home-dir:/home/user
+
+  &queue-service queue:
+    <<: *app-service-template
+    restart: always
+    hostname: *queue-service
+    command: php /app/artisan queue:work --queue=default,mail,mail2
+
+  &scheduler-service scheduler:
+    <<: *app-service-template
+    restart: always
+    hostname: *scheduler-service
+    command: scheduler.sh "php /app/artisan schedule:run"
+
+  &php-fpm-service php-fpm:
+    <<: *app-service-template
+    user: 'root:root'
+    restart: always
+    hostname: *php-fpm-service
+    ports: [*php-fpm-port]
+    entrypoint: /fpm-entrypoint.sh
+    command: php-fpm --nodaemonize -d "opcache.enable=0" -d "display_startup_errors=On" -d "display_errors=On" -d "error_reporting=E_ALL"
+    networks:
+    - backend-network
+    - frontend-network
+
+  &node-service node:
+    <<: *app-service-template
+    image: artjoker/laravel_node
+    restart: on-failure
+    hostname: *node-service
+    working_dir: /app
+    command: []
+    depends_on: []
+    networks:
+    - frontend-network
+
+  nginx:
+    image: registry.gitlab.com/tarampampam/laravel-in-docker/nginx:latest
+    #build:
+    #  context: ./docker/nginx
+    #  dockerfile: Dockerfile
+    restart: always
+    working_dir: /usr/share/nginx/html
+    environment:
+      FPM_HOST: *php-fpm-service
+      FPM_PORT: *php-fpm-port
+      ROOT_DIR: '/app/public' # App path must equals with php-fpm container path
+    volumes:
+    - ./:/app:ro
+    ports: ['80:80']
+    depends_on:
+    - *php-fpm-service
+    networks:
+    - frontend-network
+
+  redis:
+    image: redis:4.0.11-alpine
+    restart: always
+    command: redis-server
+    volumes:
+    - redis-data:/data:rw
+    ports: [*redis-port, '16379:6379'] # Port 16379 for connecting from localhost
+    networks:
+    - backend-network
+
+  mysql:
+    image: 'mysql:5.7'
+    restart: always
+    environment:
+      MYSQL_DATABASE: *db-name
+      MYSQL_USER: *db-username
+      MYSQL_PASSWORD: *db-password
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - 'mysql-data:/var/lib/mysql'
+      - './docker/init.sql:/docker-entrypoint-initdb.d/init.sql'
+    ports: [*db-port, '3306:3306'] # Port 3307 for connecting from localhost using, for example, data-grip
+    networks:
+    - backend-network

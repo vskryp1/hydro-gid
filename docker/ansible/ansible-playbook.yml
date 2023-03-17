@@ -1,0 +1,161 @@
+---
+- name: Setup python
+  hosts: all
+  become: yes
+  gather_facts: false # You must disable the gather of facts for this role to work as intended
+  roles:
+    - role: jasonheecs.ubuntu-python-raw
+      vars:
+      - python_version: 2
+
+
+- name: Setup base packages
+  hosts: all
+  become: yes
+  gather_facts: yes # You must disable the gather of facts for this role to work as intended
+  
+  tasks:
+    - name: install base packages
+      package: name={{item}} state=present
+      with_items:
+      - software-properties-common
+      - git
+      - htop
+      - iotop
+      - vim
+      - fio
+      - curl
+      - lsof
+      - mc
+      - landscape-common
+      - gnupg2
+      - pass
+
+- name: Setup sudo project user
+  hosts: all
+  become: yes
+  roles:
+    - weareinteractive.git
+    - weareinteractive.users_oh_my_zsh
+    - weareinteractive.sudo
+  vars_files:
+    - vars/main.yml
+  vars:
+    users:
+      - name: Set project user
+        username: "{{ user }}"
+        authorized_keys: 
+        - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+        - "{{ lookup('file', './files/art_deployer.pub') }}"
+        - "{{ lookup('file',  public_key) }}"
+        home_create: yes
+        home_mode: "0750"
+        groups:
+          - sudo
+          - docker
+        oh_my_zsh:
+          theme: blinks
+          plugins: docker
+    users_groups:
+      - docker
+    sudo_users:
+      - name: "{{ user }}"
+        nopasswd: yes
+
+#- name: Install netdata
+#  hosts: all
+#  roles:
+#  - jffz.netdata
+
+- name: Setup Docker
+  hosts: docker
+  become: yes
+  roles:
+    - role: geerlingguy.docker
+      vars:
+      - docker_edition: 'ce'
+      - docker_package: "docker-{{ docker_edition }}"
+      - docker_service_enabled: true
+      - docker_install_compose: true
+      - docker_compose_version: "1.23.1"
+      - docker_compose_path: /usr/local/bin/docker-compose
+
+- name: Setup ssh security
+  hosts: all
+  become: true
+  roles:
+    - role: diodonfrost.ssh_hardening
+      vars:
+       - sshd_port: "53126"
+       - sshd_password_authentification: "no"
+       - sshd_banner: "none"
+
+
+- name: Setup ufw
+  hosts: all
+  become: yes
+  gather_facts: yes # You must disable the gather of facts for this role to work as intended
+  
+  tasks:
+    - name: Install ufw
+      package: 
+        name: ufw
+        state: present
+
+    - name: Enable UFW and deny incoming
+      ufw:
+        state: enabled
+        direction: incoming
+        policy: deny
+
+    - name: Allow outgoing
+      ufw:
+        direction: outgoing
+        policy: allow
+
+    - name: Allow OpenSSH
+      ufw:
+        rule: allow
+        name: OpenSSH
+
+    - name: Allow ssh on port 53126
+      ufw:
+        rule: limit
+        port: 53126
+        proto: tcp
+
+
+- name: ufw allow 80 and 443 ports
+  hosts:
+    - docker
+  become: true
+  tasks:
+    - name: Allow all access to tcp port 80
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+
+    - name: Allow all access to tcp port 443
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+
+- name: Disable service apache2, nginx, mysql
+  hosts: docker
+  become: yes
+  gather_facts: yes # You must disable the gather of facts for this role to work as intended
+  
+  tasks:
+    - name: Disable services
+      systemd:
+        name: "{{ item }}"
+        enabled: no
+        state: stopped
+      with_items:
+        - apache2
+        - httpd
+        - nginx
+        - mysql
+      ignore_errors: yes

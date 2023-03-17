@@ -1,0 +1,183 @@
+# Base docker image for all steps (which hosted on your gitlab account)
+image: registry.gitlab.com/jordanhammond/ticket-works-api/app:latest
+
+# List of all stages
+# One stage may contain several jobs which can run parallel (for example npm and composer)
+stages:
+  - build
+  - test
+  - docker-build
+  - deploy
+
+# Snippet for ssh connection with key from variable $SSH_PRIVATE_KEY
+# Nothing change here
+.init_ssh: &init_ssh |
+  eval $(ssh-agent -s) # init ssh-agent in subshell
+  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null # add ssh key from variable to ssh-agent
+  mkdir -p ~/.ssh # create SSH dir
+  chmod 700 ~/.ssh # fix permissions for SSH dir
+  [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config # if docker environment - ignore host key checking
+  ssh-keyscan ${DOMAIN} >> ~/.ssh/known_hosts # Add domain to list of known hosts
+  chmod 644 ~/.ssh/known_hosts # fix permissions to file known_hosts
+
+# JOB 1. Install dependencies (needed for Laravel) using composer
+composer: # Name of CI job
+  stage: build # Name of CI stage
+  cache: # Caching description
+    key: ${CI_COMMIT_REF_NAME}-composer # Name of cache, needed for reduce build time if we try to deploy same version couple times
+    policy: pull-push # Download cache on start of job and upload after job
+    paths: # List of path for caching
+      - vendor/ # Caching vendor dir
+  script: # Commands which runs through this job
+    # Install composer packages without progress, user input, and not execute scpripts from composer.json
+    - composer install --no-interaction --no-progress --no-scripts
+  artifacts: # The list of artifacts needed on next steps
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME" # Name of artifacts
+    expire_in: 2 hour # Time to live for artifacts
+    paths:
+      - vendor/ # Save vendor dir to artifacts
+  only: # Execute only for dev and master branch commits
+    - master
+    - dev
+
+# JOB 2. Run unit tests
+phpunit:
+  stage: test
+  services: # Additional services required for run tests
+    - mariadb:10.0 # Use official docker image `mariadb` with tag `10.0` from https://hub.docker.com/_/mariadb
+    - redis:4.0.11-alpine # Use official docker image `redis` with tag `4.0.11-alpine` from https://hub.docker.com/_/redis
+  variables: # environment variables for job and services
+    APP_ENV: test
+    DB_HOST: mariadb
+    DB_USERNAME: root
+    MYSQL_DATABASE: homestead
+    MYSQL_ROOT_PASSWORD: secret
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+  script:
+    - cp .env.example .env # create .env file for test from example
+    - php artisan key:generate # fill variable APP_KEY in .env
+    - mysql -h${DB_HOST} -u${DB_USERNAME} --password=${MYSQL_ROOT_PASSWORD} -e "source ./docker/init.sql" ${MYSQL_DATABASE} # Fill MySQL database from file ./docker/init.sql
+    - chmod -R 777 storage/ # change permissions for storage to rw
+    - ./vendor/bin/phpunit --verbose --coverage-text # Run unit test in PHPUnit
+  artifacts: # The list of artifacts needed on next steps
+    when: always # Always save artifacts
+    expire_in: 1 hour # Remove artifacts after 1 hour
+    paths: # Path to artifacts
+      - storage/logs # Save logs to artifacts. If test crash we can download logs to define problem
+  only: # Execute only for dev and master branch commits
+    - master
+    - dev
+
+# JOB 3. Packaging project to docker image
+docker-package:
+  stage: docker-build
+  image: docker:stable
+  dependencies: # use artifacts from job with name `composer`
+    - composer # name of previous job
+  services: # Additional services required for this job
+    - docker:dind # Run Docker in Docker for build
+  before_script: # Execute commands before main job script
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY" # Login to GitLab docker registry using CI variables
+  script:
+    - TAG="$CI_COMMIT_REF_NAME" # Docker image tag == name of current branch
+    # Build docker image with tag `registry.gitlab.com/username/project-name:branch-name`. Path to Dockerfile is `-f ./docker/sources/Dockerfile`.
+    # Context of Dockerfile is current dir `./`
+    - docker build --tag "${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}"
+      -f ./docker/sources/Dockerfile ./
+    # Push docker image to GitLab docker registry
+    - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH}:${TAG}"
+  only: # Execute only for commits to dev and master branch
+    - dev
+    - master
+
+# Deploy to dev
+dev:
+  stage: deploy
+  variables: # Environment variables for deployment https://docs.gitlab.com/ee/ci/variables/#variables
+    SSH_PRIVATE_KEY: ${DEV_SSH_PRIVATE_KEY} # SSH private key to connect server
+    DOMAIN: ${DEV_DOMAIN}                   # Project domain [example.com]
+    SERVER_PATH: ${DEV_SERVER_PATH}         # Path to project dir on remote server [~/prject_dir]
+    SSH_USER: ${DEV_SSH_USER}               # SSH user name [user-name]
+    SSH_HOST: ${DEV_DOMAIN}                 # IP or domain for connect to SSH server [192.168.0.2] or [example.com]
+    SSH_PORT: ${DEV_SSH_PORT}               # SSH port [22]
+    ENV_VARIABLES: ${DEV_ENV_VARIABLES}     # .env file encoded with base64 https://www.base64decode.org/
+    AFTER_DEPLOY: config/after-deploy.sh    # Path to executable script to run custom commands after deploy (clean cache, run migrations, etc)
+  script: &docker-deploy # `&docker-deploy` is variable containing script
+    - *init_ssh # run code block defined  `init_ssh`
+    # Copy config file (.env) to server
+    - echo "$ENV_VARIABLES" | base64 -d > .env
+    # Create docker-compose.yml from template
+    - cat docker-compose-prod.yml > docker-compose.yml
+    # replace the example path to docker image with the current
+    - sed -i -e "s|registry.example.com/group/user.*|$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}|g" "docker-compose.yml"
+    # replace the example domain with the correct domain
+    - sed -i -e "s|Host:example.com|Host:${DOMAIN}|g" "docker-compose.yml"
+    # copy config files to server
+    - scp -P ${SSH_PORT} docker-compose.yml .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+    # Delivery docker image to server
+    - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ${SERVER_PATH} &&
+      docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY" &&
+      docker-compose pull --quiet"
+    # Deploy. Construction `export UID=\${UID}` need for export server variable.
+    - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST}
+      "
+      cd ${SERVER_PATH} &&
+      export UID=\${UID} &&
+      export GID=\${GID} &&
+      docker-compose down &&
+      docker-compose up -d &&
+      docker-compose exec -T php-fpm /app/${AFTER_DEPLOY}
+      "
+    - exit 0
+  dependencies: [] # disable dependencies
+  environment: # https://docs.gitlab.com/ee/ci/environments.html#defining-environments
+    name: dev  # Name of environment
+    url: ${DEV_DOMAIN_URL} # url to environment [http://example.com]
+  when: manual # manual start of job
+  only:        # Execute only for commits to dev branch
+    - dev
+
+
+########################## Deploy to staging and production ##########################
+
+staging:
+  stage: deploy
+  image: artjoker/laravel:latest
+  variables:
+    SSH_PRIVATE_KEY: ${STAGING_SSH_PRIVATE_KEY}
+    DOMAIN: ${STAGING_DOMAIN}
+    SERVER_PATH: ${STAGING_SERVER_PATH}
+    SSH_USER: ${STAGING_SSH_USER}
+    SSH_HOST: ${STAGING_SSH_HOST}
+    SSH_PORT: ${STAGING_SSH_PORT}
+    ENV_VARIABLES: ${STAGING_ENV_VARIABLES}
+    AFTER_DEPLOY: config/after-deploy.sh
+  script: *docker-deploy # use deploy script from dev deployment
+  dependencies: []
+  environment:
+    name: staging
+    url: ${STAGING_DOMAIN_URL}
+  only:
+  - master
+
+production:
+  stage: deploy
+  image: artjoker/laravel:latest
+  variables:
+    SSH_PRIVATE_KEY: ${PROD_SSH_PRIVATE_KEY}
+    DOMAIN: ${PROD_DOMAIN}
+    SERVER_PATH: ${PROD_SERVER_PATH}
+    SSH_USER: ${PROD_SSH_USER}
+    SSH_HOST: ${PROD_SSH_HOST}
+    SSH_PORT: ${PROD_SSH_PORT}
+    ENV_VARIABLES: ${PROD_ENV_VARIABLES}
+    AFTER_DEPLOY: config/after-deploy.sh
+  script: *docker-deploy # use deploy script from dev deployment
+  dependencies: []
+  environment:
+    name: production
+    url: ${PROD_DOMAIN_URL}
+  when: manual
+  only:
+  - master

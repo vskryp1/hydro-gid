@@ -1,0 +1,153 @@
+/*Variables*/
+
+/*COLORS*/
+$accent:  #21283D;
+$grey: #AAADBB;
+$header-bg: #222C67;
+$text: #333;
+$color-green: #55CE8C;
+$orang: #FF9B00;
+
+/*ANIMATIONS*/
+@mixin anim {
+  transition: all .2s ease;
+}
+
+@mixin anim-linear {
+  transition: all .4s linear;
+}
+
+/*FONTS*/
+@mixin f400 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+@mixin f500 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+@mixin f600 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+@mixin f700 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+@mixin f900 {
+
+}
+
+/*=======================START-MEDIA=====================*/
+@mixin respond-to($media) {
+  @if $media == xs-320 {
+    @media only screen and (max-width: 320px) {
+      @content;
+    }
+  }
+  @if $media == xs-480 {
+    @media only screen and (max-width: 480px) {
+      @content;
+    }
+  }
+  @if $media == xs {
+    @media only screen and (max-width: 570px) {
+      @content;
+    }
+  }
+  @if $media == xs-600 {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  } @if $media == xs-750 {
+  @media only screen and (max-width: 750px) {
+    @content;
+  }
+} @else if $media == sm {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $media == sm-767 {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $media == sm-800 {
+    @media only screen and (max-width: 800px) {
+      @content;
+    }
+  } @else if $media == md-960 {
+    @media only screen and (max-width: 960px) {
+      @content;
+    }
+  } @else if $media == md {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  }
+  @if $media == min-1030 {
+    @media only screen and (min-width: 1030px) {
+      @content;
+    }
+  } @else if $media == tablet {
+    @media only screen and (max-width: 1023px) {
+      @content;
+    }
+  } @else if $media == tablet-1030 {
+    @media only screen and (max-width: 1030px) {
+      @content;
+    }
+  } @else if $media == tablet-b {
+    @media only screen and (max-width: 1180px) {
+      @content;
+    }
+  } @else if $media == lg-1200 {
+    @media only screen and (max-width: 1200px) {
+      @content;
+    }
+  } @else if $media == lg-1250 {
+    @media only screen and (max-width: 1250px) {
+      @content;
+    }
+  } @else if $media == lg-1360 {
+    @media only screen and (max-width: 1360px) {
+      @content;
+    }
+  }@else if $media == lg-1366 {
+    @media only screen and (max-width: 1366px) {
+      @content;
+    }
+  } @else if $media == lg-1450 {
+    @media only screen and (max-width: 1450px) {
+      @content;
+    }
+  }  @else if $media == lg {
+    @media only screen and (max-width: 1560px) {
+      @content;
+    }
+  } @else if $media == lg-1700 {
+    @media only screen and (max-width: 1700px) {
+      @content;
+    }
+  } @else if $media == max-md {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  } @else if $media == max-lg {
+    @media only screen and (max-width: 1560px) {
+      @content;
+    }
+  } @else if $media == min-lg-1700 {
+    @media only screen and (min-width: 1700px) {
+      @content;
+    }
+  } @else if $media == max-sm-600 {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+}
+
+/*=======================END-MEDIA=====================*/
+

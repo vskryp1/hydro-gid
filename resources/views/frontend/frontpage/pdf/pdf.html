@@ -1,0 +1,342 @@
+<!doctype html>
+<style>
+    body {
+        font-family: DejaVu Sans;
+        margin: 0;
+    }
+
+    .pdf-logo {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20%;
+    }
+
+    .pdf-logo img {
+        width: 100%;
+    }
+
+    .pdf-container {
+        max-width: 850px;
+        margin: auto;
+    }
+
+    .pdf-header {
+        display: flex;
+        border-bottom: 1px solid #E6E9EB;
+        padding-bottom: 33px;
+        margin: 0 20px 20px;
+        border-bottom: 1px solid #AAADBB;
+    }
+
+    .pdf-color {
+        height: 40px;
+        margin-bottom: 33px;
+        display: flex;
+    }
+
+    .pdf-color__blue {
+        background: #222C67;
+        display: inline-block;
+        width: 70%;
+        height: 100%;
+        position: relative;
+    }
+
+    .pdf-color__blue:after {
+        content: '';
+        width: 0;
+        border-top: 40px solid #222c67;
+        border-right: 40px solid transparent;
+        position: absolute;
+        left: 100%;
+    }
+
+    .pdf-color__yellow {
+        background: #FF9B00;
+        display: inline-block;
+        width: 30%;
+        height: 100%;
+    }
+
+    .pdf-info {
+        display: flex;
+        width: 80%;
+        padding-left: 50px;
+        justify-content: space-around;
+    }
+
+    .pdf-data {
+        font-size: 14px;
+        line-height: 30px;
+        color: #21283D;
+    }
+
+    .pdf-data a {
+        color: #21283D;
+        display: block;
+        text-decoration: none;
+    }
+
+    .pdf-contact__ico {
+        width: 15px;
+        display: inline-block;
+        vertical-align: middle;
+        padding-right: 10px;
+    }
+
+    .pdf-contact__ico img {
+        max-width: 100%;
+    }
+
+    .pdf-date {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0.592076px;
+        color: #21283D;
+        padding: 10px;
+        background: #F3F4F6;
+        display: inline-block;
+    }
+
+    .pdf-body {
+        padding: 0 20px;
+    }
+
+    .pdf-title {
+        color: #21283D;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 35px;
+        padding-bottom: 33px;
+    }
+
+    .pdf-text {
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .pdf-info__item {
+        padding: 33px 0;
+        border-bottom: 1px solid #AAADBB;
+    }
+    .pdf-info__item:last-child {
+        border-bottom: none;
+    }
+    .pdf-info__item table{
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    .pdf-info__item tr:nth-child(odd){
+        background: #F3F4F6;
+    }
+    .pdf-info__item td{
+        padding: 15px;
+        min-width: 200px;
+    }
+    .pdf-title__img{
+        display: flex;
+    }
+    .pdf-title__img img{
+        max-width: 200px;
+        padding-left: 50px;
+    }
+    .pdf-footer{
+        border-top: 1px solid #AAADBB;
+        padding: 33px 0;
+        margin: 33px 20px 0;
+        font-size: 16px;
+    }
+</style>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<div class="page-wrapper">
+    <main class="pdf">
+        <div class="pdf-container">
+            <div class="pdf-color">
+                <span class="pdf-color__blue"></span>
+                <span class="pdf-color__yellow"></span>
+            </div>
+            <div class="pdf-header flex-wrap between-xs middle-xs">
+                <div class="pdf-logo">
+                    <img src="https://skr-hydraulic.com.ua/assets/frontend/images/logo/ru/header-logo.svg"
+                         alt="header-logo">
+                </div>
+                <div class="pdf-info">
+                    <div class="pdf-data">
+                        <div class="pdf-contact">
+                            <a href="tel:38066069956">
+                                <span class="pdf-contact__ico">
+                                    <img src="pdf-img/phone.png" alt="">
+                                </span>
+                                +38 (066) 066 99 56
+                            </a>
+                            <a href="tel:380970669956">
+                                <span class="pdf-contact__ico">
+                                    <img src="pdf-img/phone.png" alt="">
+                                </span>
+                                +38 (097) 066 99 56
+                            </a>
+                            <a href="skr-hydraulic.com.ua">
+                                <span class="pdf-contact__ico">
+                                    <img src="pdf-img/site.png" alt="">
+                                </span>
+                                skr-hydraulic.com.ua
+                            </a>
+                            <a href="skr-hydraulic.com.ua">
+                                <span class="pdf-contact__ico">
+                                     <img src="pdf-img/site.png" alt="">
+                                </span>
+                                skr-hydraulic.com.ua
+                            </a>
+                            <a href="mailto:info@hydro-gid.com.ua">
+                                <span class="pdf-contact__ico">
+                                     <img src="pdf-img/mail.png" alt="">
+                                </span>
+                                info@hydro-gid.com.ua
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pdf-data">
+                        ТОВ «ГІДРОГІД» <br/>Код ЕДРПОУ: 41337446, Інн: 413374420338<br/>
+                        Розрахункові рахунки в гривнях:<br/> №UA443510050000026002665895000<br/> ПАТ «УКРСИББАНК», МФО
+                        351 005
+                    </div>
+                </div>
+
+            </div>
+            <div class="pdf-body">
+                <div class="pdf-descr">
+                    <div class="pdf-date">
+                    <span class="pdf-contact__ico">
+                        <img src="pdf-img/calendar.png" alt="">
+                    </span>
+                        «09» червня 2020 року
+                    </div>
+                    <div class="pdf-info__item">
+                        <div class="pdf-title">Техніко‐комерційна пропозиція</div>
+                        <div class="pdf-text">Шановні панове! Відповідно до Вашого запиту пропонуємо розглянути
+                            комерційну
+                            пропозицію по поставці комплектуючих для Вашого обладнання
+                        </div>
+                    </div>
+                    <div class="pdf-info__item">
+                        <div class="pdf-title pdf-title__img">
+                            Аксіально‐поршневий насос BAP 37—110 см3
+                            <img src="pdf-img/prod-img.png" alt="#">
+                        </div>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        800 550
+                                    </strong> грн
+                                </td>
+                                <td>
+                                    <strong>На замовлення</strong>
+                                </td>
+                                <td>
+                                    Артикул: <strong>23414145</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ціна товару з урахуванням ПДВ</td>
+                                <td>Термін поставки - 6 тижнів</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pdf-info__item">
+                        <div class="pdf-title">
+                            Основні характеристики
+                        </div>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Виробник
+                                    </strong>
+                                </td>
+                                <td>
+                                    Oleodinamica Mozioni
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Робочий об’єм, см3</strong></td>
+                                <td>11,4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Робочий об’єм, см3</strong></td>
+                                <td>11,4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Максимальний тиск, Бар</strong></td>
+                                <td>350</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Максимальний робочий тиск, Бар</strong></td>
+                                <td>від 301</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Виробник</strong></td>
+                                <td>Oleodinamica Mozioni</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Робочий об’єм, см3</strong></td>
+                                <td>11,4</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pdf-info__item">
+                        <div class="pdf-title">
+                            Умови оплати та поставки
+                        </div>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        Умови оплати:
+                                    </strong>
+                                </td>
+                                <td>
+                                    Ціна товару розраховується за курсом НБУ євро до гривні в день виставлення пропозіції
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Оплата:</strong></td>
+                                <td>Здійснюється покупцем у розмірі 100% предоплати</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Обсяг поставки:</strong></td>
+                                <td>комплектуючі
+                                    документація</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Гарантія:</strong></td>
+                                <td>Поставка товару супроводжується гарантійним талоном. Гарантійні зобов’язання надаються протягом 12 місяців з моменту поставки.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Термін дії пропозиції:</strong></td>
+                                <td>Пропозиція діє до 12.07.2020 року</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="pdf-footer">
+                <div class="pdf-copy">© Скр гідравліка</div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

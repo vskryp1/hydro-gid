@@ -1,0 +1,38 @@
+---
+- name: Install requerements
+  become: true
+  package: name={{item}} state=present
+  with_items:
+  - python-dockerpty
+  - docker-compose
+
+- name: Creating config dir
+  become: false
+  file:
+    path: "{{ traefik_dir }}"
+    state: directory
+
+- name: Copy traefik config
+  become: false
+  template:
+    dest: "{{ traefik_dir }}/traefik.toml"
+    force: true
+    src: templates/traefik.toml.j2
+
+- name: Create network
+  docker_network:
+    driver: bridge
+    name: "{{ traefik_network }}"
+  ignore_errors: yes
+
+- name: Copy traefik docker-compose.yml
+  become: false
+  template:
+    dest: "{{ traefik_dir }}/docker-compose.yml"
+    force: true
+    src: templates/docker-compose.yml.j2
+
+- name: Run traefik docker-compose.yml
+  become: false
+  docker_service:
+    project_src: "{{ traefik_dir }}"

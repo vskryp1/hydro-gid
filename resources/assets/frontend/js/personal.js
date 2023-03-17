@@ -1,0 +1,28 @@
+window.$ = window.jQuery = require('jquery');
+window.Swal = require('sweetalert2');
+require('bootstrap');
+require('popper.js');
+window.Slick = require('slick-carousel/slick/slick.js');
+require('select2/dist/js/select2.full.min');
+require('@fancyapps/fancybox');
+require('raty-js');
+require('jquery-lazy/jquery.lazy');
+require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar');
+require('jquery.mmenu/dist/jquery.mmenu.all.js');
+require('./elements/tabs');
+require('./elements/selectQwProd');
+require('./libs/jquery.maskedinput');
+require('./elements/common');
+require('./main/index');
+
+window.$ = window.jQuery = require('jquery');
+// window.Slick = require('slick-carousel/slick/slick.js');
+// require('select2/dist/js/select2.full.min');
+// require('bootstrap-slider/dist/bootstrap-slider.min');
+require('@fancyapps/fancybox');
+require('raty-js');
+require('./elements/tabs');
+require('./elements/selectQwProd');
+require('./elements/filters');
+require('./elements/common');
+require('./personal/index');

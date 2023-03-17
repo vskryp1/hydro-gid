@@ -1,0 +1,5 @@
+@section('og_title', $og_meta['og_title'])
+@section('og_description', $og_meta['og_description'])
+@section('og_locale', $og_meta['og_locale'])
+@section('og_url', $og_meta['og_url'])
+@section('og_image', $og_meta['og_img'])

@@ -1,0 +1,68 @@
+.page-404{
+  padding-top: 104px;
+  padding-bottom: 161px;
+}
+.page-404__inner{
+  max-width: 1104px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 353px;
+
+}
+.page-404__content{
+  max-width: 386px;
+  width: 100%;
+}
+.page-404__title{
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 41px;
+  color: #21283D;
+  margin-bottom: 16px;
+}
+.page-404__text{
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  color: #21283D;
+  margin-bottom: 16px;
+}
+.page-404__code{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #21283D;
+  margin-bottom: 48px;
+  span{
+    color: #FF775F;
+  }
+}
+.page-404__link{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: #55CE8C;
+  border: 1px solid #55CE8C;
+  padding: 14px 31px;
+  &:hover{
+    color: #fff;
+    opacity: .8;
+  }
+}
+@media (max-width: 499px){
+  .page-404__images{
+    display: none;
+  }
+}
+@media (max-width: 360px){
+  .page-404__inner {
+     min-width: 330px;
+   }
+}
+

@@ -1,0 +1,33 @@
+---
+
+- name: Installing oh-my-zsh per user
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ item.username }}/.oh-my-zsh"
+    update: "{{ users_oh_my_zsh_update }}"
+    version: master
+  with_items: "{{ users }}"
+
+- name: Setting permissions per user
+  file:
+    path: "/home/{{ item.username }}/.oh-my-zsh"
+    owner: "{{ item.username }}"
+    group: "{{ item.group if item.group is defined else (users_group if users_group else item.username) }}"
+    recurse: yes
+  with_items: "{{ users }}"
+
+- name: Setting default shell per user
+  user:
+    name: "{{ item.username }}"
+    shell: /bin/zsh
+  with_items: "{{ users }}"
+
+- name: Configuring oh-my-zsh
+  template:
+    src: home-user-zshrc.j2
+    dest: "/home/{{ item.username }}/.zshrc"
+    owner: "{{ item.username }}"
+    group: "{{ item.group if item.group is defined else (users_group if users_group else item.username) }}"
+    backup: yes
+    mode: "0644"
+  with_items: "{{ users }}"

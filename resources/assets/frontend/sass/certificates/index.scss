@@ -1,0 +1,21 @@
+.certificates__inner{
+  padding-top: 48px;
+  padding-bottom: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  a{
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 1345px){
+  .certificates__inner{
+    justify-content: space-around;
+  }
+}
+
+.certificates__item-img {
+  width: calc((100%/3) - 30px);
+}

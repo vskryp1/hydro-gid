@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>
+    {{ config('app.name', __('Гидро Гид')) }}
+    @yield('title')
+  </title>
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.ico') }}">
+</head>
+<body bgcolor="#ededed" style="background:#ededed;" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" cz-shortcut-listen="true">
+<div style="background-color:#ededed; height: 100%;">
+  <table style="font-family: 'Arial', sans-serif; width: 600px; overflow:scroll;" width="600" align="center" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr height="32" style="line-height:0; font-size:0;">
+        <td></td>
+      </tr>
+    <tr>
+      <td style="line-height:0; font-size:0; background-color:#F3F4F6; border-radius: 10px; overflow: hidden; box-sizing: border-box;">
+        <table width="600" align="center" cellpadding="0" cellspacing="0" style="vertical-align:top;">
+          <tbody style="">
+            <!--шапка письма-->
+            <tr>
+              <td colspan="3" style="">
+                <table width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;vertical-align:top;border-top: 10px solid #28347C;">
+                  <tbody>
+                  <tr>
+                    <td>
+                      <table width="600" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;vertical-align:top;">
+                        <tbody>
+                        <tr>
+                          <td width="45"></td>
+                          <td height="122" style="line-height:0; font-size:0; width: 240px;">
+                            <p style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0;"><a style="display: inline-block; max-width: 240px;" href="#"><img src="assets/frontend/images/logo@2.png" style="max-width: 100%"></a></p>
+                          </td>
+                          <td height="122" colspan="3" style="line-height:0; font-size:0; display: flex; align-items: center; justify-content: flex-end;">
+                            <span style="margin-right:5px; display: inline-block;"><img src="assets/frontend/images/mails/phone.png" alt="" style="margin: 0 auto;"></span>
+                            <div style="">
+                              <p style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 5px;"><a href="tel:+380442227292" style="text-transform: uppercase; font-weight: 600; font-size:14px; line-height:20px; color: #21283D; !important; display: inline-block;text-decoration: unset;">(044) 222 72 92</a></p>
+                              <p style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 0;"><a href="tel:+980963088538" style="text-transform: uppercase; font-weight: 600; font-size:14px; line-height:20px; color: #21283D; !important; display: inline-block;text-decoration: unset;">(096) 308 85 38</a></p>
+                            </div>
+                          </td>
+                          <td width="45"></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                    <td width="1" bgcolor="#acacac"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <!--шапка письма-->
+            <!--тело письма-->
+            <tr>
+              <td bgcolor="#ffffff" width="600" style="line-height:0; font-size:0;">
+                <table align="left" cellpadding="0" cellspacing="0" style="border-collapse:collapse;vertical-align:top;">
+                  <tbody>
+                    <tr align="left" cellpadding="0" cellspacing="0" style="border-collapse:collapse;vertical-align:top;"></tr>
+                    <tr height="30" style="line-height:0; font-size:0;">
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td width="45"></td>
+                      <td valign="top">
+                        <h3 style="font-family: Arial; font-size: 20px; line-height: 28px; color: #333333; margin: 0;">Здравствуйте, Константин!</h3>
+                        <p style="margin: 15px 0;"><span style="font-family: Arial; font-size: 16px; line-height: 18px; letter-spacing: 0.15px; color: #21283D; margin-right: 10px;">Номер вашего заказа:</span><a style="text-decoration: none; padding: 5px 15px; background-color: #FF9B00; display: inline-block; font-family: Arial; font-size: 20px; line-height: 23px; align-items: center; color: #21283D;" href="#234324234">#234324234</a></p>
+                      </td>
+                      <td width="45"></td>
+                    </tr>
+                    <tr>
+                      <td width="45"></td>
+                      <td valign="top">
+                        <p style="font-family: Arial; font-size: 14px; line-height: 19px; color: #21283D; letter-spacing: 0.01em;"><span>Украина, 61011</span><br><span>Харьков, просп. Науки, 222</span><br><a style="font-family: Arial; font-size: 14px; line-height: 19px; color: #21283D; text-decoration: none;" href="tel:+380985554433">+380 98 555 44 33</a><br></p>
+                      </td>
+                      <td width="45"></td>
+                    </tr>
+                    <tr height="32" style="line-height:0; font-size:0;">
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table style="background: #fefefe; border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                  <tbody>
+                    <tr style="width: 90%; border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; display: block; margin: 0 auto; margin-bottom: 50px; overflow: hidden;" align="center">
+                      <td style="display: block; width: 100%;">
+                        <table style="margin: 0 auto; background: #fefefe; border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                          <tbody>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%; border-top: 1px solid #CFD2E6;">
+                              <td colspan="6"></td>
+                            </tr>
+                            <tr style="font-size:14px;line-height:1.5; width: 100%;">
+                              <td colspan="2">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="vertical-align: top; width: 120px;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="width: 100%;"><img style="margin: 0 auto; max-height: 80px; width: auto; display: block;" src="assets/frontend/images/products-1.png" alt='Регулятор расхода 3х линейный со сбросом в бак RFP3 3/8" (Италия)'></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                              <td colspan="5">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-size: 18px; line-height:25px; color: #515151;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="text-decoration: none;">
+                                          <h4 style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;">Регулятор расхода 3х линейный со сбросом в бак RFP3 3/8" (Италия)</h4></a></td>
+                                      <td style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;"><span>2</span><span>шт.</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #222C67; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">18010.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #222C67; font-weight: 300;">грн</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%; border-bottom: 1px solid #CFD2E6;">
+                              <td colspan="6"></td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%;">
+                              <td colspan="6"></td>
+                            </tr>
+                            <tr style="font-size:14px;line-height:1.5; width: 100%;">
+                              <td colspan="2">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="vertical-align: top; width: 120px;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="width: 100%;"><img style="margin: 0 auto; max-height: 80px; width: auto; display: block;" src="assets/frontend/images/products-2.png" alt='Гидрораспределитель с электромагнитным управлением'></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                              <td colspan="5">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-size: 18px; line-height:25px; color: #515151;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="text-decoration: none;">
+                                          <h4 style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;">Гидрораспределитель с электромагнитным управлением</h4></a></td>
+                                      <td style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;"><span>2</span><span>шт.</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #222C67; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">18010.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #222C67; font-weight: 300;">грн</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%; border-bottom: 1px solid #CFD2E6;">
+                              <td colspan="6"></td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%;">
+                              <td colspan="6"></td>
+                            </tr>
+                            <tr style="font-size:14px;line-height:1.5; width: 100%;">
+                              <td colspan="2">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="vertical-align: top; width: 120px;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="width: 100%;"><img style="margin: 0 auto; max-height: 80px; width: auto; display: block;" src="assets/frontend/images/products-3.png" alt="Воздушный фильтр FreshAir"></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                              <td colspan="5">
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-size: 18px; line-height:25px; color: #515151;"><a href="http://hydro-gid.dev.app.artjoker.ua/product" style="text-decoration: none;">
+                                          <h4 style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;">Воздушный фильтр FreshAir</h4></a></td>
+                                      <td style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.1px; color: #21283D; font-weight: 600; text-decoration: none;"><span>2</span><span>шт.</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                                  <tbody>
+                                    <tr>
+                                      <td style="padding:0 10px;text-align:left;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #222C67; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">18010.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #222C67; font-weight: 300;">грн</span></td>
+                                      <td width="45"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%; border-bottom: 1px solid #CFD2E6;">
+                              <td colspan="6"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table style="padding: 15px 0; margin: 0 auto; background-color: #ffffff; border-collapse: collapse; border-spacing: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                          <tbody>
+                            <tr height="25" style="line-height:0;font-size:0">
+                              <td></td>
+                            </tr>
+                            <tr style="font-size:12px;line-height:1.5; margin-bottom: 10px;">
+                              <td width="45" style="width: 45px;"></td>
+                              <td colspan="1" style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 16px; line-height: 24px; letter-spacing: 0.44px; color: #21283D; font-weight: 300;"><span><span>6</span> товаров на сумму</span></td>
+                              <td colspan="3" style="padding:0 10px;text-align:right;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #5C6A7F; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">800 550.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #5C6A7F; font-weight: 300;">грн</span></td>
+                              <td width="45"></td>
+                            </tr>
+                            <tr height="10" style="line-height:0;font-size:0">
+                              <td></td>
+                            </tr>
+                            <tr style="font-size:12px;line-height:1.5; margin-bottom: 10px;">
+                              <td width="45" style="width: 45px;"></td>
+                              <td colspan="1" style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 16px; line-height: 24px; letter-spacing: 0.44px; color: #21283D; font-weight: 300;"><span>Скидка</span></td>
+                              <td colspan="3" style="padding:0 10px;text-align:right;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #5C6A7F; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">100.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #5C6A7F; font-weight: 300;">грн</span></td>
+                              <td width="45"></td>
+                            </tr>
+                            <tr height="10" style="line-height:0;font-size:0">
+                              <td></td>
+                            </tr>
+                            <tr style="font-size:12px;line-height:1.5; margin-bottom: 10px;">
+                              <td width="45" style="width: 45px;"></td>
+                              <td colspan="1" style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 16px; line-height: 24px; letter-spacing: 0.44px; color: #21283D; font-weight: 300;"><span>Стоимость доставки</span></td>
+                              <td colspan="3" style="padding:0 10px;text-align:right;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #5C6A7F; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">500.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #5C6A7F; font-weight: 300;">грн</span></td>
+                              <td width="45"></td>
+                            </tr>
+                            <tr height="10" style="line-height:0;font-size:0">
+                              <td></td>
+                            </tr>
+                            <tr style="font-size:12px;line-height:1.5; margin-bottom: 10px;">
+                              <td width="45" style="width: 45px;"></td>
+                              <td colspan="1" style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 16px; line-height: 24px; letter-spacing: 0.44px; color: #21283D; font-weight: 300;"><span>Оплата</span></td>
+                              <td colspan="3" style="text-align:right; padding:0 10px; vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #5C6A7F; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">Наличные</span></td>
+                              <td width="45"></td>
+                            </tr>
+                            <tr height="25" style="line-height:0;font-size:0; width: 100%; border-bottom: 1px solid #CFD2E6;">
+                              <td colspan="6"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table style="padding: 15px 0; margin: 0 auto; background-color: #ffffff; border-collapse: collapse; border-spacing: 0; text-align: inherit; vertical-align: top; width: 100%;" align="center">
+                          <tbody>
+                          <tr height="25" style="line-height:0;font-size:0">
+                            <td></td>
+                          </tr>
+                          <tr style="font-size:12px;line-height:1.5; margin-bottom: 10px;">
+                            <td width="45" style="width: 45px;"></td>
+                            <td colspan="1" style="padding:0 10px;text-align:left;vertical-align: middle; font-family: Arial; font-size: 20px; line-height: 24px; letter-spacing: 0.15px; color: #28347C; font-weight: 600;"><span>Итого</span></td>
+                            <td colspan="3" style="padding:0 10px;text-align:right;vertical-align: middle; font-weight: 700; font-family: Arial; font-size: 24px; line-height: 28px; letter-spacing: 0.15px; color: #222C67; font-weight: 700;"><span style="margin-right: 5px; display: inline-block;">900 550.00</span><span style="font-family: Arial; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: #222C67; font-weight: 300;">грн</span></td>
+                            <td width="45"></td>
+                          </tr>
+                          <tr height="25" style="line-height:0;font-size:0">
+                            <td></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <!--тело письма-->
+            <!--футер письма-->
+            <tr>
+              <td bgcolor="#1F2933" height="">
+                <table width="600" align="left" cellpadding="0" cellspacing="0" style="border-collapse:collapse;vertical-align:top;">
+                  <tbody>
+                  <tr height="20" style="line-height:0; font-size:0;">
+                    <td colspan="5"></td>
+                  </tr>
+                  <tr>
+                    <td width="45"></td>
+                    <td width="245">
+                      <span style="display: inline-block;vertical-align: middle;"><img src="assets/frontend/images/mails/map.png" alt="" style="margin: 0 auto;"></span>
+                      <span style="font-size: 14px;line-height:17px;color:#AAADBB;display: inline-block;vertical-align: middle;padding-left: 3px;opacity: 0.8;">г. Киев, ул. Васильковская, 30</span>
+                    </td>
+                    <td width="145" style="text-align: right;">
+                      <span style="display: inline-block;vertical-align: middle;"><img src="assets/frontend/images/mails/mail.png" alt="" style="margin: 0 auto;"></span>
+                      <span style="font-size: 14px;line-height:17px;color:#AAADBB;display: inline-block;vertical-align: middle;padding-left: 3px;opacity: 0.8;"><a style="color: #AAADBB; display: inline-block; margin-left: 10px; text-decoration:none;" href="mailto:post@gmail.com">post@gmail.com</a></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="45"></td>
+                    <td colspan="3">
+                      <p style="font-size:10px;letter-spacing: 0.02em;line-height:14px;color:#AAADBB; padding: 20px 0; border-top: 1px solid #616E7C; border-bottom: 1px solid #283950; margin-bottom: 0;"><span>Письмо содержит данные для доступа в личный кабинет, не передавайте его третьим лицам.</span><span style="margin-left: 5px;">Добавьте наш адрес</span><a style="font-size:10px;letter-spacing: 0.02em;line-height:14px;color:#AAADBB; !important; display: inline-block; margin-left: 5px; margin-right: 5px;" href="mailto:Travel@com.ua">post@gmail.com</a><span>в ваш список контактов, чтобы не пропустить ни одной скидки!</span></p>
+                    </td>
+                    <td width="45"></td>
+                  </tr>
+                  <tr height="25" style="line-height:0; font-size:0;">
+                    <td colspan="5"></td>
+                  </tr>
+                  <tr>
+                    <td width="45"></td>
+                    <td width="245">
+                      <div style="width:100%;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:start;-webkit-justify-content:flex-start;-ms-flex-pack:start;justify-content:flex-start;" class="footer__social">
+                        <ul style="display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;list-style:none;margin:0;width:150px;padding:0;" class="social-list">
+                          <li style="-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;margin-right:30px;margin:0 auto;" class="social-item"><a href="https://www.facebook.com" target="_blank" rel="nofollow" style="width: auto;height: auto;color: #616E7C;-webkit-transition: all .3s ease;-o-transition: all .3s ease;transition: all .3s ease;"><img src="assets/frontend/images/mails/facebook.png" alt="" style="margin: 0 auto;"></a></li>
+                          <li style="-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;margin-right:30px;margin:0 auto;" class="social-item"><a href="https://www.instagram.com" target="_blank" rel="nofollow" style="width: auto;height: auto;color: #616E7C;-webkit-transition: all .3s ease;-o-transition: all .3s ease;transition: all .3s ease;"><img src="assets/frontend/images/mails/instagram.png" alt="" style="margin: 0 auto;"></a></li>
+                          <li style="-webkit-box-flex:0;-webkit-flex-grow:0;-ms-flex-positive:0;flex-grow:0;margin-right:30px;margin:0 auto;" class="social-item"><a href="https://www.linkedin.com" target="_blank" rel="nofollow" style="width: auto;height: auto;color: #616E7C;-webkit-transition: all .3s ease;-o-transition: all .3s ease;transition: all .3s ease;"><img src="assets/frontend/images/mails/linkedin.png" alt="" style="margin: 0 auto;"></a></li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td width="245" style="text-align: right;">
+                      <span style="font-size: 10px;line-height:14px;letter-spacing: 0.02em;color:#AAADBB;display: inline-block;vertical-align: middle;padding-left: 3px;">©ГидроГид Все права защищены</span>
+                    </td>
+                  </tr>
+                  <tr height="30" style="line-height:0; font-size:0;">
+                    <td colspan="5"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <!--футер письма-->
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+window.$ = window.jQuery = require('jquery');
+window.Swal = require('sweetalert2');
+require('bootstrap');
+require('popper.js');
+require('@fancyapps/fancybox');
+require('raty-js');
+require('jquery-lazy/jquery.lazy');
+require('./elements/tabs');
+require('jquery.mmenu/dist/jquery.mmenu.all.js');
+require('malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar');
+require('./elements/selectQwProd');
+require('./elements/common');
+require('./compare/index');

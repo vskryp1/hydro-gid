@@ -1,0 +1,62 @@
+<?php
+
+    namespace App\Models\Client;
+
+    use App\Models\Order\DeliveryPlace;
+    use App\Models\Region\Region;
+    use App\Traits\UuidTrait;
+    use Illuminate\Database\Eloquent\Model;
+
+    class Address extends Model
+    {
+        use UuidTrait;
+
+        public $timestamps = false;
+
+        public $fillable = [
+            'client_id',
+            'city',
+            'place_id',
+            'street',
+            'house',
+            'temp_client_id',
+        ];
+
+        public $appends = [
+            'formatted',
+        ];
+
+        public function client()
+        {
+            return $this->belongsTo(Client::class);
+        }
+
+        public function region()
+        {
+            return $this->belongsTo(Region::class);
+        }
+
+        public function delivery_place()
+        {
+            return $this->belongsTo(DeliveryPlace::class, 'place_id');
+        }
+
+        public function getFormattedAttribute()
+        {
+            $formatAddress = [
+                $this->house,
+                $this->street,
+                $this->city,
+            ];
+
+            if(!$this->city){
+                $formatAddress[] = $this->delivery_place->name;
+            }
+
+            if ($this->region) {
+                $formatAddress[] = $this->region->name;
+            }
+
+            return collect($formatAddress)->filter()->reverse()->implode(', ');
+        }
+    }

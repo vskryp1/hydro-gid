@@ -1,0 +1,293 @@
+image: artjoker/laravel:latest
+
+stages:
+  - build
+  - test
+  - docker-build
+  - deploy
+
+variables:
+  DB_HOST: mysql
+  DB_USERNAME: root
+  MYSQL_DATABASE: testme
+  MYSQL_ROOT_PASSWORD: secret
+  REDIS_HOST: 'redis'
+  REDIS_PORT: 6379
+
+
+.init_ssh: &init_ssh |
+  eval $(ssh-agent -s)
+  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+  # Replace the last line with the following lines if you'd rather
+  # leave StrictHostKeyChecking enabled (replace yourdomain.com):
+  #
+  ssh-keyscan ${SSH_HOST} >> ~/.ssh/known_hosts
+  chmod 644 ~/.ssh/known_hosts
+
+.change_file_permissions: &change_file_permissions |
+  find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+  find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+
+composer:
+  stage: build
+  image: artjoker/laravel_app:latest
+  cache: 
+    key: ${CI_COMMIT_REF_NAME}-composer
+    policy: pull-push
+    paths:
+    - vendor/
+  script:
+  - export COMPOSER_MEMORY_LIMIT=-1
+  - time composer install --no-interaction --ansi --no-suggest
+  - git describe --tags > version
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    expire_in: 2 hour
+    paths:
+    - vendor/
+    - version
+  only:
+  - merge_request
+  - dev
+  - staging
+  - master
+
+node:
+  stage: build
+  image: artjoker/laravel_node:latest
+  cache: 
+    key: ${CI_COMMIT_REF_NAME}-node
+    policy: pull-push
+    paths:
+    - node_modules/
+  script:
+  - time npm install
+  - time npm run production
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    expire_in: 2 hour
+    paths:
+    - public/
+  only:
+  - merge_request
+  - dev
+  - staging
+  - master
+
+phpunit:
+  image: artjoker/laravel_app:latest
+  stage: test
+  services:
+  - mysql:5.7
+  - redis:4.0.11-alpine
+  dependencies:
+  - composer
+  - node
+  variables:
+    APP_ENV: test
+    DB_HOST: mysql
+    DB_USERNAME: root
+    MYSQL_DATABASE: testme
+    MYSQL_ROOT_PASSWORD: secret
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+  script:
+  - docker-php-ext-enable xdebug
+  - cp .env.example .env
+  - php artisan key:generate
+  - time php artisan migrate --seed --database=test
+  - chmod -R 777 storage/
+  - ./vendor/bin/phpunit --verbose
+  artifacts:
+    when: always
+    expire_in: 1 hour
+    paths:
+    - storage/logs
+  only:
+  - merge_request
+
+
+
+
+#codestyle:
+#  stage: test
+#  dependencies: []
+#  script:
+#  - phpcs --standard=PSR2 --extensions=php --ignore=app/Support/helpers.php app
+
+docker-package:
+  stage: docker-build
+  image: docker:18.09
+  dependencies:
+  - composer
+  - node
+  services:
+  - docker:dind
+  before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+  script: 
+  - TAG="$CI_COMMIT_REF_NAME"
+  - docker build --tag "${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}" 
+                  -f ./docker/sources/Dockerfile ./
+  - echo "${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}"  
+  - docker push "${CI_REGISTRY}/${CI_PROJECT_PATH}:${TAG}"
+  only:
+  - dev
+  - master
+
+dev-clean:
+  stage: deploy
+  variables:
+    SSH_PRIVATE_KEY: ${DEV_SSH_PRIVATE_KEY}
+    DOMAIN: ${DEV_DOMAIN}
+    SERVER_PATH: ${DEV_SERVER_PATH}
+    SSH_USER: ${DEV_SSH_USER}
+    SSH_HOST: ${DEV_SSH_HOST}
+    SSH_PORT: ${DEV_SSH_PORT}
+    ENV_VARIABLES: ${DEV_ENV_VARIABLES}
+    AFTER_DEPLOY: docker/deploy/after-deploy-dev-clean.sh
+  script: &docker-deploy
+  - *init_ssh
+  # Copy config files to server
+  - echo "$ENV_VARIABLES" | base64 -d > .env
+  - cat docker-compose-prod.yml > docker-compose.yml
+  - sed -i -e "s|registry.example.com/group/user.*|$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}|g" "docker-compose.yml"
+  - sed -i -e "s|Host:example.com|Host:${DOMAIN}|g" "docker-compose.yml"
+  # Copy sql-backup script
+  - scp -P ${SSH_PORT} docker/deploy/sql-backup.sh .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+  - scp -P ${SSH_PORT} docker-compose.yml .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+  # Delivery docker image to server
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ${SERVER_PATH} && 
+            docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY" && 
+            docker-compose pull --quiet"
+  # Deploy. Construction `export UID=\${UID}` need for export server variable.
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} 
+      "
+      cd ${SERVER_PATH} &&
+      export UID=\${UID} &&
+      export GID=\${GID} &&
+      chmod +x sql-backup.sh &&
+      ./sql-backup.sh &&
+      docker-compose down &&
+      docker-compose up -d &&
+      docker-compose exec -T php-fpm /app/${AFTER_DEPLOY}
+      "
+  - exit 0
+  environment:
+    name: dev
+    url: ${DEV_DOMAIN_URL}
+  when: manual
+  only:
+  - dev
+
+dev:
+  stage: deploy
+  variables:
+    SSH_PRIVATE_KEY: ${DEV_SSH_PRIVATE_KEY}
+    DOMAIN: ${DEV_DOMAIN}
+    SERVER_PATH: ${DEV_SERVER_PATH}
+    SSH_USER: ${DEV_SSH_USER}
+    SSH_HOST: ${DEV_SSH_HOST}
+    SSH_PORT: ${DEV_SSH_PORT}
+    ENV_VARIABLES: ${DEV_ENV_VARIABLES}
+    AFTER_DEPLOY: docker/deploy/after-deploy-dev.sh
+  script:
+  - *init_ssh
+  # Copy config files to server
+  - echo "$ENV_VARIABLES" | base64 -d > .env
+  - cat docker-compose-dev.yml > docker-compose.yml
+  - sed -i -e "s|registry.example.com/group/user.*|$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}|g" "docker-compose.yml"
+  - sed -i -e "s|Host:example.com|Host:${DOMAIN}|g" "docker-compose.yml"
+  # Copy sql-backup script
+  - scp -P ${SSH_PORT} docker/deploy/sql-backup.sh .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+  - scp -P ${SSH_PORT} docker-compose.yml .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+  # Delivery docker image to server
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ${SERVER_PATH} &&
+            docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY" &&
+            docker-compose pull --quiet"
+  # Deploy. Construction `export UID=\${UID}` need for export server variable.
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST}
+      "
+      cd ${SERVER_PATH} &&
+      export UID=\${UID} &&
+      export GID=\${GID} &&
+      chmod +x sql-backup.sh &&
+      ./sql-backup.sh &&
+      docker-compose down &&
+      docker volume rm hydro-giddevmyappcomua_php-data &&
+      docker-compose up -d &&
+      docker-compose exec -T php-fpm /app/${AFTER_DEPLOY}"
+  environment:
+    name: dev
+    url: ${DEV_DOMAIN_URL}
+  when: manual
+  only:
+  - dev
+
+staging:
+  stage: deploy
+  image: artjoker/laravel:latest
+  variables:
+    SSH_PRIVATE_KEY: ${STAGING_SSH_PRIVATE_KEY}
+    DOMAIN: ${STAGING_DOMAIN}
+    SERVER_PATH: ${STAGING_SERVER_PATH}
+    SSH_USER: ${STAGING_SSH_USER}
+    SSH_HOST: ${STAGING_SSH_HOST}
+    SSH_PORT: ${STAGING_SSH_PORT}
+    ENV_VARIABLES: ${STAGING_ENV_VARIABLES}
+    AFTER_DEPLOY: docker/deploy/after-deploy.sh
+  script: *docker-deploy
+  environment:
+    name: staging
+    url: ${STAGING_DOMAIN_URL}
+  only:
+  - staging
+
+production:
+  stage: deploy
+  image: artjoker/laravel:latest
+  variables:
+    SSH_PRIVATE_KEY: ${PROD_SSH_PRIVATE_KEY}
+    DOMAIN: ${PROD_DOMAIN}
+    SERVER_PATH: ${PROD_SERVER_PATH}
+    SSH_USER: ${PROD_SSH_USER}
+    SSH_HOST: ${PROD_SSH_HOST}
+    SSH_PORT: ${PROD_SSH_PORT}
+    ENV_VARIABLES: ${PROD_ENV_VARIABLES}
+    AFTER_DEPLOY: docker/deploy/after-deploy.sh
+  script: &docker-deploy-prod
+  - *init_ssh
+  # Copy config files to server
+  - echo "$ENV_VARIABLES" | base64 -d > .env
+  - cat docker-compose-prod.new.yml > docker-compose.yml
+  - sed -i -e "s|registry.example.com/group/user.*|$CI_REGISTRY_IMAGE:${CI_COMMIT_REF_NAME}|g" "docker-compose.yml"
+  - sed -i -e "s|Host:example.com,www.example.com|Host:${DOMAIN},www.${DOMAIN}|g" "docker-compose.yml"
+  - sed -i -e "s|domain.example.com|${DOMAIN}|g" "docker-compose.yml"
+  - sed -i -e "s|redirect.regex=^http?://example.com|redirect.regex=^http?://${DOMAIN}|g" "docker-compose.yml"
+  - sed -i -e "s|redirect.replacement=https://example.com|redirect.replacement=https://${DOMAIN}|g" "docker-compose.yml"
+  # Copy sql-backup script
+  - scp -P ${SSH_PORT} docker-compose.yml .env ${SSH_USER}@${SSH_HOST}:${SERVER_PATH}
+  # Delivery docker image to server
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ${SERVER_PATH} &&
+            docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY" &&
+            docker-compose pull --quiet"
+  # Deploy. Construction `export UID=\${UID}` need for export server variable.
+  - ssh -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST}
+      "
+      cd ${SERVER_PATH} &&
+      export UID=\${UID} &&
+      export GID=\${GID} &&
+      docker-compose down &&
+      docker-compose up -d &&
+      docker-compose exec -T php-fpm /app/${AFTER_DEPLOY}
+      "
+  environment:
+    name: production
+    url: ${PROD_DOMAIN_URL}
+  when: manual
+  only:
+  - master

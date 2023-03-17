@@ -1,0 +1,27 @@
+---
+- name: Creating directory
+  hosts: docker
+  become: false
+  gather_facts: yes # You must disable the gather of facts for this role to work as intended
+  
+  tasks:
+    - name: Creating dev prod st folders
+      file:
+        path: "/home/{{ project_name }}/{{ item }}.{{ domain }}"
+        state: directory
+      with_items:
+        - dev
+        - st
+        - prod
+
+- name: Setup traefik
+  hosts: docker
+  roles:
+    - role: traefik
+      vars:
+        traefik_dir: /home/{{ project_name }}/traefik
+        traefik_hostname: "{{ domain }}"
+        traefik_https_redirect: true
+        traefik_image: traefik:alpine
+        traefik_log_level: ERROR
+        traefik_network: traefik

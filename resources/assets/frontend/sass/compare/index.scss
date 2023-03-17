@@ -1,0 +1,405 @@
+.table-scroll {
+  position: relative;
+  max-width: 1415px;
+  margin: 0 auto 50px;
+  overflow: hidden;
+
+  &:after {
+    background: #ffffff;
+    background: -moz-linear-gradient(right, #ffffff, rgba(243, 244, 246, 0.2));
+    background: -webkit-linear-gradient(right, #ffffff, rgba(243, 244, 246, 0.2));
+    background: linear-gradient(to left, #ffffff, rgba(243, 244, 246, 0.2));
+
+
+    width: 200px;
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.col {
+  width: 265px;
+  min-width: 265px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow: auto;
+  background: #fff;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+tbody {
+  background: #fff;
+}
+
+.table-scroll table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.table-scroll th, .table-scroll td {
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+  border: 1px solid #e8e9ea !important;
+}
+
+.table-scroll td {
+  text-align: center;
+}
+
+.table-scroll thead {
+  background: #fff;
+
+  .col {
+    padding: 0;
+    position: relative;
+  }
+
+  tr:first-of-type th {
+    background: #F3F4F6;
+    border-left: 0 !important;
+    position: relative;
+  }
+}
+
+.filter-nav {
+  padding-top: 12px;
+}
+
+.star {
+  display: flex;
+  @include respond-to(xs-600) {
+    display: none;
+  }
+}
+
+.ttl-cat {
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.1px;
+}
+
+.star-box {
+  justify-content: space-between;
+}
+
+span {
+  display: block;
+}
+
+tbody span {
+  padding: 6px 15px;
+}
+
+
+.prod-cart {
+  box-shadow: none;
+  padding: 17px 15px;
+  width: 100%;
+
+  &:hover {
+    box-shadow: none;
+    // transform: scale(1);
+    z-index: 0;
+  }
+}
+
+.table-scroll tbody tr:nth-child(2n) th span,
+.table-scroll tbody tr:nth-child(2n) td span,
+.table-scroll tbody tr:nth-child(2n) th,
+.table-scroll tbody tr:nth-child(2n) td {
+  background: #F3F4F6;
+}
+
+.clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.clone th, .clone td {
+  visibility: hidden
+}
+
+.clone td, .clone th {
+  border-color: transparent
+}
+
+.clone tbody th {
+  visibility: visible;
+}
+
+.clone .fixed-side {
+  background: #fff;
+  visibility: visible;
+  border-right: 1px solid #e8e9ea;
+  z-index: 100;
+}
+
+.fixed-side {
+  max-width: 290px;
+  min-width: 290px;
+}
+
+.fixed-side.ttl {
+  color: #76ab33;
+  font-size: 16px;
+}
+
+.clone thead {
+  background: transparent;
+}
+
+
+.icon.js-btn-close {
+  position: absolute;
+  color: #AAADBB;
+  font-size: 21px;
+  top: 14px;
+  right: 14px;
+  z-index: 99;
+  cursor: pointer;
+}
+
+
+thead tr:first-of-type {
+  height: 360px;
+}
+
+.prod-cart {
+  position: relative;
+}
+
+@media only screen and (max-width: 1030px) {
+  .filter-nav {
+    display: block;
+    padding: 0 20px;
+  }
+}
+
+.products {
+  padding-bottom: 0;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 200px;
+}
+
+.main-table.clone thead .fixed-side {
+  position: relative;
+  pointer-events: all;
+}
+
+
+.fixed-side {
+  font-weight: 600 !important;
+}
+
+.val {
+  display: inline-block;
+}
+
+.btn-delete {
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+  color: #FF775F;
+  font-weight: 400;
+
+  .icon {
+    display: inline-block;
+    margin-right: 15px;
+  }
+}
+
+.btn-back {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+  color: #21283D;
+  padding: 8px 13px;
+  background: #fff;
+
+  .icon {
+    display: inline-block;
+    margin-right: 15px;
+  }
+}
+
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal {
+  width: calc(100% - 290px);
+  top: 343px;
+  bottom: auto;
+  left: 290px;
+  z-index: 100;
+  background-color: #F3F4F6;
+  @include respond-to(xs-600) {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  background-color: #AAADBB;
+
+  &:hover {
+    background: #222C67;
+  }
+}
+
+
+.page__title {
+  text-align: center;
+}
+
+.compare-page {
+  form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    height: 100%;
+    align-items: flex-start;
+  }
+}
+
+.category__box {
+  padding-top: 40px;
+
+  &--item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--parent {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #AAADBB;
+    margin-bottom: 65px;
+
+    .main-btn {
+      .icon {
+        display: inline-block;
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+
+.h3 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  color: #21283D;
+  margin-bottom: 25px;
+}
+
+.checkout__aside-title {
+  padding-bottom: 16px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  color: $accent;
+}
+
+.checkout__aside-item {
+  display: flex;
+  background: #fff;
+  margin-bottom: 30px;
+}
+
+.checkout__aside-img {
+  max-width: 143px;
+  margin-right: 16px;
+}
+
+.checkout__aside-text {
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: $accent;
+  margin-bottom: 12px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.checkout__aside-number {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.checkout__aside-prise {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: $header-bg;
+
+  span {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    font-weight: 300;
+    display: inline-block;
+  }
+}
+
+.checkout__aside-sum {
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #5C6A7F;
+}
+
+.checkout__aside-item {
+  padding: 18px;
+  border-bottom: 1px solid #EFEFF4;
+}
+
+
+tr:hover {
+  background: #28347C !important;
+  color: #fff !important;
+}
+
+.table-scroll tbody tr:hover:nth-child(2n) th span, .table-scroll tbody tr:hover:nth-child(2n) td span,
+.table-scroll tbody tr:hover:nth-child(2n) th, .table-scroll tbody tr:hover:nth-child(2n) td {
+  background: #28347C !important;
+  color: #fff !important;
+}
+
+.nav__menu-dropdown span {
+  display: inline-block;
+}
+
+.js-difference-label.checked:before {
+  background: #28347C;
+  border-color: #28347C;
+}
+
+.js-difference-label.checked:after {
+  opacity: 1;
+}
+
+.compare-item__wrap {
+  .checkout__aside-img {
+    max-width: 100px;
+  }
+}
