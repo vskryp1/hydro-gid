@@ -116,7 +116,7 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="@version" onclick="return false;">
+            <a data-toggle="tooltip" data-placement="top" title=""  onclick="return false;">
                 <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
             </a>
             <a href="{{route('backend.clearCache')}}" data-do="link"

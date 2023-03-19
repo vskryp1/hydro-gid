@@ -47,9 +47,9 @@
 @endsection
 
 @section('styles')
-    {!! Html::style(mix('assets/backend/css/dashboard.css')) !!}
+    {!! Html::style(url('/assets/backend/css/dashboard.css')) !!}
 @endsection
 
 @section('scripts')
-    {!! Html::script(mix('assets/backend/js/dashboard.js')) !!}
+    {!! Html::script(url('/assets/backend/js/dashboard.js')) !!}
 @endsection
