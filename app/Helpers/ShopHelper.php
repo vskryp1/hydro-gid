@@ -410,7 +410,7 @@ class ShopHelper
     {
         $locale = App::getLocale();
 
-        return asset("assets/frontend/images/logo/$locale/$position-logo.svg");
+        return asset("assets/frontend/images/$position-logo.svg");
     }
 
     public static function getFormatPhone($key)

@@ -25,3 +25,6 @@ version
 
 # Ansible hosts
 docker/ansible/hosts.ini
+backup/*
+backup/
+backup
