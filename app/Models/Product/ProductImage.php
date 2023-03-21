@@ -95,14 +95,14 @@
         public function getImageAlt()
         {
             return empty($this->alt)
-                ? __('frontend/product/index.image_alt', ['name' => $this->product->name])
+                ? $this->product->name
                 : $this->alt;
         }
 
         public function getImageTitle()
         {
             return empty($this->title)
-                ? __('frontend/product/index.image_title', ['name' => $this->product->name])
+                ? $this->product->name
                 : $this->title;
         }
     }

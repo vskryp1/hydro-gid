@@ -1,6 +1,7 @@
 <?php
 
     return [
+        'oferta'                  => 'Оферта',
         'site_address'            => 'Адреса',
         'site_name'               => 'Ім\'я',
         'site_email'              => 'Пошта',
