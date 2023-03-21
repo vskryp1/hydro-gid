@@ -47,7 +47,7 @@
                      'placeholder' => __('frontend/service/index.username'),
                 ]) !!}
             </label>
-            {!! Form::button(__('frontend/content/index.buy_per_click'), [ 'type' => 'submit', 'class' => 'main-btn main-btn--green main-btn--center' ]) !!}
+            {!! Form::button(__('frontend/product/index.accounting_price'), [ 'type' => 'submit', 'class' => 'main-btn main-btn--green main-btn--center' ]) !!}
             {!! Form::hidden('is_accounting_price',true) !!}
             {!! Form::hidden('product_id',$product->id) !!}
             {!! Form::close() !!}
