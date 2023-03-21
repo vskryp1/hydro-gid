@@ -250,13 +250,13 @@
                                                 </a>
                                                 <a data-fancybox data-src="#modal-buy_per_click" href="#"
                                                    class="main-btn main-btn--orange btn-style_click">
-                                                    @lang('frontend/product/index.buy_in_one_click')
+                                                    @lang('frontend/product/index.consult_in_expert')
                                                 </a>
                                             @else
                                                 @include('frontend.elements.forms.temp_order')
                                                 <a data-fancybox data-src="#modal-buy_per_click" href="#"
                                                    class="main-btn main-btn--orange btn-style_click">
-                                                    @lang('frontend/product/index.buy_in_one_click')
+                                                    @lang('frontend/product/index.consult_in_expert')
                                                 </a>
                                             @endif
                                         </div>

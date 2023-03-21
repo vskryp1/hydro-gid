@@ -16,6 +16,7 @@
         'download_technical_doc' => 'Завантажити технічну документацію',
         'description'            => 'опис',
         'buy_in_one_click'       => 'Купити в 1 клік',
+        'consult_in_expert'      => 'Консультация эксперта',
         'specifications'         => 'Характеристики',
         'technical_params'       => 'Технічні характеристики',
         'related_products'       => 'З цим товаром купують',
