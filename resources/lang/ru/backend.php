@@ -524,6 +524,8 @@ return array (
   'export_datap_excel' => 'Экспорт данных о товарах из сайта в Excel файл',
   'import_products_excel' => 'Импорт Товаров из Excel',
   'import_datap_excel' => 'Импорт данных о товарах на сайт из Excel файла',
+  'import_prices_products_excel'  => 'Импорт цен Товаров поставщиков из Excel',
+  'import_prices_datap_excel'     => 'Импорт данных о ценах товаров поставщиков на сайт из Excel файла',
   'import_export_orders' => 'Импорт / Экспорт Заказов',
   'export_orders_excel' => 'Экспорт Заказов в Excel',
   'go_to_site' => 'Перейти на сайт',

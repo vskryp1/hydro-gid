@@ -110,6 +110,7 @@
             Route::group(['prefix' => 'import', 'as' => 'import.'], function () {
                 Route::post('products', 'Backend\ImportController@products')->name('products');
                 Route::put('product/headers', 'Backend\ImportController@productHeaders')->name('product.headers');
+                Route::post('prices-products', 'Backend\ImportController@prices')->name('prices.products');
             });
             Route::resource('reviews', 'Backend\Review\ReviewController')->except(['show']);
             Route::resource('service-orders', 'Backend\Orders\ServiceOrderController')->except(['show']);

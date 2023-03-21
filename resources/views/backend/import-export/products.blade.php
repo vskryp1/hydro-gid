@@ -57,6 +57,33 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>
+                        @lang('backend.import_prices_products_excel')
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <p>
+                        <i>
+                            @lang('backend.import_prices_datap_excel')
+                        </i>
+                    </p>
+                    {!! Form::open([
+                        'route'  => 'backend.import.prices.products',
+                        'method' =>'POST',
+                        'files'  => true,
+                    ]) !!}
+                    {!! Form::file('file', [
+                        'accept' => '.xls, .xlsx',
+                    ]) !!}
+                    {!! Form::submit(__('backend.import')) !!}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
