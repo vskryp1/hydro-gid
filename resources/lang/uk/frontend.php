@@ -1,6 +1,8 @@
 <?php
 
     return [
+        'products'                                             => 'Товари',
+        'articles'                                             => 'Статті',
         'site_name'                                            => 'ArtLaraShop',
         'empty_checkout_title'                                 => 'Ваш кошик порожній!',
         'empty_checkout_message'                               => 'Щоб оформити замовлення додайте товари до кошику.',
