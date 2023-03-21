@@ -17,6 +17,7 @@
           'name',
           'phone',
           'product_id',
+          'is_accounting_price',
         ];
 
         public static function boot()

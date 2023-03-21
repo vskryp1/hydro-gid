@@ -165,6 +165,7 @@
             }
             $this->data['allow_default_warranty'] = isset($this->data['allow_default_warranty']);
             $this->data['active']                 = isset($this->data['active']);
+            $this->data['is_disable_price']       = isset($this->data['is_disable_price']);
             $this->data['rating_calculate']       = $this->data['rating_calculate'] ?? 0;
             $this->data['rating']                 = $this->data['rating'] ?? 0;
             $this->data['parent_id']              = $this->data['parent_id'] ?? null;

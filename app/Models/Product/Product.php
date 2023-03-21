@@ -64,6 +64,7 @@
             'product_status_id',
             'position',
             'availability',
+            'is_disable_price',
             'sale_type',
             'active',
             'original_price',

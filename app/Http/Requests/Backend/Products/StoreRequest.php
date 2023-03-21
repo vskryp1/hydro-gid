@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
         $rules['position']            = 'numeric|digits_between:1,11';
         $rules['currency_id']         = 'required|exists:currencies,id';
         $rules['active']              = 'boolean';
+        $rules['is_disable_price']    = 'boolean';
         $rules['availability']        = 'required|enum_value:' . ProductAvailability::class;
         $rules['sale_type']           = 'required|enum_value:' . ProductSaleType::class;
         $rules['categories']          = 'required|array';

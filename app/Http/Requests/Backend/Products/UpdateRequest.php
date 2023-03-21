@@ -29,6 +29,7 @@
             $rules['position']           = 'numeric|digits_between:1,11';
             $rules['currency_id']        = 'required|exists:currencies,id';
             $rules['active']             = 'boolean';
+            $rules['is_disable_price']   = 'boolean';
             $rules['rating']             = 'numeric|digits_between:0,5';
             $rules['technical_doc']      = 'nullable|mimes:pdf'; // |max:' . ShopHelper::setting('image_size', config('app.image_size'));
             $rules['availability']       = 'required|enum_value:' . ProductAvailability::class;

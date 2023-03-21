@@ -258,6 +258,10 @@
                             @endif
                         </div>
                         <div class="checkbox">
+                            {!! Form::checkbox('is_disable_price', 0, null, ['class' => 'js-switch']) !!}
+                            @lang('backend.is_disable_price')
+                        </div>
+                        <div class="checkbox">
                             {!! Form::checkbox('active', 1, null, ['class' => 'js-switch']) !!}
                             @lang('backend.active')
                             @if(config('app.group_products', false))

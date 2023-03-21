@@ -96,6 +96,87 @@
                         </div>
                     </div>
                     <div class="choose-config-section col-xs-6">
+                        @if($product->is_disable_price)
+                            <div class="row">
+                                <div class="about-prod">
+
+                                    <div class="flex-row about-prod__btns-wrap">
+                                        @switch((string) $product->availability)
+                                            @case(ProductAvailability::NOT_AVAILABLE)
+                                                <div class="not-avail">
+                                                    @auth('web')
+                                                        <a data-put="{{ route('ajax.user.put.in.waitinglist', [
+                                                                'user_id' => auth('web')->id(),
+                                                                'product' => $product, ]) }}"
+                                                           data-method="POST"
+                                                           data-inlist-message="@lang('frontend/profile/index.waitinglist_messages.exists')"
+                                                           class="report
+                                                   @if(auth('web')->user()->hasProductInWaiting($product)) active @endif
+                                                    js_put_in_waitinglist">
+                                                            @lang('frontend/product/index.notify_when_appears')
+                                                        </a>
+                                                    @else
+                                                        <a href="#" data-fancybox data-src="#modal" class="report">
+                                                            @lang('frontend/product/index.notify_when_appears')
+                                                        </a>
+                                                    @endauth
+                                                </div>
+                                                @break
+                                            @case(ProductAvailability::UNDER_ORDER)
+                                                <div class="prod-cart__order" style="display: block;">
+                                            <span class="ttl">
+                                                    @lang('frontend/product/index.under_order')
+                                            </span>
+                                                    <span class="discr">
+                                                    @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
+                                            </span>
+                                                    <a data-href="{{ route('ajax.cart.add', $product) }}"
+                                                       style="display: block;" data-method="POST"
+                                                       class="js-add-to-cart prod-cart__buy" data-fancybox=""
+                                                       data-src="#modal-basket"
+                                                       data-category="{{ $product->getMainCategoryAttribute()->name }}"
+                                                       data-name="{{ $product->name }}"
+                                                       data-sku="{{ $product->sku }}"
+                                                       data-price="{{ $product->format_price }}"
+                                                       data-brand="{{ ShopHelper::setting("site_name") }}">
+                                                        @lang('frontend/product/index.to_order')
+                                                    </a>
+                                                </div>
+                                                @break
+                                            @case(ProductAvailability::EXPECTED_DELIVERY)
+                                                <div class="prod-cart__order" style="display: block;">
+                                                <span class="ttl">
+                                                        @lang('frontend/product/index.expected_delivery')
+                                                </span>
+                                                    <span class="discr">
+                                                        @lang('frontend/product/index.delivery_date') - @lang(trans_choice('frontend/product/index.expected_days', Carbon::now()->diffInDays($product->expected_at)+1))
+                                                </span>
+                                                </div>
+                                            @default
+                                        @endswitch
+                                        <div class="cols modal__title">
+                                            @lang('frontend/product/index.accounting_price_title')
+                                        </div>
+                                        <div class="cols">
+                                            <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
+                                               class="main-btn main-btn--green btn-style_click">
+                                                @lang('frontend/product/index.accounting_price')
+                                            </a>
+                                            @include('frontend.elements.product.lists_buttons.compare_list_btn', ['classes' => [ 'mark' ]])
+                                            @include('frontend.elements.product.lists_buttons.wishlist_btn', ['classes' => [ 'mark' ]])
+                                        </div>
+                                    </div>
+                                    @if($product->technical_doc_url)
+                                        <div class="flex-row">
+                                            <a href="{{ $product->technical_doc_url }}" target="_blank" class="btn-download">
+                                                <i class="icon icon-download"></i>
+                                                @lang('frontend/product/index.download_technical_doc')
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @else
                         <div class="border-holder row between-xs">
                             <div class="column-left">
                                 @if($product->status)
@@ -276,6 +357,7 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

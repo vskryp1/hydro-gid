@@ -4,7 +4,9 @@
         <tr role="row">
             <th width="10%">@lang('backend.date')</th>
             <th>@lang('backend.client')</th>
+            <th></th>
             <th width="20%">@lang('backend.phone')</th>
+
             <th width="30%">@lang('backend.products')</th>
             <th width="10%">@lang('backend.status')</th>
             <th></th>
@@ -15,6 +17,7 @@
             <tr role="row">
                 <td>{{ $order->created_at }}</td>
                 <td>{{ $order->name }}</td>
+                <td><b style="color: red"><?=$order->is_accounting_price ? __('backend.is_accounting_price'): '' ?></b></td>
                 <td>{{ $order->phone }}</td>
                 <td><a href="{{ $order->product->alias }}">{{ $order->product->name }}</a></td>
                 <td>

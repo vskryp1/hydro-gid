@@ -12,6 +12,7 @@ class BuyPerClickRequest extends FormRequest
         return [
             'phone'    => ['required', 'regex:/[' . config('app.phone_chars') . ']*/'],
             'name' => ['required', 'string'],
+            'is_accounting_price' => ['boolean'],
         ];
     }
 

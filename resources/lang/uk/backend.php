@@ -1,6 +1,8 @@
 <?php
 
     return [
+        'is_accounting_price'           => 'Уточнение цены',
+        'is_disable_price'              => 'Скрыть цену',
         'actions'                       => 'Действия',
         'active'                        => 'Активно',
         'add_keys'                      => 'Добавить ключ',
