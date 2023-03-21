@@ -75,7 +75,7 @@ class ImportController extends Controller
         foreach ($rows[0] as $row) {
             $sku = $row['Артикул'];
             $price = (double)$row['Ціна роздрібна з ПДВ в євро'];
-            Product::where('sku', 'LIKE', '%'.$sku.'%')->update(['price' => $price, 'price_old' => $price]);
+            Product::where('sku', 'LIKE', '%'.$sku.'%')->update(['original_price' => $price, 'original_price_old' => $price, 'price' => $price, 'price_old' => $price]);
         }
 
          return redirect()
