@@ -89,8 +89,17 @@ class ShopHelper
 
     public static function getAmount($money)
     {
-        $badChars = array("$", ",", "(", ")");
-        return str_ireplace($badChars, "", $money);
+        switch(mb_substr_count($money,',')):
+            case 1: $money = str_ireplace(',', '.', $money);
+                break;
+            case 2: $money = mb_substr_count($money,'.') > 0 ? preg_replace('/,/','', $money, 2) : str_replace(',','.', preg_replace('/,/','', $money, 1));
+                break;
+            case 3: $money = mb_substr_count($money,'.') > 0 ? preg_replace('/,/','', $money, 3) :  str_replace(',','.', preg_replace('/,/','', $money, 2));
+                break;
+            case 4: $money = mb_substr_count($money,'.') > 0 ? preg_replace('/,/','', $money, 4) :  str_replace(',','.', preg_replace('/,/','', $money, 3));
+                break;
+        endswitch;
+        return round((float)$money,2);
     }
 
     public static function total_price($price, $qty)
