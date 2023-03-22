@@ -37,7 +37,7 @@
 
         public function getPriceFormattedAttribute()
         {
-            return ShopHelper::price_format($this->price);
+            return ShopHelper::price_format($this->original_price);
         }
 
         public function scopeActiveByPosition($query)

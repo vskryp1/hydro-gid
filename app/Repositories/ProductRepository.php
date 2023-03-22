@@ -160,9 +160,11 @@
          */
         public function prepareData($updateSellPrice = true)
         {
-            if ($updateSellPrice) {
+            //if ($updateSellPrice) {
                 $this->data['original_price'] = $this->data['original_price_old'];
-            }
+                $this->data['price'] = $this->data['original_price_old'];
+                $this->data['price_old'] = $this->data['original_price_old'];
+           // }
             $this->data['allow_default_warranty'] = isset($this->data['allow_default_warranty']);
             $this->data['active']                 = isset($this->data['active']);
             $this->data['is_disable_price']       = isset($this->data['is_disable_price']);
