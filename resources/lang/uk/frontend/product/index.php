@@ -1,6 +1,8 @@
 <?php
 
     return [
+        'availability'            => 'Наявність',
+        'available'              => 'У наявності',
         'article'                => 'Артикул',
         'generate_pdf'           => 'сформувати PDF',
         'main_params'            => 'Основні характеристики',
