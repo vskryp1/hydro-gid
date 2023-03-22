@@ -36,7 +36,7 @@
               'route'  => 'frontend.forms.buy_per_click',
               'method' => 'POST',
               'files'  => true,
-              'id'     => 'buy_per_click-form',
+              'id'     => 'buy_per_click-form-is-accounting-price',
               'class'  => 'login__form modal__form'
             ]) !!}
             <label>
@@ -57,4 +57,5 @@
 @section('scripts')
     @parent
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\ServiceOrder\BuyPerClickRequest', '#buy_per_click-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Frontend\ServiceOrder\BuyPerClickRequest', '#buy_per_click-form-is-accounting-price') !!}
 @endsection
