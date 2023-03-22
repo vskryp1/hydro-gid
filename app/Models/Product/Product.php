@@ -417,7 +417,7 @@
          */
         public function getFormatPriceAttribute()
         {
-            return ShopHelper::price_format($this->converted_price);
+            return ShopHelper::price_format(ceil($this->converted_price));
         }
 
         /**
@@ -458,7 +458,7 @@
          */
         public function getFormatPriceOldAttribute()
         {
-            return ShopHelper::price_format($this->converted_price_old);
+            return ShopHelper::price_format(ceil($this->converted_price_old));
         }
 
         /**
