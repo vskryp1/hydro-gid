@@ -75,18 +75,11 @@ class ShopHelper
 
     public static function price_format($price, $clear = false)
     {
-        /*$price = number_format(
+        $price = number_format(
             $price,
             config('app.price_format.decimals'),
             config('app.price_format.decimal_point'),
             config('app.price_format.thousand_seperator')
-        );*/
-
-        $price = number_format(
-            $price,
-            2,
-            ' ',
-            ' '
         );
 
         $price = rtrim(rtrim($price, '0'), config('app.price_format.decimal_point'));
