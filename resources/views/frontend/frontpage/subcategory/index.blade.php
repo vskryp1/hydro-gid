@@ -51,7 +51,7 @@
                     </div>
                     <div class="row category-product js_height-block">
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -263,7 +263,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -305,7 +305,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -349,7 +349,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -391,7 +391,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -433,7 +433,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -473,7 +473,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -517,7 +517,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -556,7 +556,7 @@
                             </div>
                         </div>
                         <div class="item-prod out-stock col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -598,7 +598,7 @@
                             </div>
                         </div>
                         <div class="item-prod out-stock col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -638,7 +638,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -682,7 +682,7 @@
                             </div>
                         </div>
                         <div class="item-prod col-lg-3">
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>

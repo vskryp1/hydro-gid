@@ -1,4 +1,4 @@
-<div class="prod-cart height">
+<div class="prod-cart">
     @include('frontend.elements.product.status', ['product' => $product])
     <div class="prod-cart__top">
         <a href="{{ $product->alias }}">

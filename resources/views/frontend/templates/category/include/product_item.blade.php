@@ -1,5 +1,5 @@
 <div class="item-prod col-lg-3" >
-    <div class="prod-cart height">
+    <div class="prod-cart">
         @include('frontend.elements.product.status', ['product' => $product])
         <div class="prod-cart__addto">
             @include('frontend.elements.product.lists_buttons.compare_list_btn', ['classes' => [ 'mark' ]])

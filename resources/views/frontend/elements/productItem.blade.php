@@ -1,5 +1,5 @@
 @isset($product)
-    <div class="prod-cart height">
+    <div class="prod-cart">
         @include('frontend.elements.product.status', ['product' => $product])
         <div class="prod-cart__addto">
             @auth('web')

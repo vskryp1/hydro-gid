@@ -42,7 +42,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -71,7 +71,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -99,7 +99,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -127,7 +127,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -155,7 +155,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
@@ -183,7 +183,7 @@
                         </th>
                         <th scope="col" class="col">
                             <i class="icon icon-delete js-btn-close"></i>
-                            <div class="prod-cart height">
+                            <div class="prod-cart">
                                 <div class="prod-cart__status">
                                     <div class="prod-cart__status-box"><span>Распродажа</span></div>
                                 </div>
