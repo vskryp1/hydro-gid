@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Helpers\{ExportHelper, ImportHelper};
+use App\Helpers\{ExportHelper, ImportHelper, ShopHelper};
 use App\Imports\ProductImport;
 use App\Imports\ProductPriceImport;
 use Illuminate\Http\Request;
@@ -74,7 +74,7 @@ class ImportController extends Controller
 
         foreach ($rows[0] as $row) {
             $sku = $row['Артикул'];
-            $price = (float)str_replace(',','',$row['Ціна роздрібна з ПДВ в євро']);
+            $price = ShopHelper::getAmount($row['Ціна роздрібна з ПДВ в євро']);
             Product::where('sku', 'LIKE', '%'.$sku.'%')->update(['original_price' => $price, 'original_price_old' => $price, 'price' => $price, 'price_old' => $price]);
         }
 

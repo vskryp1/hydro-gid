@@ -87,6 +87,12 @@ class ShopHelper
         return $clear ? str_replace([config('app.price_format.thousand_seperator'), ' '], '', $price) : $price;
     }
 
+    public static function getAmount($money)
+    {
+        $badChars = array("$", ",", "(", ")");
+        return str_ireplace($badChars, "", $money);
+    }
+
     public static function total_price($price, $qty)
     {
     	$total_price = $price * $qty;
