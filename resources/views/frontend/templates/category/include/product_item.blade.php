@@ -1,4 +1,4 @@
-<div class="item-prod col-lg-3" >
+<div class="item-prod col-lg-3">
     <div class="prod-cart">
         @include('frontend.elements.product.status', ['product' => $product])
         <div class="prod-cart__addto">
@@ -36,64 +36,87 @@
             @endif
         </div>
 
-        @include('frontend.elements.product.price', ['product' => $product])
-
+        @if(!$product->is_disable_price)
+            @include('frontend.elements.product.price', ['product' => $product])
+        @endif
         @switch((string) $product->availability)
             @case(ProductAvailability::NOT_AVAILABLE)
-            <div class="not-available-h">
+                <div class="not-available-h">
                     <span class="not-available-txt">
                         @lang('frontend/product/index.out_of_stock')
                     </span>
-                @auth('web')
-                    <a  data-put="{{ route('ajax.user.put.in.waitinglist', [
+                    @auth('web')
+                        <a data-put="{{ route('ajax.user.put.in.waitinglist', [
                                                                 'user_id' => auth('web')->id(),
                                                                 'product' => $product, ]) }}"
-                        data-method="POST"
-                        data-inlist-message="@lang('frontend/profile/index.waitinglist_messages.exists')"
-                       class="report js_put_in_waitinglist
+                           data-method="POST"
+                           data-inlist-message="@lang('frontend/profile/index.waitinglist_messages.exists')"
+                           class="report js_put_in_waitinglist
                             @if(auth('web')->user()->hasProductInWaiting($product)) active @endif">
-                        @lang('frontend/product/index.notify_when_appears')
-                    </a>
-                @else
-                    <a href="#" data-fancybox data-src="#modal" class="report">
-                        @lang('frontend/product/index.notify_when_appears')
-                    </a>
-                @endauth
-            </div>
-            @break
+                            @lang('frontend/product/index.notify_when_appears')
+                        </a>
+                    @else
+                        <a href="#" data-fancybox data-src="#modal" class="report">
+                            @lang('frontend/product/index.notify_when_appears')
+                        </a>
+                    @endauth
+                </div>
+                @break
 
             @case(ProductAvailability::UNDER_ORDER)
-            <div class="prod-cart__order">
+                <div class="prod-cart__order">
                     <span class="ttl">
                         @lang('frontend/product/index.under_order')
                     </span>
-                <span class="discr">
+                    <span class="discr">
                         @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
                 </span>
-            </div>
-            <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
-                @lang('frontend/product/index.buy_in_one_click')
-            </a>
-            @break
+                </div>
+                @if(!$product->is_disable_price)
+                    <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
+                        @lang('frontend/product/index.buy_in_one_click')
+                    </a>
+                @else
+                    <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
+                       class="prod-cart__buy">
+                        @lang('frontend/product/index.accounting_price')
+                    </a>
+                @endif
+                @break
 
             @case(ProductAvailability::EXPECTED_DELIVERY)
-            <div class="prod-cart__awaiting">
+                <div class="prod-cart__awaiting">
                     <span class="ttl">
                         @lang('frontend/product/index.expected_delivery')
                     </span>
-                <span class="discr">
+                    <span class="discr">
                     @lang('frontend/product/index.delivery_date') - @lang(trans_choice('frontend/product/index.expected_days', Carbon::now()->diffInDays($product->expected_at)+1))
                 </span>
-            </div>
-            <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
-                @lang('frontend/product/index.buy_in_one_click')
-            </a>
-            @break
+                </div>
+                @if(!$product->is_disable_price)
+                    <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
+                        @lang('frontend/product/index.buy_in_one_click')
+                    </a>
+                @else
+                    <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
+                       class="prod-cart__buy">
+                        @lang('frontend/product/index.accounting_price')
+                    </a>
+                @endif
+                @break
 
             @default
-            <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
-                @lang('frontend/product/index.buy_in_one_click')
-            </a>
+                @if(!$product->is_disable_price)
+                    <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
+                        @lang('frontend/product/index.buy_in_one_click')
+                    </a>
+                @else
+                    <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
+                       class="prod-cart__buy">
+                        @lang('frontend/product/index.accounting_price')
+                    </a>
+                @endif
+
         @endswitch
         @include('frontend.elements.forms.temp_order')
     </div>
