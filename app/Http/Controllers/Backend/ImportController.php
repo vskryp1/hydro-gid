@@ -72,7 +72,7 @@ class ImportController extends Controller
 
         $rows = (new ProductPriceImport())->toArray($request->file('file'));
 
-        Product::update(['is_disable_price' => true]);
+        Product::query()->update(['is_disable_price' => true]);
         foreach ($rows[0] as $row) {
             $sku = $row['Артикул'];
             $price = ShopHelper::getAmount($row['Ціна роздрібна з ПДВ в євро']);
