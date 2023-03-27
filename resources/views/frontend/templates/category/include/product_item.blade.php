@@ -38,6 +38,14 @@
 
         @if(!$product->is_disable_price)
             @include('frontend.elements.product.price', ['product' => $product])
+        @else
+            <div class="prod-cart__bottom" style="min-height: 40px;">
+                <div class="prod-cart__prise">
+                    <div class="prod-cart__prise-new">
+                        @lang('frontend/product/index.accounting_price_title')
+                    </div>
+                </div>
+            </div>
         @endif
         @switch((string) $product->availability)
             @case(ProductAvailability::NOT_AVAILABLE)
@@ -74,7 +82,7 @@
                 </div>
                 @if(!$product->is_disable_price)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
-                        @lang('frontend/product/index.buy_in_one_click')
+                        @lang('frontend/product/index.consult_in_expert')
                     </a>
                 @else
                     <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
@@ -108,7 +116,7 @@
             @default
                 @if(!$product->is_disable_price)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
-                        @lang('frontend/product/index.buy_in_one_click')
+                        @lang('frontend/product/index.consult_in_expert')
                     </a>
                 @else
                     <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
