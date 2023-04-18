@@ -72,19 +72,20 @@
                 @break
 
             @case(ProductAvailability::UNDER_ORDER)
-                <div class="prod-cart__order">
-                    <span class="ttl">
-                        @lang('frontend/product/index.under_order')
-                    </span>
-                    <span class="discr">
-                        @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
-                </span>
-                </div>
+
                 @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>
                 @else
+                    <div class="prod-cart__order">
+                    <span class="ttl">
+                        @lang('frontend/product/index.under_order')
+                    </span>
+                        <span class="discr">
+                        @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
+                </span>
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
                        class="prod-cart__buy">
                         @lang('frontend/product/index.accounting_price')
@@ -114,19 +115,20 @@
                 @break
 
             @default
-                <div class="prod-cart__order">
-                    <span class="ttl">
-                        @lang('frontend/product/index.under_order')
-                    </span>
-                    <span class="discr">
-                        @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
-                </span>
-                </div>
+
                 @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>
                 @else
+                    <div class="prod-cart__order">
+                    <span class="ttl">
+                        @lang('frontend/product/index.under_order')
+                    </span>
+                        <span class="discr">
+                        @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
+                </span>
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
                        class="prod-cart__buy">
                         @lang('frontend/product/index.accounting_price')
