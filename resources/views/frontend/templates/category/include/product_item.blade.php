@@ -36,7 +36,7 @@
             @endif
         </div>
 
-        @if(!$product->is_disable_price)
+        @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
             @include('frontend.elements.product.price', ['product' => $product])
         @else
             <div class="prod-cart__bottom" style="min-height: 40px;">
@@ -80,7 +80,7 @@
                         @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
                 </span>
                 </div>
-                @if(!$product->is_disable_price)
+                @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>
@@ -101,7 +101,7 @@
                     @lang('frontend/product/index.delivery_date') - @lang(trans_choice('frontend/product/index.expected_days', Carbon::now()->diffInDays($product->expected_at)+1))
                 </span>
                 </div>
-                @if(!$product->is_disable_price)
+                @if(!$product->is_disable_price  && $product->original_price > 0 && $product->price > 0)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.buy_in_one_click')
                     </a>
@@ -114,7 +114,7 @@
                 @break
 
             @default
-                @if(!$product->is_disable_price)
+                @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>

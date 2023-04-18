@@ -20,7 +20,7 @@
         'buy_in_one_click'       => 'Купити в 1 клік',
         'consult_in_expert'      => 'Консультація експерта',
         'accounting_price'       => 'Уточнити ціну',
-        'accounting_price_title' => 'Ціну та наявність уточнюйте',
+        'accounting_price_title' => 'Ціну уточнюйте',
         'specifications'         => 'Характеристики',
         'technical_params'       => 'Технічні характеристики',
         'related_products'       => 'З цим товаром купують',

@@ -153,6 +153,8 @@
                                                 </span>
                                                 </div>
                                             @default
+                                                <div class="prod-cart__order" style="display: block; height: 44px">
+                                                </div>
                                         @endswitch
                                         <div class="cols modal__title">
                                             @lang('frontend/product/index.accounting_price_title')
