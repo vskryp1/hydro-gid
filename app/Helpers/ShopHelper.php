@@ -89,8 +89,9 @@ class ShopHelper
 
     public static function getAmount($money)
     {
+
         switch(mb_substr_count($money,',')):
-            case 1: $money = str_ireplace(',', '.', $money);
+            case 1: $money = mb_substr_count($money,'.') > 0 ? str_ireplace(',', '', $money) : str_ireplace(',', '.', $money);
                 break;
             case 2: $money = mb_substr_count($money,'.') > 0 ? preg_replace('/,/','', $money, 2) : str_replace(',','.', preg_replace('/,/','', $money, 1));
                 break;
