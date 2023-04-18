@@ -107,6 +107,14 @@
                         @lang('frontend/product/index.buy_in_one_click')
                     </a>
                 @else
+                    <div class="prod-cart__order">
+                    <span class="ttl">
+                        @lang('frontend/product/index.under_order')
+                    </span>
+                        <span class="discr">
+                        @lang('frontend/product/index.delivery_date') - {{ $product->under_order_weeks }} @lang(trans_choice('frontend/product/index.weeks', $product->under_order_weeks))
+                </span>
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
                        class="prod-cart__buy">
                         @lang('frontend/product/index.accounting_price')
