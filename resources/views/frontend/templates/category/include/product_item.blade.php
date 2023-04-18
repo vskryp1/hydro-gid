@@ -74,6 +74,8 @@
             @case(ProductAvailability::UNDER_ORDER)
 
                 @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
+                    <div class="prod-cart__order" style="height: 44px">
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>
@@ -103,6 +105,8 @@
                 </span>
                 </div>
                 @if(!$product->is_disable_price  && $product->original_price > 0 && $product->price > 0)
+                    <div class="prod-cart__order" style="height: 44px">
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.buy_in_one_click')
                     </a>
@@ -125,6 +129,8 @@
             @default
 
                 @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
+                    <div class="prod-cart__order" style="height: 44px">
+                    </div>
                     <a data-fancybox data-src="#modal-buy_per_click" href="#" class="prod-cart__buy">
                         @lang('frontend/product/index.consult_in_expert')
                     </a>
