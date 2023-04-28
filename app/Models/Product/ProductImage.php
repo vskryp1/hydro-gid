@@ -72,7 +72,7 @@ class ProductImage extends Model implements TranslatableContract
         $is_image_exist = Storage::disk('public')->exists("cache/$filterType/webp/$this->product_id/" . $imageName . '.webp');
 
         return $is_image_exist
-            ?  str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $imageName . '.webp'])->implode(DIRECTORY_SEPARATOR))
+            ?  str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR))
             : str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR));
     }
 
