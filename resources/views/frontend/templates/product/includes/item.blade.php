@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="choose-config-section col-xs-6">
-                        @if($product->is_disable_price)
+                        @if($product->is_disable_price || $product->original_price == 0)
                             <div class="row">
                                 <div class="about-prod">
 
