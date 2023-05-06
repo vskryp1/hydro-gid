@@ -21,7 +21,11 @@
                               'filter_values.translations',
                               'product_status.translations',
                               'group.option_filters.translations',
-                          ]);
+                          ])->orderBy('is_disable_price', 'ASC')
+                          ->orderBy('original_price', 'DESC')
+                          ->orderBy('original_price_old', 'DESC')
+                          ->orderBy('price', 'DESC')
+                          ->orderBy('price_old', 'DESC');
         }
 
         public static function prepareActiveProductsWithFilters()
@@ -46,7 +50,11 @@
                                   $query->orderBy('position');
                               },
 	                          'pages'
-                          ]);
+                          ])->orderBy('is_disable_price', 'ASC')
+                          ->orderBy('original_price', 'DESC')
+                          ->orderBy('original_price_old', 'DESC')
+                          ->orderBy('price', 'DESC')
+                          ->orderBy('price_old', 'DESC');
         }
 
         public static function getProductParams($product)

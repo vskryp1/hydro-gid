@@ -363,9 +363,7 @@
                     </div>
                 </div>
             </div>
-            @if((int)ShopHelper::price_format($product->original_price))
-                @include('frontend.elements.forms.temp_order')
-            @endif
+            @include('frontend.elements.forms.temp_order')
             <aside class="item-prod-right">
                 @include('frontend.templates.product.includes.right_sidebar')
             </aside>
