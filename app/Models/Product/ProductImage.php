@@ -62,8 +62,7 @@
         {
             return $is_webp
                 ? $this->getWebpUrl($filterType)
-                : asset(collect(['storage', 'cache', $filterType, $this->product_id, $this->getOriginal('image')])
-                    ->implode(DIRECTORY_SEPARATOR));
+                : str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR));
         }
 
         protected function getWebpUrl($filterType)
@@ -73,10 +72,8 @@
             $is_image_exist = Storage::disk('public')->exists("cache/$filterType/webp/$this->product_id/" . $imageName . '.webp');
 
             return $is_image_exist
-                ? asset(collect(['storage', 'cache', $filterType, 'webp', $this->product_id, $imageName . '.webp'])
-                    ->implode(DIRECTORY_SEPARATOR))
-                : asset(collect(['storage', 'cache', $filterType, $this->product_id, $this->getOriginal('image')])
-                    ->implode(DIRECTORY_SEPARATOR));
+                ?  str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR))
+                : str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR));
         }
 
         public function getImageAttribute($value)
