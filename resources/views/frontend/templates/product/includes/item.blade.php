@@ -100,7 +100,7 @@
                             <div class="row">
                                 <div class="about-prod">
 
-                                    <div class="flex-row about-prod__btns-wrap">
+                                    <div class="bout-prod__btns-wrap">
                                         @switch((string) $product->availability)
                                             @case(ProductAvailability::NOT_AVAILABLE)
                                                 <div class="not-avail">
@@ -156,7 +156,7 @@
                                                 <div class="prod-cart__order" style="display: block; height: 44px">
                                                 </div>
                                         @endswitch
-                                        <div class="cols modal__title">
+                                        <div style="text-align: left; padding-top:0" class="cols modal__title">
                                             @lang('frontend/product/index.accounting_price_title')
                                         </div>
                                         <div class="cols">
