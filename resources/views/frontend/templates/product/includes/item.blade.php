@@ -156,7 +156,7 @@
                                                 <div class="prod-cart__order" style="display: block; height: 44px">
                                                 </div>
                                         @endswitch
-                                        <div style="text-align: left; padding-top:0" class="cols modal__title">
+                                        <div style="text-align: left; padding-top:0; padding-bottom:25px" class="cols modal__title">
                                             @lang('frontend/product/index.accounting_price_title')
                                         </div>
                                         <div class="cols">
