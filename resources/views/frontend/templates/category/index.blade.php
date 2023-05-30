@@ -65,7 +65,8 @@
                                 <div class="products__list">
                                     <div class="products__item--hover"></div>
                                     <picture>
-                                        <source type="image/webp" class="lazy-srcset" data-srcset="{{ $child->getImageUrl('category', 'page_image', true) }}">
+                                        <source type="image/webp" class="lazy-srcset"
+                                                data-srcset="{{ $child->getImageUrl('category', 'page_image', true) }}">
                                         <img class="lazy" data-src="{{ $child->getImageUrl('category', 'page_image') }}"
                                              alt="{{ __('frontend.page_alt', ['name' => $child->name]) }}"
                                              title="{{ __('frontend.page_title', ['name' => $child->name]) }}">
@@ -109,7 +110,8 @@
                         <div class="choice-holder">
                             <label>@lang('frontend/product/index.products_on_page'):</label>
                             @foreach(config('app.filters.products_count_on_page') as $productsOnPage)
-                                <a class="item sort-limit-accept @if($productsOnPage == $limit) active @endif" data-limit="{{ $productsOnPage }}">
+                                <a class="item sort-limit-accept @if($productsOnPage == $limit) active @endif"
+                                   data-limit="{{ $productsOnPage }}">
                                     {{ $productsOnPage }}
                                 </a>
                             @endforeach
@@ -122,6 +124,7 @@
                         <span class="icon icon-rotate"></span>
                         <a href="#">@lang('frontend/product/index.show_more')</a>
                     </div>
+                        {{ $products->render()  }}
                 </div>
             </div>
         </div>

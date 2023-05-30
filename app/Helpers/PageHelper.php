@@ -158,12 +158,15 @@
                     }
                 )
             ->whereRaw('products.id = products.parent_id');
+
             $filterHelper = new FilterHelper($products, $request->offset);
             $filterHelper->setFiltersByProducts();
             $filterHelper->processingFilters($requestFilters);
             $filterHelper->setFiltersByProducts();
+
 	        $this->viewModels = $filterHelper->getFilters();
             $this->viewData   = $filterHelper->getViewData();
+
             $this->setSeoMetaFilters($filterHelper, $requestFilters);
 
             $this->putViewData('recently_viewed_products', ProductHelper::getRecentlyViewed());

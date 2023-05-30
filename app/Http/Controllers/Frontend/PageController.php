@@ -32,9 +32,6 @@
             if ($current_page > 0) {
                 $models = $pageHelper->getViewModels();
                 //redirect to last page if page more than exists
-                if ($models->lastPage() < $current_page) {
-                    return redirect($models->url($models->lastPage()), 301);
-                }
                 //4 step set meta tags of 4
                 $seo_meta = app(SeoMetaData::class);
                 $seo_meta->setSeoTitle($seo_meta->getSeoTitle() . ' ' . __('frontend.page') . ' ' . $current_page);
@@ -45,9 +42,6 @@
                 $seo_meta->setSeoContent($seo_meta->getSeoContent());
                 $seo_meta->setStep(SeoMetaData::STEP_PAGINATE);
 
-                $seo_paginate = app(SeoPaginateData::class);
-                $seo_paginate->setPrev($current_page > 2 ? $models->previousPageUrl() : '');
-                $seo_paginate->setNext($models->nextPageUrl());
             }
             $view = Response::view("frontend.templates.{$page->page_template->folder}.index", $pageHelper->getViewData());
             if (isset($pageHelper->noCache) && $pageHelper->noCache) {

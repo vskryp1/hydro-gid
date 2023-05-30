@@ -381,8 +381,9 @@
         {
             $productIds = $this->products->pluck('id');
             $this->recheckFilters();
-            $this->showMoreAvailable = $productIds->count() > $this->getLimit();
-	        $this->products          = $this->products->limit($this->getLimit())->get();
+            $this->products = $this->products->paginate($this->getLimit());
+            $page = $_GET['page'] ?? 1;
+            $this->showMoreAvailable = $page < $this->products->lastPage();
         }
 
         public function getLimit()
