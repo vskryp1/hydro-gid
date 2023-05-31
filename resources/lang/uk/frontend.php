@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'app_name'                                             => 'СКР Гидравлик',
+        'app_name'                                             => 'СКР Гидравлік',
         'products'                                             => 'Товари',
         'articles'                                             => 'Статті',
         'site_name'                                            => 'ArtLaraShop',
