@@ -22966,9 +22966,12 @@
                                 t(".js_show_more").on("click", (function(e) {
                                         e.preventDefault();
                                         if (t('.pagination').length > 0) {
-                                            let href = t('.pagination').find('.active').next().find('a').attr('href')
-                                            location.href = href
-                                        } else {
+                                            let pageajax = parseInt(t(this).attr('data-page-ajax')) + 1;
+                                            t(this).attr('data-page-ajax', pageajax)
+                                            const url = new URL(window.location.href);
+                                            url.searchParams.set('page', pageajax);
+                                            window.history.replaceState(null, null, url); // or pushState
+                                        }
                                             var n = t("[name=limit]").length && t("[name=limit]").val() ? parseInt(t("[name=limit]").val()) : window.shop.filters.limit;
                                             n = parseInt(n),
                                                 window.shop.filters.offset = parseInt(window.shop.filters.offset),
@@ -23008,7 +23011,8 @@
                                                         s()
                                                     }
                                                 ), 500)
-                                        }
+
+
 
                                     }
                                 ))

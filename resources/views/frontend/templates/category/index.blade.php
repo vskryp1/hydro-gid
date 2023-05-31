@@ -120,7 +120,7 @@
                     <div class="row category-product js_height-block js-products-block js-items">
                         @include('frontend.templates.category.include.product_items')
                     </div>
-                    <div class="btn-see-more js_show_more @unless($showMoreAvailable) display-none @endunless">
+                    <div data-page-ajax="1" class="btn-see-more js_show_more @unless($showMoreAvailable) display-none @endunless">
                         <span class="icon icon-rotate"></span>
                         <a href="#">@lang('frontend/product/index.show_more')</a>
                     </div>
