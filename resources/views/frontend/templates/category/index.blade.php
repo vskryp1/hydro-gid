@@ -66,7 +66,7 @@
             <div class="container">
                 <div class="products__title">
                     <h1 class="products__title">
-                        {{ $page->name }}
+                        {{ $page->name.$end_h1 }}
                     </h1>
                 </div>
                 @if($page->children_active->count() > 0)
