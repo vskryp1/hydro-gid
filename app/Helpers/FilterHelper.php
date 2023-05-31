@@ -370,7 +370,6 @@
 
         public function getViewData()
         {
-	        $this->setLimits();
             $this->hasMoreProducts();
             $this->filterHelper = $this;
 
@@ -381,9 +380,9 @@
         {
             $productIds = $this->products->pluck('id');
             $this->recheckFilters();
-            $this->products = $this->products->paginate($this->getLimit());
             $page = $_GET['page'] ?? 1;
-            $this->showMoreAvailable = $this->products->count() > ($this->getLimit() + $this->offset);
+            $this->products = $this->products->paginate($this->getLimit())->orderBy('is_disable_price', 'ASC');
+            $this->showMoreAvailable = $page < $this->products->lastPage();
         }
 
         public function getLimit()
