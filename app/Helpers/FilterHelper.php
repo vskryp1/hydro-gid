@@ -381,7 +381,7 @@
             $productIds = $this->products->pluck('id');
             $this->recheckFilters();
             $page = $_GET['page'] ?? 1;
-            $this->products = $this->products->paginate($this->getLimit())->orderBy('is_disable_price', 'ASC');
+            $this->products = $this->products->orderBy('is_disable_price', 'ASC')->paginate($this->getLimit());
             $this->showMoreAvailable = $page < $this->products->lastPage();
         }
 
