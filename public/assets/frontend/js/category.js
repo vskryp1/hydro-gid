@@ -22971,6 +22971,8 @@
                                             const url = new URL(window.location.href);
                                             url.searchParams.set('page', pageajax);
                                             window.history.replaceState(null, null, url); // or pushState
+                                            $(`.page-item`).removeClass('active');
+                                            $(`.page-item:nth-child(${pageajax+1})`).addClass('active');
                                         }
                                             var n = t("[name=limit]").length && t("[name=limit]").val() ? parseInt(t("[name=limit]").val()) : window.shop.filters.limit;
                                             n = parseInt(n),
