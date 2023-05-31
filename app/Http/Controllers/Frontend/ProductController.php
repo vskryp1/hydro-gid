@@ -51,8 +51,8 @@
             $seo_meta = app(SeoMetaData::class);
             if ($seo_meta->isNotStep(SeoMetaData::STEP_MODULE)) {
                 //2 step set meta tags of 4
-                $seo_meta->setSeoTitle($product->seo_title ?? __('frontend/product/index.seo_title', ['name' => $product->name, 'price' => $product->format_price]));
-                $seo_meta->setSeoDescription($product->seo_description ?? __('frontend/product/index.seo_description', ['name' => $product->name]));
+                $seo_meta->setSeoTitle(__('frontend/product/index.seo_title', ['name' => $product->name, 'sku' => $product->sku]));
+                $seo_meta->setSeoDescription($product->seo_description ?? __('frontend/product/index.seo_description', ['name' => $product->name, 'sku' => $product->sku]));
                 $seo_meta->setSeoKeywords($product->seo_keywords ?? __('frontend/product/index.seo_keywords', ['name' => $product->name]));
                 $seo_meta->setSeoRobots($product->seo_robots);
                 $seo_meta->setSeoCanonical($product->seo_canonical ?? $request->url());

@@ -6,11 +6,11 @@
                 <div class="footer__logo">
                     @if(Request::url() === LaravelLocalization::getLocalizedURL(app()->getLocale(), url(DIRECTORY_SEPARATOR)))
                         <a>
-                            {!! Html::image(ShopHelper::getLogoUrl('footer'), 'footer-logo') !!}
+                            {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru.png') : asset('assets/frontend/images/logo-uk.png'), 'footer-logo') !!}
                         </a>
                     @else
                         <a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale(), url(DIRECTORY_SEPARATOR)) }}">
-                            {!! Html::image(ShopHelper::getLogoUrl('footer'), 'footer-logo') !!}
+                            {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru.png') : asset('assets/frontend/images/logo-uk.png'), 'footer-logo') !!}
                         </a>
                     @endif
                 </div>
@@ -132,7 +132,7 @@
                 {{ collect([
                     'Ⓒ',
                     date('Y'),
-                    config('app.name'),
+                    __('frontend.app_name'),
                     __('frontend.all_rights_reserved')
                 ])->implode(' ') }}
             </div>

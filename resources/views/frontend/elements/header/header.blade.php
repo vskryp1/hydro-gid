@@ -47,11 +47,11 @@
                     <div class="header__logo header__logo--bg">
                         @if($current_url === $localized_url)
                             <a class="header__logo-link">
-                                {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
+                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru.png') : asset('assets/frontend/images/logo-uk.png'), 'header-logo') !!}
                             </a>
                         @else
                             <a class="header__logo-link" href="{{ $localized_url }}">
-                                {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
+                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru.png') : asset('assets/frontend/images/logo-uk.png'), 'header-logo') !!}
                             </a>
                         @endif
                     </div>
