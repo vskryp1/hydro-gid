@@ -6,7 +6,7 @@
     if (isset($_GET['page']) && $_GET['page'] > 1):
        $start_title =  app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
        $start_description = app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
-       $end_h1 = app()->getLocale() == 'ru' ? '- страница ' . $_GET['page']  .': ' : '- cторінка ' . $_GET['page']  .': ';
+       $end_h1 = app()->getLocale() == 'ru' ? ' - страница ' . $_GET['page']  .': ' : ' - cторінка ' . $_GET['page']  .': ';
     endif;
 
 @endphp
