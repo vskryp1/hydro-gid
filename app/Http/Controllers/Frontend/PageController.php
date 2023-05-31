@@ -34,8 +34,8 @@
                 //redirect to last page if page more than exists
                 //4 step set meta tags of 4
                 $seo_meta = app(SeoMetaData::class);
-                $seo_meta->setSeoTitle($seo_meta->getSeoTitle() . ' ' . __('frontend.page') . ' ' . $current_page);
-                $seo_meta->setSeoDescription($seo_meta->getSeoDescription() . ' ' . __('frontend.page') . ' ' . $current_page);
+                $seo_meta->setSeoTitle($seo_meta->getSeoTitle());
+                $seo_meta->setSeoDescription($seo_meta->getSeoDescription());
                 $seo_meta->setSeoKeywords($seo_meta->getSeoKeywords());
                 $seo_meta->setSeoRobots('noindex,nofollow');
                 $seo_meta->setSeoCanonical($request->url());
