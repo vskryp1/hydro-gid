@@ -159,6 +159,7 @@
                 )
             ->whereRaw('products.id = products.parent_id');
 
+
             $filterHelper = new FilterHelper($products, $request->offset);
             $filterHelper->setFiltersByProducts();
             $filterHelper->processingFilters($requestFilters);

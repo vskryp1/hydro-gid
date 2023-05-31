@@ -383,7 +383,7 @@
             $this->recheckFilters();
             $this->products = $this->products->paginate($this->getLimit());
             $page = $_GET['page'] ?? 1;
-            $this->showMoreAvailable = $page < $this->products->lastPage();
+            $this->showMoreAvailable = $this->products->count() > ($this->getLimit() + $this->offset);
         }
 
         public function getLimit()

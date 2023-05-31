@@ -33,7 +33,7 @@
             price: "{{ Filter::PRICE }}",
             sort: "{{ Filter::SORT }}",
             slider: "{{ Filter::SLIDER }}",
-            offset: {{ 32 }},
+            offset: {{ $defaultLimit *  ($_GET['page'] ?? 0)}},
             limit: '{{ $defaultLimit }}',
             url: window.location.pathname.replace(/{{ config('app.separators.filters.start') != '' ? '\/' . config('app.separators.filters.start') . '\/(.*)' :  '(\/[A-Za-z0-9\-_:]+\\' . config('app.separators.filters.filter_value') . '.+){1,}' }}/ig, '')
         };
