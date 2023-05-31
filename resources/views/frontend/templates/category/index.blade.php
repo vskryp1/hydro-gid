@@ -2,7 +2,7 @@
 @php
     $start_title = '';
     $start_description = '';
-    $start_h1 = '';
+    $end_h1 = '';
     if (isset($_GET['page']) && $_GET['page'] > 1):
        $start_title =  app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
        $start_description = app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
