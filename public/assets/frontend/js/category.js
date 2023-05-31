@@ -19095,6 +19095,7 @@
                         t
                 }
                 function o() {
+                    let pageajax = parseInt(t('.js_show_more').attr('data-page-ajax')) + 1;
                     var e = getFiltersUrl();
                     history.pushState(null, null, window.shop.filters.url + e),
                         window.shop.filters.offset = 0,
@@ -19103,7 +19104,8 @@
                                 url: window.shop.filters.ajax_url + e,
                                 dataType: "json",
                                 data: {
-                                    path: window.location.pathname
+                                    path: window.location.pathname,
+                                    page: pageajax
                                 },
                                 type: "GET",
                                 success: function(e) {
