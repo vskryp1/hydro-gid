@@ -1,9 +1,20 @@
 @extends('frontend.layout')
+@php
+    $start_title = '';
+    $start_description = '';
+    $start_h1 = '';
+    if (isset($_GET['page']) && $_GET['page'] > 1):
+       $start_title =  app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
+       $start_description = app()->getLocale() == 'ru' ? 'Страница ' . $_GET['page']  .': ' : 'Сторінка ' . $_GET['page']  .': ';
+       $end_h1 = app()->getLocale() == 'ru' ? '- страница ' . $_GET['page']  .': '; : '- cторінка ' . $_GET['page']  .': ';
+    endif;
 
-@section('title', $seo_meta['seo_title'])
-@section('description', $seo_meta['seo_description'])
+@endphp
+
+@section('title', $start_title . $seo_meta['seo_title'])
+@section('description', $start_description . $seo_meta['seo_description'])
 @section('keywords', $seo_meta['seo_keywords'])
-@section('h1', $seo_meta['seo_h1'])
+@section('h1', $seo_meta['seo_h1'] . $end_h1)
 @section('robots', $seo_meta['seo_robots'])
 @section('canonical', $seo_meta['seo_canonical'])
 @section('seo_content')
