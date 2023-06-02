@@ -18,8 +18,9 @@
 @section('robots', $seo_meta['seo_robots'])
 @section('canonical', $seo_meta['seo_canonical'])
 @section('seo_content')
-    {!! $seo_meta['seo_content'] !!}
+    {!! (!isset($_GET['page']) || ( isset($_GET['page']) && $_GET['page'] == 1) ? $seo_meta['seo_content'] : '') !!}
 @endsection
+@endphp
 @include('frontend.elements.ogMeta')
 
 @section('styles')

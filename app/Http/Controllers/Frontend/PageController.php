@@ -37,7 +37,7 @@
                 $seo_meta->setSeoTitle($seo_meta->getSeoTitle());
                 $seo_meta->setSeoDescription($seo_meta->getSeoDescription());
                 $seo_meta->setSeoKeywords($seo_meta->getSeoKeywords());
-                $seo_meta->setSeoRobots('noindex,nofollow');
+                $seo_meta->setSeoRobots('index,follow');
                 $seo_meta->setSeoCanonical($request->url());
                 $seo_meta->setSeoContent($seo_meta->getSeoContent());
                 $seo_meta->setStep(SeoMetaData::STEP_PAGINATE);
