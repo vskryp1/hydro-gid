@@ -20,7 +20,7 @@
 @section('seo_content')
     {!! (!isset($_GET['page']) || ( isset($_GET['page']) && $_GET['page'] == 1) ? $seo_meta['seo_content'] : '') !!}
 @endsection
-@endphp
+
 @include('frontend.elements.ogMeta')
 
 @section('styles')

@@ -22967,6 +22967,7 @@
                                 )),
                                 t(".js_show_more").on("click", (function(e) {
                                         e.preventDefault();
+                                            t('.seo').remove()
                                             let pageajax = parseInt(t(this).attr('data-page-ajax')) + 1;
                                             t(this).attr('data-page-ajax', pageajax)
                                             const url = new URL(window.location.href);
