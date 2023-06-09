@@ -6,7 +6,7 @@
                 <div class="footer__logo">
                     @if(Request::url() === LaravelLocalization::getLocalizedURL(app()->getLocale(), url(DIRECTORY_SEPARATOR)))
                         <a>
-                            {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru-footer.png') : asset('assets/frontend/images/logo-ru-footer.png'), 'footer-logo') !!}
+                            {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-ru-footer.png') : asset('assets/frontend/images/logo-footer-uk.png'), 'footer-logo') !!}
                         </a>
                     @else
                         <a href="{{ LaravelLocalization::getLocalizedURL(app()->getLocale(), url(DIRECTORY_SEPARATOR)) }}">
