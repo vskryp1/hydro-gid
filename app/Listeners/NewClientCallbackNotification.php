@@ -27,7 +27,7 @@
             if (count($admins)) {
                 foreach ($admins as $admin) {
                     if ($admin) {
-                        Notification::send($admin, (new NewClientCallbackEmail($admin, $event->serviceOrder)));
+                        Notification::sendNow($admin, (new NewClientCallbackEmail($admin, $event->serviceOrder)));
                     }
                 }
             }

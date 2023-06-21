@@ -21,9 +21,11 @@ class NewOrderBuyClickNotification
     {
         $admins = ShopHelper::feedback_emails();
         if (count($admins)) {
+
             foreach ($admins as $admin) {
                 if ($admin) {
-                    Notification::send($admin, new NewOrderBuyClickAdminEmail($event->clickOrders));
+
+                    dd(Notification::send($admin, new NewOrderBuyClickAdminEmail($event->clickOrders)));
                 }
             }
         }

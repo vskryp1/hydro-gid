@@ -134,16 +134,9 @@ class ShopHelper
 
     public static function feedback_emails()
     {
-        return Cache::tags(['users'])
-                    ->remember(
-                        'feedback_emails',
-                        config('app.cache_minutes'),
-                        function () {
-                            return User::whereNotification(true)
+        return User::whereNotification(true)
                                        ->onlyActive()
                                        ->get();
-                        }
-                    );
     }
 
     public static function currencies()

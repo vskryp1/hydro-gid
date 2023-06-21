@@ -1,5 +1,8 @@
 <?php
 
+ini_set('max_execution_time', '0'); // for infinite time of execution 
+set_time_limit(0);
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
