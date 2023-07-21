@@ -38,8 +38,8 @@
         {
             return $this->getOriginal('image')
                 ? storage_path(
-                	collect(['app', 'public', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR)
-	            )
+                    collect(['app', 'public', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR)
+                )
                 : public_path('assets/frontend/images/') . ShopHelper::setting('no_image', config('app.no_product_image'));
         }
 
@@ -62,7 +62,8 @@
         {
             return $is_webp
                 ? $this->getWebpUrl($filterType)
-                : str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR));
+                : asset(collect(['storage', 'cache', $filterType, $this->product_id, $this->getOriginal('image')])
+                    ->implode(DIRECTORY_SEPARATOR));
         }
 
         protected function getWebpUrl($filterType)
@@ -72,8 +73,10 @@
             $is_image_exist = Storage::disk('public')->exists("cache/$filterType/webp/$this->product_id/" . $imageName . '.webp');
 
             return $is_image_exist
-                ?  str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR))
-                : str_replace('app/public','',collect(['app', 'public/storage', 'products', $this->product_id, $this->getOriginal('image')])->implode(DIRECTORY_SEPARATOR));
+                ? asset(collect(['storage', 'cache', $filterType, 'webp', $this->product_id, $imageName . '.webp'])
+                    ->implode(DIRECTORY_SEPARATOR))
+                : asset(collect(['storage', 'cache', $filterType, $this->product_id, $this->getOriginal('image')])
+                    ->implode(DIRECTORY_SEPARATOR));
         }
 
         public function getImageAttribute($value)
@@ -92,14 +95,14 @@
         public function getImageAlt()
         {
             return empty($this->alt)
-                ? $this->product->name
+                ? __('frontend/product/index.image_alt', ['name' => $this->product->name])
                 : $this->alt;
         }
 
         public function getImageTitle()
         {
             return empty($this->title)
-                ? $this->product->name
+                ? __('frontend/product/index.image_title', ['name' => $this->product->name])
                 : $this->title;
         }
     }

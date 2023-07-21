@@ -160,7 +160,7 @@
             return [
                 'active' => $active,
                 'html'   => view($view, [
-                    'link'       => $view_parameters['link'],
+                    'link'       => str_replace('https://185.86.76.70','/',$view_parameters['link']),
                     'title'      => $view_parameters['title'],
                     'menu_item'  => $view_parameters['menu_item'],
                     'menuable'   => $view_parameters['menuable'],

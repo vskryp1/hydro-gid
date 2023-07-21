@@ -27,6 +27,8 @@ class ImageService
             $rawPath = explode('.', $path);
             $ext     = end($rawPath);
         }
+
+        var_dump(Storage::disk('public')->exists($path));die;
         if (Storage::disk('public')->exists($path)) {
             if (!self::isExtAllowed($ext)) {
                 $url = $path;

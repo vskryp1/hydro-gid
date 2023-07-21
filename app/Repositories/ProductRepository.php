@@ -82,6 +82,7 @@
                 }
             }
 
+
             //prepare filters values
             $product_values = [];
             if (isset($this->data['filters']) && is_array($this->data['filters'])) {
@@ -187,15 +188,18 @@
             if (isset($this->data['images']) && is_array($this->data['images'])) {
                 $pos = 0;
                 foreach ($this->data['images'] as $image) {
+
                     if (!is_null($image['image'])) {
                         $filePath = collect([ 'products', $product->id, $image['image']])->implode(DIRECTORY_SEPARATOR);
-                        dispatch(
-                            new ResizeImageJob(
+
+                        $fff = new ResizeImageJob(
                                 $filePath,
                                 config('customimagecache.types.products'),
                                 'products'
-                            )
-                        );
+                            );
+
+                        $fff->handle();
+
                         $image['product_id'] = $product->id;
                         $image['cover']      = $pos == 0;
                         $image['position']   = $pos++;
