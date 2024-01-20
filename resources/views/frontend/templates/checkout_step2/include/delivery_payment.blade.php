@@ -24,13 +24,15 @@
             ['class' => 'js-payment-radio', 'data-type' => $payment->type->key, 'data-type-id' => $payment->type]
         ) }}
         <span @if($payment->type->is(PaymentType::PRIVAT24_BY_PART)) @endif>
-            @if($payment->type->is(PaymentType::LIQPAY))
-                <img src="{{asset('/assets/frontend/images/liqpay.png')}}" alt="">
+            {{ $payment->name }}
+{{--            @if($payment->type->is(PaymentType::LIQPAY))--}}
+ {{--               <img src="{{asset('/assets/frontend/images/liqpay.png')}}" alt="">--}}
 {{--            @elseif($payment->type->is(PaymentType::PRIVAT24_BY_PART))--}}
-{{--                <img src="{{asset('/assets/frontend/images/pb.png')}}" alt=""> 
-@lang('frontend/checkout/index.part_pay')--}}
-                @else{{ $payment->name }}
-            @endif
+{{--                <img src="{{asset('/assets/frontend/images/pb.png')}}" alt=""> --}}
+{{--@lang('frontend/checkout/index.part_pay')--}}
+            {{--    @else--}}
+
+         {{--   @endif--}}
         </span>
     </label>
 @endforeach
