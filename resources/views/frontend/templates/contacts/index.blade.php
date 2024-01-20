@@ -66,19 +66,30 @@
                         <div class="contacts__title-sup">
                             @lang('frontend/content/index.phones'):
                         </div>
+
                         <div class="d-flex" style="gap:10px">
-                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_first') }}</a><a href="https://telegram.im/@hydrogid" target="_blank">
-                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
-                                    </a><a href="viber://chat?number=+380962696508" target="_blank">
-                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                                    </a>
+                            @php 
+                               preg_match_all('/\d+/', (string)ShopHelper::setting('phone_number_first'), $matches);
+                               $num1 = implode('', $matches[0]);
+                               preg_match_all('/\d+/', (string)ShopHelper::setting('phone_number_second'), $matches);
+                               $num2 = implode('',$matches[0]);
+                            @endphp
+                        <a class="contacts__phone" href="tel:+38{{ $num1 }}">+38 {{ ShopHelper::setting('phone_number_first') }}</a>
+                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                            </a>
+                            <a href="viber://chat?number=+38{{ $num1 }}" target="_blank">
+                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                             </a>
                         </div>
                          <div class="d-flex" style="gap:10px">
-                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_second') }}</a><a href="https://telegram.im/@hydrogid" target="_blank">
-                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
-                                    </a><a href="viber://chat?number=+380962696508" target="_blank">
-                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                                    </a>
+                        <a class="contacts__phone" href="tel:+38{{ $num2 }}">+38 {{ ShopHelper::setting('phone_number_second') }}</a>
+                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                            </a>
+                            <a href="viber://chat?number=+38{{ $num2 }}" target="_blank">
+                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                             </a>
                         </div>            
                         <div class="d-flex">            
                         <a class="contacts__phone" href="mailto:{{ ShopHelper::setting('phone_number_third') }}"> {{ ShopHelper::setting('phone_number_third')}}</a>
