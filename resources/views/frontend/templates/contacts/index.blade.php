@@ -66,9 +66,23 @@
                         <div class="contacts__title-sup">
                             @lang('frontend/content/index.phones'):
                         </div>
-                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_first') }}</a>
-                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_second') }}</a>
-                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_third')}}</a>
+                        <div class="d-flex" style="gap:10px">
+                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_first') }}</a><a href="https://telegram.im/@hydrogid" target="_blank">
+                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                                    </a><a href="viber://chat?number=+380962696508" target="_blank">
+                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                                    </a>
+                        </div>
+                         <div class="d-flex" style="gap:10px">
+                        <a class="contacts__phone" href="tel:+38{{ ShopHelper::setting('phone_number_first') }}">+38 {{ ShopHelper::setting('phone_number_second') }}</a><a href="https://telegram.im/@hydrogid" target="_blank">
+                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                                    </a><a href="viber://chat?number=+380962696508" target="_blank">
+                                        <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                                    </a>
+                        </div>            
+                        <div class="d-flex">            
+                        <a class="contacts__phone" href="mailto:{{ ShopHelper::setting('phone_number_third') }}"> {{ ShopHelper::setting('phone_number_third')}}</a>
+                        </div>
                         <div class="contacts__social">
                             <ul>
                                 <li>
@@ -106,9 +120,6 @@
                     </div>
                     @include('frontend.elements.forms.callback')
                 </div>
-                <section class="contacts__maps">
-                    <div id="map"></div>
-                </section>
             </div>
         </div>
     </main>

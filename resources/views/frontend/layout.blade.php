@@ -1,16 +1,6 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        @env('production')
-            <!-- Google Tag Manager -->
-            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-PVVFC6M');
-            </script>
-            <!-- End Google Tag Manager -->
-        @endenv
         {!! Html::tag('meta', '', ['charset' => 'UTF-8']) !!}
         {!! Html::meta('viewport', 'width=device-width, initial-scale=1.0') !!}
         {!! Html::meta('csrf-token', csrf_token()) !!}
@@ -65,13 +55,7 @@
         @endenv
     </head>
     <body>
-        @env('production')
-            @yield('transactionTrack')
-            <!-- Google Tag Manager (noscript) -->
-            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVVFC6M"
-                              height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-            <!-- End Google Tag Manager (noscript) -->
-        @endenv
+
         {!! Setting::get('seo-afterHead', '') !!}
         @include('frontend.elements.preloader.preloader')
         @include('frontend.elements.header.header')
@@ -81,15 +65,7 @@
         <div class="page-overlay"></div>
         @yield('scripts')
         @include('sweetalert::alert')
-        @env('production')
-            <script type="text/javascript">
-                (function(d, w, s) {
-                    var widgetHash = 'd4gq46pvt98apcej75jh', gcw = d.createElement(s); gcw.type = 'text/javascript'; gcw.async = true;
-                    gcw.src = '//widgets.binotel.com/getcall/widgets/'+ widgetHash +'.js';
-                    var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(gcw, sn);
-                })(document, window, 'script');
-            </script>
-        <script src="//code.jivosite.com/widget/JoYPd7uIN6" async></script>
-        @endenv
+
+
     </body>
 </html>

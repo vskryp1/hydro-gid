@@ -23,6 +23,8 @@
         public function __construct()
         {
             parent::__construct();
+            ini_set('max_execution_time', 0); // for infinite time of execution 
+            set_time_limit(0);
             $this->middleware('permission:list pages', ['only' => ['index']]);
             $this->middleware('permission:add pages', ['only' => ['create', 'store']]);
             $this->middleware('permission:edit pages', ['only' => ['edit', 'update', 'updateParent', 'updateSorts']]);
@@ -97,11 +99,14 @@
          */
         public function create()
         {
+            if (!Cache::get('products'))
+                Cache::put('products', Product::onlyActive()->get()->pluck('name', 'id'), 8600);
+
             $templates = PageTemplate::onlyActive()->get()->pluck('name', 'id');
             return view('backend.pages.create', [
                 'templates' => $templates,
                 'pages'     => Page::all()->sortBy('position'),
-                'products'  => Product::onlyActive()->get()->pluck('name', 'id'),
+                'products'  => Cache::get('products'),
             ]);
         }
 
@@ -149,6 +154,10 @@
                 $parent                  = $parent->parent_page_id != 1 ? $parent->parent()->first() : null;
             }
             $breadcrumbs = array_reverse($breadcrumb, true);
+            if (!Cache::get('products'))
+                Cache::put('products', Product::onlyActive()->limit(10)->get()->pluck('name', 'id'), 8600);
+
+
             return view('backend.pages.edit', [
                 'breadcrumbs'     => $breadcrumbs,
                 'urls'            => $page->alias,
@@ -156,8 +165,10 @@
                 'templates'       => PageTemplate::onlyActive()->get()->pluck('name', 'id'),
                 'page_add_fields' => $page->page_template ? $page->page_template->page_additional_field : [],
                 'pages'           => Page::where('id', '<>', $page->id)->get(),
-                'products'        => Product::onlyActive()->get()->pluck('name', 'id'),
+                'products'        => Cache::get('products'),
             ]);
+
+
         }
 
         /**

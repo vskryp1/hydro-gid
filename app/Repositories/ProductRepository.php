@@ -184,7 +184,7 @@
          */
         public function saveImages($product)
         {
-            $product->images()->delete();
+           // $product->images()->delete();
             if (isset($this->data['images']) && is_array($this->data['images'])) {
                 $pos = 0;
                 foreach ($this->data['images'] as $image) {

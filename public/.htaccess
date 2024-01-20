@@ -24,8 +24,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    php_value post_max_size 24M
-    php_value upload_max_filesize 8M
+    php_value post_max_size 100M
+    php_value upload_max_filesize 1000M
 
     FileETag MTime Size
 </IfModule>

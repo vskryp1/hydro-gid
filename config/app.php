@@ -352,7 +352,7 @@
                 'value'  => 1,
             ],
             'default_toolbar_sort'   => 'popular',
-            'products_count_on_page' => [16, 24, 36],
+            'products_count_on_page' => [20, 40, 60],
         ],
 
         'price_format'   => [

@@ -1,29 +1,29 @@
 <?php
-    
-    namespace App\Http\Controllers\Backend\Products;
-    
-    use App;
-    use App\Helpers\ImageHelper;
-    use App\Helpers\ProductHelper;
-    use App\Helpers\ShopHelper;
-    use App\Http\Requests\Backend\Products\StoreRequest;
-    use App\Http\Requests\Backend\Products\UpdateRequest;
-    use App\Http\Requests\Backend\Products\UploadImageRequest;
-    use App\Jobs\ProductStockPriceRecalcJob;
-    use App\Jobs\ResizeImageJob;
-    use App\Models\Currency\Currency;
-    use App\Models\Page\Page;
-    use App\Models\Product\Product;
-    use App\Http\Controllers\Controller;
-    use App\Models\Product\ProductStatus;
-    use App\Models\Seo\Sitemap;
-    use App\Repositories\ProductRepository;
-    use Cache;
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Str;
-    use Storage;
-    use App\Enums\ProductStatus as ProductStatusEnum;
-    
+
+namespace App\Http\Controllers\Backend\Products;
+
+use App;
+use App\Helpers\ImageHelper;
+use App\Helpers\ProductHelper;
+use App\Helpers\ShopHelper;
+use App\Http\Requests\Backend\Products\StoreRequest;
+use App\Http\Requests\Backend\Products\UpdateRequest;
+use App\Http\Requests\Backend\Products\UploadImageRequest;
+use App\Jobs\ProductStockPriceRecalcJob;
+use App\Jobs\ResizeImageJob;
+use App\Models\Currency\Currency;
+use App\Models\Page\Page;
+use App\Models\Product\Product;
+use App\Http\Controllers\Controller;
+use App\Models\Product\ProductStatus;
+use App\Models\Seo\Sitemap;
+use App\Repositories\ProductRepository;
+use Cache;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Storage;
+use App\Enums\ProductStatus as ProductStatusEnum;
+
     /**
      * Class ProductsController
      * @package App\Http\Controllers\Backend
@@ -37,6 +37,8 @@
         {
             $this->repository = new ProductRepository($request);
             parent::__construct();
+            ini_set('max_execution_time', 8000000); // for infinite time of execution 
+            set_time_limit(8000000);
             $this->middleware('permission:list products', ['only' => ['index']]);
             $this->middleware('permission:add products', ['only' => ['create', 'store']]);
             $this->middleware('permission:edit products', ['only' => ['edit', 'update']]);
@@ -52,6 +54,8 @@
          */
         public function index(Request $request)
         {
+            
+
             $products = Product::with([
                 'pages.translations',
                 'currency',
@@ -59,26 +63,53 @@
                 'translations',
                 'images',
             ])
-                ->orderBy('updated_at', 'DESC');
+            ->orderBy('updated_at', 'DESC');
 
             if ($request->has('search')) {
                 $products = $products
-                    ->where('sku', 'LIKE', "%" . $request->search . "%")
-                    ->orWhereTranslationLike('name', "%" . $request->search . "%");
-            }
-            $products = $products->paginate($request->get('limit',
-                ShopHelper::setting('backend_paginate_limit', config('app.limits.backend.pagination', 25))));
-            if($request->has('search'))
-            {
-                $products->appends(['search' => $request->search]);
+                ->where('sku', 'LIKE', "%" . $request->search . "%")
+                ->orWhereTranslationLike('name', "%" . $request->search . "%");
             }
 
-            return view('backend.products.index', [
-                'products' => $products,
-                'permission' => 'products',
-            ]);
+            if ($request->has('gidro_updates')) {
+
+                $productsGidro = $products
+                ->orWhereTranslationLike('name', "%электромагнитный гидрораспределитель%")->get();
+                foreach ($productsGidro as $gidro) {
+                    if(!$gidro->getMainCategoryAttribute()) {
+                       $categories = [];
+                       $categories['9755d3c7-eb50-421d-80fe-3dcf07d8aef2'] = [
+                        'is_main' => 1,
+                    ];
+            //update categories in group or single
+                    $gidro->pages()->get()->map(function($page) use (&$categories)
+                    {
+                        if(!$page->page_template()->first()->is_category)
+                        {
+                            $categories = array_merge($categories, [$page->id => ['is_main' => false]]);
+                        }
+                    });
+                    $gidro->pages()->sync($categories);
+                }
+            }
+            
+
+            die;
+            
         }
-        
+        $products = $products->paginate($request->get('limit',
+            ShopHelper::setting('backend_paginate_limit', config('app.limits.backend.pagination', 25))));
+        if($request->has('search'))
+        {
+            $products->appends(['search' => $request->search]);
+        }
+
+        return view('backend.products.index', [
+            'products' => $products,
+            'permission' => 'products',
+        ]);
+    }
+    
         /**
          * Show the form for creating a new resource.
          *
@@ -107,29 +138,29 @@
 
             // creating warranties
             if(isset($request->warranties['amount'])) {
-		        $product->warranties()->create($request->warranties);
-            }
+              $product->warranties()->create($request->warranties);
+          }
 
             // move temporary images
-            if (isset($request->images) && is_array($request->images)) {
-                foreach ($request->images as $image) {
-                    if (!is_null($image['image'])) {
-                        Storage::disk('public')->move(Product::GALLERY_PATH . 'tmp/' . $image['image'],
-                            Product::GALLERY_PATH . $product->id . '/' . $image['image']);
-                    }
+          if (isset($request->images) && is_array($request->images)) {
+            foreach ($request->images as $image) {
+                if (!is_null($image['image'])) {
+                    Storage::disk('public')->move(Product::GALLERY_PATH . 'tmp/' . $image['image'],
+                        Product::GALLERY_PATH . $product->id . '/' . $image['image']);
                 }
             }
-            
-            $this->repository->updateRelationModels($product);
-            
-            return redirect(
-                $request->get('action') == 'continue'
-                    ? route('backend.products.edit', ['product' => $product])
-                    : route('backend.products.index')
-            )->with('success', ['text' => __('backend.product_created')]);
-            
         }
         
+        $this->repository->updateRelationModels($product);
+        
+        return redirect(
+            $request->get('action') == 'continue'
+            ? route('backend.products.edit', ['product' => $product])
+            : route('backend.products.index')
+        )->with('success', ['text' => __('backend.product_created')]);
+        
+    }
+    
         /**
          * Show the form for editing the specified resource.
          *
@@ -140,7 +171,7 @@
         public function edit($product)
         {
             $product = Product::with(['images', 'filter_values', 'pages', 'productRelations', 'similarProducts'])
-                ->findOrFail($product);
+            ->findOrFail($product);
             if($product->inStock()){
                 $product->product_status_id = ProductHelper::getProductStatus(ProductStatusEnum::STOCK)->id;
             }
@@ -172,8 +203,8 @@
 
             return redirect(
                 $request->get('action') == 'continue'
-                    ? route('backend.products.edit', ['product' => $product])
-                    : route('backend.products.index')
+                ? route('backend.products.edit', ['product' => $product])
+                : route('backend.products.index')
             )->with('success', ['text' => __('backend.product_updated')]);
         }
         
@@ -208,13 +239,13 @@
         {
             $search = trim($request->get('q', ''));
             $products = Product::with(['currency'])
-                ->when($request->get('type') == 'group', function ($query) {
-                    return $query->doesnthave('children');
-                })
-                ->where(function ($query) use ($search) {
-                    return $query->where('sku', 'LIKE', "%" . $search . "%")
-                        ->orWhereTranslationLike('name', "%" . $search . "%");
-                });
+            ->when($request->get('type') == 'group', function ($query) {
+                return $query->doesnthave('children');
+            })
+            ->where(function ($query) use ($search) {
+                return $query->where('sku', 'LIKE', "%" . $search . "%")
+                ->orWhereTranslationLike('name', "%" . $search . "%");
+            });
             
             $products = $products->take(10)->get();
             $currency = Currency::find($request->currency);
@@ -257,8 +288,8 @@
             Cache::tags('products')->flush();
             return redirect(
                 $request->get('action') == 'continue'
-                    ? route('backend.products.group.edit', ['product' => $product->id])
-                    : route('backend.products.edit', ['product' => $product->id]) . '#group'
+                ? route('backend.products.group.edit', ['product' => $product->id])
+                : route('backend.products.edit', ['product' => $product->id]) . '#group'
             )->with('success', ['text' => __('backend.product_group_saved')]);
         }
         
@@ -316,8 +347,8 @@
             Cache::tags('products')->flush();
             return redirect(
                 $request->get('action') === 'continue'
-                    ? route('backend.products.edit', ['product' => $product])
-                    : route('backend.products.index')
+                ? route('backend.products.edit', ['product' => $product])
+                : route('backend.products.index')
             )->with('success', ['text' => __('backend.product_copied')]);
         }
     }

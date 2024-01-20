@@ -15584,7 +15584,7 @@ header.fixed .header__bottom {
 }
 
 .top__inner .row {
-  flex-wrap: nowrap;
+  /*flex-wrap: nowrap;*/
   margin: 0 -15px;
 }
 @media only screen and (max-width: 1030px) {
@@ -15596,7 +15596,7 @@ header.fixed .header__bottom {
 .top__slider {
   overflow-x: hidden;
   border: 1px solid #EFEFF4;
-  max-width: 910px;
+  max-width: 100%;
   width: 100%;
   min-height: 500px;
   margin: 0 15px;

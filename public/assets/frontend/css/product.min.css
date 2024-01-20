@@ -17426,11 +17426,17 @@ input:focus, textarea:focus, select:focus, .select-wrapper input.select-dropdown
   justify-content: space-between;
 }
 .btn-download .icon {
-  color: #AAADBB;
+  color: #fff;
   display: inline-block;
   margin-right: 10px;
   text-decoration: unset;
   font-size: 20px;
+}
+.btn-download {
+    background: #55CE8C;
+    color: #fff;
+    padding: 5px;
+    font-size: 18px;
 }
 .btn-download span {
   text-decoration: underline;
