@@ -160,8 +160,12 @@ class CartController extends Controller
     public function searchDeliveryPlace(Delivery $delivery, bool $getOnlyDeliveryPlaceIds = false)
     {
         $ids = [];
+        $locale         = App::getLocale();
+        $is_np = false;
+        $delivery_places = [];
         if ($delivery->type->is(DeliveryType::PICKUP_NP) || $delivery->type->is(DeliveryType::COURIER_NP)) {
             $ids = Delivery::whereIn('type', [DeliveryType::PICKUP_NP, DeliveryType::COURIER_NP])->pluck('id');
+            $is_np = true;
         } else {
             $ids = [$delivery->id];
         }
@@ -169,6 +173,19 @@ class CartController extends Controller
         if (request()->search) {
             $deliveryQuery->whereTranslationLike('name', "%" . request()->search . "%");
         }
+       if ($is_np) {
+        $np = new NovaPoshtaApi2(ShopHelper::np_api_key(), $locale);
+        $cities   = $np->getCities(0, request()->search);
+         foreach ($cities['data'] as $city) {
+            $name = $locale == 'ru' && isset($city['DescriptionRu'])
+                                ? $city['DescriptionRu']
+                                : $city['Description'];
+            $delivery_places[] = [
+                                                    'id'   => $city['Ref'],
+                                                    'text' => $name,
+                                                 ];
+         }
+       } else {
         $delivery_places = $deliveryQuery->whereIn('delivery_id', $ids)
                                          ->orderBy('is_default')
                                          ->byPosition()
@@ -182,6 +199,8 @@ class CartController extends Controller
                                                  ];
                                              }
                                          );
+       }
+        
         return response()->json($delivery_places);
     }
 
