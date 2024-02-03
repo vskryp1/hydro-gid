@@ -66,6 +66,18 @@
         @yield('scripts')
         @include('sweetalert::alert')
 
+        <style>.header__socials, .header__socials_phones {
+    padding-left: 0!important;
+    justify-content: space-between;
+    gap: 10px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.contacts__social img {
+    width: 40px;
+}</style>
+
 
     </body>
 </html>

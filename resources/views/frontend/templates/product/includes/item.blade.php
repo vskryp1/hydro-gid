@@ -160,7 +160,7 @@
                                             @lang('frontend/product/index.accounting_price_title')
                                         </div>
                                         <div class="cols">
-                                            <a data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
+                                            <a style="margin-bottom: 20px;" data-fancybox data-src="#modal-buy_per_click_is_accounting_price" href="#"
                                                class="main-btn main-btn--green btn-style_click">
                                                 @lang('frontend/product/index.accounting_price')
                                             </a>
@@ -170,7 +170,7 @@
                                     </div>
                                     @if($product->technical_doc_url)
                                         <div class="flex-row">
-                                            <a href="{{ $product->technical_doc_url }}" target="_blank" class="btn-download">
+                                            <a href="{{ $product->technical_doc_url }}" target="_blank" class="btn-download main-btn--green">
                                                 <i class="icon icon-download"></i>
                                                 @lang('frontend/product/index.download_technical_doc')
                                             </a>
@@ -351,7 +351,7 @@
                                 </div>
                                 @if($product->technical_doc_url)
                                     <div class="flex-row">
-                                        <a href="{{ $product->technical_doc_url }}" target="_blank" class="btn-download">
+                                        <a href="{{ $product->technical_doc_url }}" target="_blank" class="btn-download main-btn--green">
                                             <i class="icon icon-download"></i>
                                             @lang('frontend/product/index.download_technical_doc')
                                         </a>

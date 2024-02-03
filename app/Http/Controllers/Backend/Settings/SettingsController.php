@@ -59,14 +59,14 @@ class SettingsController extends Controller
         if($key != '') {
             \Setting::set($key, $request->value);
             foreach (\Setting::get('locales') as $lang => $value) {
-                if ($request->values[$lang] != '') {
+                if (!empty($request->values[$lang])) {
                     \Setting::lang($lang)->set($key, $request->values[$lang]);
                 }
             }
 
             SettingModel::where('key', $key)->update(['can_delete' => isset($request->can_delete)]);
         }
-        Artisan::command('queue:restart');
+        //Artisan::command('queue:restart');
         Cache::tags('settings')->flush();
         return redirect()
             ->route('backend.settings.global.index')

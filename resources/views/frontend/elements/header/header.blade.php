@@ -64,6 +64,16 @@
                         {!! Form::button(null, ['type' => 'submit', 'class' => 'icon icon-search']) !!}
                         {!! Form::close() !!}
                     </div>
+                      <div class="row header__socials_phones">
+                    <div class="header__socials">
+                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                            </a>
+                            <a href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                             </a>
+                    </div>
+
                     <div class="header__phone">
                         <a class="header__phone-number"
                            href="tel:{{ ShopHelper::getFormatPhone('phone_number_first') }}">
@@ -77,6 +87,7 @@
                             {{ __('frontend.request_a_call') }}
                         </a>
                     </div>
+                     </div>
                     <div class="header__panel-list">
                         <ul>
                             <li>
@@ -414,6 +425,16 @@
                                 </div>
                                 <div class="header__mobile-menu-footer header__mobile-menu-item">
                                     <div class="container">
+                                        <div class="row header__socials_phones">
+                                        <div class="header__socials">
+                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                            </a>
+                            <a href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                             </a>
+                    </div>
+
                                         <div class="header__phone">
                                             <a class="header__phone-number"
                                                href="tel:{{ ShopHelper::getFormatPhone('phone_number_first') }}">
@@ -427,6 +448,7 @@
                                                 {{ __('frontend.request_a_call') }}
                                             </a>
                                         </div>
+                                    </div>
                                         <div class="header__city">
 
                                         </div>

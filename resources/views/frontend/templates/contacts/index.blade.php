@@ -75,21 +75,10 @@
                                $num2 = implode('',$matches[0]);
                             @endphp
                         <a class="contacts__phone" href="tel:+38{{ $num1 }}">+38 {{ ShopHelper::setting('phone_number_first') }}</a>
-                            <a href="https://telegram.im/@hydrogid" target="_blank">
-                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
-                            </a>
-                            <a href="viber://chat?number=+38{{ $num1 }}" target="_blank">
-                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                             </a>
+
                         </div>
                          <div class="d-flex" style="gap:10px">
                         <a class="contacts__phone" href="tel:+38{{ $num2 }}">+38 {{ ShopHelper::setting('phone_number_second') }}</a>
-                            <a href="https://telegram.im/@hydrogid" target="_blank">
-                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
-                            </a>
-                            <a href="viber://chat?number=+38{{ $num2 }}" target="_blank">
-                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                             </a>
                         </div>            
                         <div class="d-flex">            
                         <a class="contacts__phone" href="mailto:{{ ShopHelper::setting('phone_number_third') }}"> {{ ShopHelper::setting('phone_number_third')}}</a>
@@ -107,23 +96,18 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ ShopHelper::setting('linkedin_link') }}" target="_blank">
-                                        <img src="{{asset('/assets/frontend/images/social/linkedin.svg')}}" alt="">
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
                                         <img src="{{asset('/assets/frontend/images/social/telegram.svg')}}" alt="">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ ShopHelper::setting('skype_link') }}" target="_blank">
-                                        <img src="{{asset('/assets/frontend/images/social/skype.svg')}}" alt="">
-                                    </a>
-                                </li>
-                                <li>
                                     <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
                                         <img src="{{asset('/assets/frontend/images/social/viber.svg')}}" alt="">
+                                    </a>
+                                </li>
+                                 <li>
+                                    <a href="{{ ShopHelper::setting('youtube-link') }}" target="_blank">
+                                        <img src="{{asset('/assets/frontend/images/social/youtube.svg')}}" alt="">
                                     </a>
                                 </li>
                             </ul>
