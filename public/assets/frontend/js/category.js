@@ -34569,8 +34569,9 @@ __webpack_require__(/*! ./checkout/index */ "./resources/assets/frontend/js/chec
       this.renderMap(geo, select2Element.text());
     };
 
+   
     this.renderMap = function (geo, title) {
-      var map = new google.maps.Map(document.getElementById('map-' + this.deliveryId), {
+      /*var map = new google.maps.Map(document.getElementById('map-' + this.deliveryId), {
         center: geo,
         zoom: window.data.map_zoom
       });
@@ -34578,7 +34579,8 @@ __webpack_require__(/*! ./checkout/index */ "./resources/assets/frontend/js/chec
         position: geo,
         map: map,
         title: title
-      });
+      });*/
+       $('#map-' + this.deliveryId).html(`<iframe width="100%" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=${geo.lat},${geo.lng}&z=${window.data.map_zoom}&output=embed"></iframe>`)
     };
   }
 
