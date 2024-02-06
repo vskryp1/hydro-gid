@@ -100,7 +100,7 @@ class SettingsController extends Controller
                 \Setting::lang($lang)->set($request->global, $request->values[$lang]);
             }
         }
-        Artisan::command('queue:restart');
+        //Artisan::command('queue:restart');
         Cache::tags('settings')->flush();
         return redirect($request->get('action') == 'continue'
 			? route('backend.settings.global.edit', ['id' => $request->key])

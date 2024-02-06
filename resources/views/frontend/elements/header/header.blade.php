@@ -475,6 +475,14 @@
                         </div>
                     </div>
                     <div class="header__mobile-icons">
+                        <div class="header__socials" style="gap: 0; align-items: start; margin-top: -5px;">
+                            <a style="width: 30px" href="https://telegram.im/@hydrogid" target="_blank">
+                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                            </a>
+                            <a style="width: 30px" href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                                   <img  src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                             </a>
+                    </div>
                         <div class="phone">
                             <a class="icon icon-phone" data-fancybox="" data-src="#modal-phone"></a>
                         </div>

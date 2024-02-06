@@ -38,7 +38,7 @@
                                 @foreach($slider->slider_items as $item)
                                     <div class="top__slider-item">
                                         <div class="top__slider-content">
-                                            <div class="top__slider-info">
+                                            <div class="top__slider-info" style="display:none">
                                                 <div class="top__slider-pretitle">
                                                     {{ $item->title }}
                                                 </div>
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="top__slider-images">
                                                 <picture>
-                                                    <source type="image/webp" class="lazy-srcset" data-srcset="{{ $item->getUrl('sliders', true) }}">
+                                                    <source type="image/webp" class="lazy-srcset" data-srcset="{{ $item->getUrl() }}">
                                                     <img class="lazy" data-src="{{ $item->getUrl('sliders') }}"
                                                          alt="{{ empty($item->alt) ? $page->name : $item->alt }}"
                                                          title="{{ empty($item->title) ? $page->name : $item->title }}">
