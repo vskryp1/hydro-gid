@@ -66,10 +66,10 @@
                     </div>
                       <div class="row header__socials_phones">
                     <div class="header__socials">
-                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                            <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
                             </a>
-                            <a href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                            <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
                                    <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
                              </a>
                     </div>
@@ -427,10 +427,10 @@
                                     <div class="container">
                                         <div class="row header__socials_phones">
                                         <div class="header__socials">
-                            <a href="https://telegram.im/@hydrogid" target="_blank">
+                            <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
                             </a>
-                            <a href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                            <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
                                    <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
                              </a>
                     </div>
@@ -476,10 +476,10 @@
                     </div>
                     <div class="header__mobile-icons">
                         <div class="header__socials" style="gap: 0; align-items: start; margin-top: -5px;">
-                            <a style="width: 30px" href="https://telegram.im/@hydrogid" target="_blank">
+                            <a style="width: 30px" href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
                             </a>
-                            <a style="width: 30px" href="viber://chat?number=+38{{ ShopHelper::getFormatPhone('phone_number_first') }}" target="_blank">
+                            <a style="width: 30px" href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
                                    <img  src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
                              </a>
                     </div>

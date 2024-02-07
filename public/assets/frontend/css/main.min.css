@@ -15676,10 +15676,10 @@ header.fixed .header__bottom {
   position: relative;
 }
 @media (max-width: 768px) {
-  .top__slider-content {
+  /*.top__slider-content {
     padding: 0 15px;
     flex-direction: column-reverse;
-  }
+  }*/
   .top__slider-content .top__slider-info {
     position: relative;
     z-index: 1;
@@ -15713,11 +15713,15 @@ header.fixed .header__bottom {
   max-width: 100%;
 }
 @media (max-width: 768px) {
-  .top__slider-images {
+ /* .top__slider-images {
     max-width: 230px;
     bottom: 0;
     right: 0;
     margin: 50px 0 20px;
+  }*/
+
+  .top__slider {
+    height: unset;
   }
 }
 
