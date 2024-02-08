@@ -247,5 +247,7 @@
 	    'seo_description_filter'                               => 'Купить ❰❰❰:name :filter❱❱❱ по доступной ₴ цене в Украине: ✓гарантия качества продукции ✓низкие цены на товар. Звоните для консультации ✆ (097) 066 99 56',
 	    'seo_keywords_filter'                                  => ':name :filter, купить, цена, Украина',
 	    'seo_h1_filter'                                        => ':name: :filter',
-        'search_city'                                          => 'Выберите город из списка'
+        'search_city'                                          => 'Выберите город из списка',
+        'page_alt'                                             => ':name',
+        'page_title'                                           => ':name',
     ];
