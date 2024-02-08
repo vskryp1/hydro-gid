@@ -50,7 +50,7 @@
                                                                             )!!}
                                     @endif
                                     @if($type == 'file' && $value != '' && Storage::disk('public')->exists(\App\Models\Page\Page::GALLERY_PATH. $page->id . '/' . $value))
-                                        <img src="{{ asset("/storage/cache/page_md/$page->id/$value") }}" width="100px">
+                                        <img src="{{ asset("/storage/pages/$page->id/$value") }}" width="100px">
                                     @endif
                                 </td>
                             </tr>

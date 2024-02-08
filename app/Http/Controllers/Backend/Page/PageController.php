@@ -233,13 +233,12 @@
                                     $name = ImageHelper::generateName($path, $image['value']->getClientOriginalName());
                                     Storage::disk('public')->putFileAs($path, $image['value'], $name);
                                     $image['value'] = $name;
-                                    dispatch(
-                                        new ResizeImageJob(
+
+                                    new ResizeImageJob(
                                             $path . DIRECTORY_SEPARATOR . $name,
                                             config('customimagecache.types.pages'),
                                             'pages'
-                                        )
-                                    );
+                                        );
                                 }elseif(isset($pafvModel) && $image['value'] == '' && $pafv->translate($lang)->value){
                                     Storage::disk('public')->delete(Page::GALLERY_PATH.$pafv->translate($lang)->value);
                                 }

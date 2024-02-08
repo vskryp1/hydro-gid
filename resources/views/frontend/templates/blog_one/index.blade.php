@@ -41,10 +41,19 @@
                         </div>
                         @include('frontend.templates.blog_one.include.info')
                         <picture>
-                            <source type="image/webp" srcset="{{ $page->getImageUrl('page_blog_one', 'image', true) }}">
-                            <img src="{{ $page->getImageUrl('page_blog_one') }}"
-                                 alt="{{ $page->name }}"
-                                 title="{{ $page->name }}">
+                            <?php  $page_add_fields = $page->page_template->page_additional_field; ?>
+                             @foreach($page_add_fields as $field)
+                            @php($value = $field->page_additional_field_value->where('page_id', $page->id)->first() && $field->page_additional_field_value->where('page_id', $page->id)->first()->translate()
+                                  ? $field->page_additional_field_value->where('page_id', $page->id)->first()->translate()->value
+                                  : null)
+                            @php($type = $field->page_additional_field_type->type)
+                                    @if($type == 'file' && $value != '' && Storage::disk('public')->exists(\App\Models\Page\Page::GALLERY_PATH. $page->id . '/' . $value))
+                                        <img src="{{ asset("/storage/pages/$page->id/$value") }}"  alt="{{ $page->name }}" title="{{ $page->name }}">
+
+                                        <source type="image/webp" srcset="{{ asset("/storage/pages/$page->id/$value") }}">
+                           @endif
+                                    @endforeach
+                            
                         </picture>
                         {!!  $page->description !!}
                         @include('frontend.templates.blog_one.include.info')
