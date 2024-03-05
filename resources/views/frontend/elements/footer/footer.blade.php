@@ -65,6 +65,12 @@
                             </li>
                         @endforeach
                     </ul>
+                    <div class="footer-column-more">
+                        <div>
+                            <span>{{ __('frontend.view_more') }} <i class="icon icon-arrow-down"></i></span>
+                            <span>{{ __('frontend.view_less') }} <i class="icon icon-arrow-down"></i></span>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if($services->isNotEmpty())

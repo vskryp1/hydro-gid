@@ -250,4 +250,6 @@
         'search_city'                                          => 'Выберите город из списка',
         'page_alt'                                             => ':name',
         'page_title'                                           => ':name',
+        'view_more'                                            => 'Показать больше',
+        'view_less'                                            => 'Скрыть',
     ];
