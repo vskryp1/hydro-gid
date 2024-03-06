@@ -155,10 +155,10 @@ input[type=radio] {
 
 .form-control {
   &~.invalid-feedback {
-    margin-top: -10px;
+    margin-top: -24px;
   }
   &.is-valid ~ .invalid-feedback {
-    display: none !important;
+    display: none;
   }
 }
 
