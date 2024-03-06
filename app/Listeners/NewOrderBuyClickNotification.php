@@ -25,7 +25,8 @@ class NewOrderBuyClickNotification
             foreach ($admins as $admin) {
                 if ($admin) {
 
-                    dd(Notification::send($admin, new NewOrderBuyClickAdminEmail($event->clickOrders)));
+//                    dd(Notification::send($admin, new NewOrderBuyClickAdminEmail($event->clickOrders)));
+                    Notification::send($admin, new NewOrderBuyClickAdminEmail($event->clickOrders));
                 }
             }
         }
