@@ -252,4 +252,6 @@
         'search_city'                                          => 'Виберіть місто з переліку',
         'page_alt'                                             => ':name',
         'page_title'                                           => ':name',
+        'view_more'                                            => 'Показати боліше',
+        'view_less'                                            => 'Приховати',
 	];
