@@ -12569,10 +12569,10 @@ input[type=radio] {
 }
 
 .form-control ~ .invalid-feedback {
-  margin-top: -10px;
+  margin-top: -24px;
 }
 .form-control.is-valid ~ .invalid-feedback {
-  display: none !important;
+  display: none;
 }
 
 #input-file-error {
@@ -16002,6 +16002,41 @@ header.fixed .header__bottom {
     text-align: left;
   }
 }
+.footer__column-2 .footer__column-list {
+  height: 80px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.footer__column-2 .footer__column-list.active {
+  height: auto;
+  overflow: visible;
+}
+
+.footer-column-more {
+  font-size: 14px;
+}
+
+.footer-column-more i.icon-arrow-down {
+  font-size: 8px;
+}
+
+.footer-column-more span:nth-child(2) {
+  display: none;
+}
+
+.footer-column-more.active span:nth-child(2) {
+  display: block;
+}
+
+.footer-column-more.active i.icon-arrow-down {
+  transform: rotate(180deg);
+}
+
+.footer-column-more.active span {
+  display: none;
+}
+
 .filter-block__top {
   margin-bottom: -13px;
 }

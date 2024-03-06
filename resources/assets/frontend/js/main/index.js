@@ -36,6 +36,11 @@
         $(this).toggleClass('close');
     });
 
+    $(".footer-column-more").click(function () {
+        $(this).toggleClass("active");
+        $(".footer__column-2 .footer__column-list").toggleClass("active");
+    });
+
     $('.questions').on('click', '.questions__item', function () {
         $(this).next(".questions__item-answer").slideToggle();
         $(this).toggleClass('active');

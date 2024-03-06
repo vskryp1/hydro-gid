@@ -34569,9 +34569,8 @@ __webpack_require__(/*! ./checkout/index */ "./resources/assets/frontend/js/chec
       this.renderMap(geo, select2Element.text());
     };
 
-   
     this.renderMap = function (geo, title) {
-      /*var map = new google.maps.Map(document.getElementById('map-' + this.deliveryId), {
+      var map = new google.maps.Map(document.getElementById('map-' + this.deliveryId), {
         center: geo,
         zoom: window.data.map_zoom
       });
@@ -34579,8 +34578,7 @@ __webpack_require__(/*! ./checkout/index */ "./resources/assets/frontend/js/chec
         position: geo,
         map: map,
         title: title
-      });*/
-       $('#map-' + this.deliveryId).html(`<iframe width="100%" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=${geo.lat},${geo.lng}&z=${window.data.map_zoom}&output=embed"></iframe>`)
+      });
     };
   }
 
@@ -35318,11 +35316,10 @@ var _wW = $(window).width();
           mark($(this), !reg.test($.trim($(this).val())));
           email = false;
           break;
-
-        case "phone":
-          reg = /[0-9 -()+]{10}$/;
-          mark($(this), !reg.test($.trim($(this).val())));
-          break;
+        // case "phone":
+        //     reg = /[0-9 -()+]{10}$/;
+        //     mark($(this), !reg.test($.trim($(this).val())));
+        //     break;
 
         case "pass":
           password = true;
@@ -40888,6 +40885,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     $(this).next(".footer__column-list").slideToggle();
     $(this).toggleClass('close');
   });
+  $(".footer-column-more").click(function () {
+    $(this).toggleClass("active");
+    $(".footer__column-2 .footer__column-list").toggleClass("active");
+  });
   $('.questions').on('click', '.questions__item', function () {
     $(this).next(".questions__item-answer").slideToggle();
     $(this).toggleClass('active');
@@ -41018,7 +41019,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/resources/assets/frontend/js/category.js */"./resources/assets/frontend/js/category.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\skr-hydraulic\hydro-gid\resources\assets\frontend\js\category.js */"./resources/assets/frontend/js/category.js");
 
 
 /***/ })

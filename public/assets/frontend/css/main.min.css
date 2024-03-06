@@ -12489,10 +12489,10 @@ input[type=radio] {
 }
 
 .form-control ~ .invalid-feedback {
-  margin-top: -10px;
+  margin-top: -24px;
 }
 .form-control.is-valid ~ .invalid-feedback {
-  display: none !important;
+  display: none;
 }
 
 #input-file-error {
@@ -15573,6 +15573,41 @@ header.fixed .header__bottom {
     text-align: left;
   }
 }
+.footer__column-2 .footer__column-list {
+  height: 80px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.footer__column-2 .footer__column-list.active {
+  height: auto;
+  overflow: visible;
+}
+
+.footer-column-more {
+  font-size: 14px;
+}
+
+.footer-column-more i.icon-arrow-down {
+  font-size: 8px;
+}
+
+.footer-column-more span:nth-child(2) {
+  display: none;
+}
+
+.footer-column-more.active span:nth-child(2) {
+  display: block;
+}
+
+.footer-column-more.active i.icon-arrow-down {
+  transform: rotate(180deg);
+}
+
+.footer-column-more.active span {
+  display: none;
+}
+
 .top {
   padding-top: 30px;
   margin-bottom: 77px;
@@ -15584,7 +15619,7 @@ header.fixed .header__bottom {
 }
 
 .top__inner .row {
-  /*flex-wrap: nowrap;*/
+  flex-wrap: nowrap;
   margin: 0 -15px;
 }
 @media only screen and (max-width: 1030px) {
@@ -15595,13 +15630,13 @@ header.fixed .header__bottom {
 
 .top__slider {
   overflow-x: hidden;
-  /*border: 1px solid #EFEFF4;*/
-  max-width: 100%;
+  border: 1px solid #EFEFF4;
+  max-width: 910px;
   width: 100%;
-  height: 450px;
+  min-height: 500px;
   margin: 0 15px;
-  /*box-shadow: 0 4px 4px rgba(26, 30, 40, 0.1);
-  background: #fff;*/
+  box-shadow: 0 4px 4px rgba(26, 30, 40, 0.1);
+  background: #fff;
 }
 @media (min-width: 1025px) {
   .top__slider {
@@ -15672,14 +15707,14 @@ header.fixed .header__bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*padding: 0 70px;*/
+  padding: 0 70px;
   position: relative;
 }
 @media (max-width: 768px) {
-  /*.top__slider-content {
+  .top__slider-content {
     padding: 0 15px;
     flex-direction: column-reverse;
-  }*/
+  }
   .top__slider-content .top__slider-info {
     position: relative;
     z-index: 1;
@@ -15710,18 +15745,14 @@ header.fixed .header__bottom {
 
 .top__slider-images {
   min-width: 150px;
-  max-width: 100%;
+  max-width: 55%;
 }
 @media (max-width: 768px) {
- /* .top__slider-images {
+  .top__slider-images {
     max-width: 230px;
     bottom: 0;
     right: 0;
     margin: 50px 0 20px;
-  }*/
-
-  .top__slider {
-    height: unset;
   }
 }
 
