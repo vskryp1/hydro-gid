@@ -865,7 +865,7 @@ header{
       box-shadow: none !important;
     }
     &.is-valid + .invalid-feedback{
-      display: none !important;
+      display: none;
     }
   }
   button{

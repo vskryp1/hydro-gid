@@ -932,7 +932,7 @@ var _wW = $(window).width();
 })();
 
 $(document).ready(function() {
-    $('[name="phone"]').mask("+38 (099) 999 99 99");
+    $('[name="phone"]').mask("+38 (099) 999 99 99", {autoclear: false});
     var _count = $('.js_hidden').attr('data-count');
     if(_count == 0)
     {
