@@ -42,8 +42,8 @@
 
                     return back(301)->withError(__('auth.banned'));
                 }
-    
-                return redirect()->back()->with('success', __('auth.login_success'));
+
+                return redirect()->route('frontend.page', ['alias' => 'account']);
             }
 
             return redirect()->back()->withError(__('auth.failed'));
