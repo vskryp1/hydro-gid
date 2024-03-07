@@ -941,6 +941,12 @@ $(document).ready(function() {
     else {
         $('.js_hidden').text(_count);
     }
+
+    var isModalSuccess = document.getElementById("modal-success");
+    if(isModalSuccess != null) {
+        $('a[data-src="#modal-success"]').click();
+    }
+
     for (let selector in window.jsvalidation) {
         $(selector).each(function () {
             $(this).validate({

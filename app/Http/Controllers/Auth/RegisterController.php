@@ -27,7 +27,7 @@
         {
             event(new Registered($user = $this->create($request->all())));
 
-	        return redirect()->back(301)->with('success', __('auth.success_register'));
+	        return redirect()->back(301)->with('modal-success', __('auth.success_register'));
         }
 
         protected function create(array $data): ?Client

@@ -34,7 +34,9 @@
                                         {{ $locale }}
                                     </a>
                                 @endif
-                                @if($loop->count !== $loop->iteration)|@endif
+                                @if($loop->count !== $loop->iteration)
+                                    |
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -64,37 +66,38 @@
                         {!! Form::button(null, ['type' => 'submit', 'class' => 'icon icon-search']) !!}
                         {!! Form::close() !!}
                     </div>
-                      <div class="row header__socials_phones">
-                    <div class="header__socials">
+                    <div class="row header__socials_phones">
+                        <div class="header__socials">
                             <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
-                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                                <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg"
+                                     alt="">
                             </a>
                             <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
-                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                             </a>
-                    </div>
+                                <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                            </a>
+                        </div>
 
-                    <div class="header__phone">
-                        <a class="header__phone-number"
-                           href="tel:{{ ShopHelper::getFormatPhone('phone_number_first') }}">
-                            {{ ShopHelper::setting('phone_number_first') }}
-                        </a>
-                        <a class="header__phone-number"
-                           href="tel:{{ ShopHelper::getFormatPhone('phone_number_second') }}">
-                            {{ ShopHelper::setting('phone_number_second') }}
-                        </a>
-                        <a class="header__phone-text" data-fancybox data-src="#modal-call" href="javascript:;">
-                            {{ __('frontend.request_a_call') }}
-                        </a>
+                        <div class="header__phone">
+                            <a class="header__phone-number"
+                               href="tel:{{ ShopHelper::getFormatPhone('phone_number_first') }}">
+                                {{ ShopHelper::setting('phone_number_first') }}
+                            </a>
+                            <a class="header__phone-number"
+                               href="tel:{{ ShopHelper::getFormatPhone('phone_number_second') }}">
+                                {{ ShopHelper::setting('phone_number_second') }}
+                            </a>
+                            <a class="header__phone-text" data-fancybox data-src="#modal-call" href="javascript:;">
+                                {{ __('frontend.request_a_call') }}
+                            </a>
+                        </div>
                     </div>
-                     </div>
                     <div class="header__panel-list">
                         <ul>
                             <li>
                                 <a class="js-comparelist-link"
-                                    @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_COMPARE_CART)
-                                        href="{{ route('frontend.page', PageAlias::PAGE_COMPARE_CART) }}"
-                                    @endunless>
+                                   @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_COMPARE_CART)
+                                       href="{{ route('frontend.page', PageAlias::PAGE_COMPARE_CART) }}"
+                                        @endunless>
                                     {!! Html::image('/assets/frontend/images/balanced.svg', 'balanced', [
                                         'class' => 'header__pannel-link',
                                     ]) !!}
@@ -157,7 +160,7 @@
                             <li>
                                 <a @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_BASKET)
                                        href="{{ route('frontend.page', PageAlias::PAGE_BASKET) }}"
-                                    @endunless>
+                                        @endunless>
                                         <span class="preview-tip js-head-cart-items-count js_hidden
                                             @if(!Cart::instance('default')->count())
                                                 hidden
@@ -225,7 +228,7 @@
                             @foreach($bottomHeadLinks as $link)
                                 <li class="header__menu-item">
                                     @if(isset($page) && $page->getOriginal('alias') === $link['alias'])
-                                        <span  class="header__menu-link active">{{ $link['name'] }}</span>
+                                        <span class="header__menu-link active">{{ $link['name'] }}</span>
                                     @else
                                         <a class="header__menu-link"
                                            href="{{ $link['href'] }}">
@@ -237,203 +240,208 @@
                         </ul>
                     </nav>
                     <a class="header__calculate"
-                        @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_CALCULATORS)
-                            href="{{ route('frontend.page', PageAlias::PAGE_CALCULATORS) }}"
-                        @endunless>
+                       @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_CALCULATORS)
+                           href="{{ route('frontend.page', PageAlias::PAGE_CALCULATORS) }}"
+                            @endunless>
                         <span>{{ __('frontend.calculate') }}</span>
                     </a>
                 </div>
             </div>
         </div>
         @handheld
-            <div class="header__mobile">
-                <div class="container">
-                    <div class="header__mobile-icon">
-                        <div class="icon icon-menu"></div>
-                        <div class="header__mobile-menu">
-                            <div class="header__mobile-title mobmenu__title">
+        <div class="header__mobile">
+            <div class="container">
+                <div class="header__mobile-icon">
+                    <div class="icon icon-menu"></div>
+                    <div class="header__mobile-menu">
+                        <div class="header__mobile-title mobmenu__title">
                                 <span class="title">
                                     {{ __('frontend.menu') }}
                                 </span>
-                                <a class="icon icon-x-circle"></a>
-                            </div>
-                            <div class="header__mobile-menu-wrapper">
-                                <div class="header__languages header__mobile-menu-item">
-                                    <div class="container">
-                                        @foreach(ShopHelper::languages(false, true) as $locale => $language)
-                                            @if(App::getLocale() === $locale)
-                                                <a class="active">
-                                                    {{ $locale }}
-                                                </a>
-                                            @else
-                                                <a href="{{ LaravelLocalization::getLocalizedURL($locale, null, [], true) }}">
-                                                    {{ $locale }}
-                                                </a>
-                                            @endif
-                                            @if($loop->count !== $loop->iteration)|@endif
-                                        @endforeach
-                                    </div>
+                            <a class="icon icon-x-circle"></a>
+                        </div>
+                        <div class="header__mobile-menu-wrapper">
+                            <div class="header__languages header__mobile-menu-item">
+                                <div class="container">
+                                    @foreach(ShopHelper::languages(false, true) as $locale => $language)
+                                        @if(App::getLocale() === $locale)
+                                            <a class="active">
+                                                {{ $locale }}
+                                            </a>
+                                        @else
+                                            <a href="{{ LaravelLocalization::getLocalizedURL($locale, null, [], true) }}">
+                                                {{ $locale }}
+                                            </a>
+                                        @endif
+                                        @if($loop->count !== $loop->iteration)
+                                            |
+                                        @endif
+                                    @endforeach
                                 </div>
-                                <div class="header__panel-list">
-                                    <ul>
-                                        <li class="header__mobile-menu-item">
-                                            <div class="container">
-                                                <a @auth('web')
+                            </div>
+                            <div class="header__panel-list">
+                                <ul>
+                                    <li class="header__mobile-menu-item">
+                                        <div class="container">
+                                            <a @auth('web')
                                                    @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_ACCOUNT)
-                                                   href="{{ route('frontend.page', PageAlias::PAGE_ACCOUNT) }}"
-                                                   @endunless
-                                                   @endauth data-fancybox data-src="#modal" class="button-reset header__mobile-menu-link">
+                                                       href="{{ route('frontend.page', PageAlias::PAGE_ACCOUNT) }}"
+                                               @endunless
+                                               @endauth data-fancybox data-src="#modal"
+                                               class="button-reset header__mobile-menu-link">
                                                     <span class="title">
                                                         {{ __('frontend.favourites') }}
                                                     </span>
-                                                    @if(Cart::instance('wishlist')->count() !== 0 || (auth()->user() && auth()->user()->wishlist->count()))
-                                                        <span class="preview-tip">
+                                                @if(Cart::instance('wishlist')->count() !== 0 || (auth()->user() && auth()->user()->wishlist->count()))
+                                                    <span class="preview-tip">
                                                             {{ Cart::instance('wishlist')->count() ? : auth()->user()->wishlist->count() }}
                                                         </span>
-                                                    @endif
-                                                    <span class="header__pannel-link icon icon-bookmarks"></span>
+                                                @endif
+                                                <span class="header__pannel-link icon icon-bookmarks"></span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="header__mobile-menu-item">
+                                        <div class="container">
+                                            <a @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_COMPARE_CART)
+                                                   href="{{ route('frontend.page', PageAlias::PAGE_COMPARE_CART) }}"
+                                               @endunless class="header__mobile-menu-link">
+                                                    <span class="title">
+                                                        {{ __('frontend.compare_list') }}
+                                                    </span>
+                                                @if(Cart::instance('comparelist')->count() !== 0 || (auth()->user() && auth()->user()->comparelist->count()))
+                                                    <span class="preview-tip">
+                                                            {{ Cart::instance('comparelist')->count() ? : auth()->user()->comparelist->count() }}
+                                                        </span>
+                                                @endif
+                                                <span class="header__pannel-link icon icon-compare"></span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    @auth('web')
+                                        <li class="header__mobile-menu-item">
+                                            <div class="container">
+                                                <a @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_ACCOUNT)
+                                                       href="{{ route('frontend.page', PageAlias::PAGE_ACCOUNT) }}"
+                                                   @endunless class="header__mobile-menu-link">
+                                                        <span class="title">
+                                                            {{ __('frontend.profile') }}
+                                                        </span>
+                                                    <span class="header__pannel-link icon icon-user"></span>
                                                 </a>
                                             </div>
                                         </li>
                                         <li class="header__mobile-menu-item">
                                             <div class="container">
-                                                <a @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_COMPARE_CART)
-                                                   href="{{ route('frontend.page', PageAlias::PAGE_COMPARE_CART) }}"
-                                                   @endunless class="header__mobile-menu-link">
-                                                    <span class="title">
-                                                        {{ __('frontend.compare_list') }}
-                                                    </span>
-                                                    @if(Cart::instance('comparelist')->count() !== 0 || (auth()->user() && auth()->user()->comparelist->count()))
-                                                        <span class="preview-tip">
-                                                            {{ Cart::instance('comparelist')->count() ? : auth()->user()->comparelist->count() }}
+                                                {!! Form::open([
+                                                    'url'    => route('logout'),
+                                                    'method' => 'POST',
+                                                    'class' => 'btn-logout-style'
+                                                ]) !!}
+                                                {!! Form::button(__('frontend.logout'), [
+                                                    'type'  => 'submit',
+                                                    'class' => 'dropdown-item title',
+
+                                                ]) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li class="header__mobile-menu-item">
+                                            <div class="container">
+                                                <a href="javascript:;" data-fancybox data-src="#modal"
+                                                   class="button-reset header__mobile-menu-link">
+                                                        <span class="title">
+                                                            {{ __('frontend.profile') }}
                                                         </span>
-                                                    @endif
-                                                    <span class="header__pannel-link icon icon-compare"></span>
+                                                    <span class="header__pannel-link icon icon-user"></span>
                                                 </a>
                                             </div>
                                         </li>
-                                        @auth('web')
-                                            <li class="header__mobile-menu-item">
-                                                <div class="container">
-                                                    <a @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_ACCOUNT)
-                                                       href="{{ route('frontend.page', PageAlias::PAGE_ACCOUNT) }}"
-                                                       @endunless class="header__mobile-menu-link">
-                                                        <span class="title">
-                                                            {{ __('frontend.profile') }}
-                                                        </span>
-                                                        <span class="header__pannel-link icon icon-user"></span>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                            <li class="header__mobile-menu-item">
-                                                <div class="container">
-                                                    {!! Form::open([
-                                                        'url'    => route('logout'),
-                                                        'method' => 'POST',
-                                                        'class' => 'btn-logout-style'
-                                                    ]) !!}
-                                                    {!! Form::button(__('frontend.logout'), [
-                                                        'type'  => 'submit',
-                                                        'class' => 'dropdown-item title',
-
-                                                    ]) !!}
-                                                    {!! Form::close() !!}
-                                                </div>
-                                            </li>
-                                        @else
-                                            <li class="header__mobile-menu-item">
-                                                <div class="container">
-                                                    <a href="javascript:;" data-fancybox data-src="#modal"
-                                                       class="button-reset header__mobile-menu-link">
-                                                        <span class="title">
-                                                            {{ __('frontend.profile') }}
-                                                        </span>
-                                                        <span class="header__pannel-link icon icon-user"></span>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        @endauth
-                                    </ul>
-                                </div>
-                                <div class="header__mobile-menu-main header__mobile-menu-item">
-                                    <div class="container">
-                                        <nav class="header__menu">
-                                            <ul>
-                                                @foreach($topHeadLinks as $link)
-                                                    <li>
-                                                        @if(isset($page) && $page->getOriginal('alias') === $link['alias'])
-                                                            <span class="header__mobile-menu-link active">{{ $link['name'] }}</span>
-                                                        @else
-                                                            <a class="header__mobile-menu-link" href="{{ $link['href'] }}">
-                                                                {{ $link['name'] }}
-                                                            </a>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </nav>
-                                        <a class="header__calculate"
-                                           @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_CALCULATORS)
+                                    @endauth
+                                </ul>
+                            </div>
+                            <div class="header__mobile-menu-main header__mobile-menu-item">
+                                <div class="container">
+                                    <nav class="header__menu">
+                                        <ul>
+                                            @foreach($topHeadLinks as $link)
+                                                <li>
+                                                    @if(isset($page) && $page->getOriginal('alias') === $link['alias'])
+                                                        <span class="header__mobile-menu-link active">{{ $link['name'] }}</span>
+                                                    @else
+                                                        <a class="header__mobile-menu-link" href="{{ $link['href'] }}">
+                                                            {{ $link['name'] }}
+                                                        </a>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </nav>
+                                    <a class="header__calculate"
+                                       @unless(isset($page) && $page->getOriginal('alias') === PageAlias::PAGE_CALCULATORS)
                                            href="{{ route('frontend.page', PageAlias::PAGE_CALCULATORS) }}"
-                                                @endunless>
-                                            <span>{{ __('frontend.calculate') }}</span>
-                                        </a>
-                                    </div>
+                                            @endunless>
+                                        <span>{{ __('frontend.calculate') }}</span>
+                                    </a>
                                 </div>
-                                <div class="header__mobile-menu-main header__mobile-menu-item">
-                                    <div class="container">
-                                        <nav class="header__top-menu">
-                                            <ul>
-                                                @if($services->isNotEmpty())
-                                                    <li class="header__menu-item header__menu-item-dropbtn">
-                                                        <div class="nav__menu-dropdown">
+                            </div>
+                            <div class="header__mobile-menu-main header__mobile-menu-item">
+                                <div class="container">
+                                    <nav class="header__top-menu">
+                                        <ul>
+                                            @if($services->isNotEmpty())
+                                                <li class="header__menu-item header__menu-item-dropbtn">
+                                                    <div class="nav__menu-dropdown">
                                                             <span class="header__menu-dropdowntext">
                                                                 {{ __('frontend.services') }}
                                                             </span>
-                                                            <span class="icon icon-arrow-down header__menu-dropdowndown services-icon"></span>
-                                                        </div>
-                                                        <ul class="menu__dropdown">
-                                                            @foreach($services as $service)
-                                                                <li class="header__menu-item">
-                                                                    @if(isset($page) && $page->getOriginal('alias') === basename($service->alias))
-                                                                        <span class="header__menu-link active">{{ $service->name }}</span>
-                                                                    @else
-                                                                        <a href="{{ $service->alias }}">
-                                                                            {{ $service->name }}
-                                                                        </a>
-                                                                    @endif
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </li>
-                                                @endif
-                                                @foreach($bottomHeadLinks as $link)
-                                                    <li class="header__menu-item">
-                                                        @if(isset($page) && $page->getOriginal('alias') === $link['alias'])
-                                                            <span class="header__menu-link active">{{ $link['name'] }}</span>
-                                                        @else
-                                                            <a class="header__menu-link"
-                                                               href="{{ $link['href'] }}">
-                                                                {{ $link['name'] }}
-                                                            </a>
-                                                        @endif
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                                        <span class="icon icon-arrow-down header__menu-dropdowndown services-icon"></span>
+                                                    </div>
+                                                    <ul class="menu__dropdown">
+                                                        @foreach($services as $service)
+                                                            <li class="header__menu-item">
+                                                                @if(isset($page) && $page->getOriginal('alias') === basename($service->alias))
+                                                                    <span class="header__menu-link active">{{ $service->name }}</span>
+                                                                @else
+                                                                    <a href="{{ $service->alias }}">
+                                                                        {{ $service->name }}
+                                                                    </a>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+                                            @foreach($bottomHeadLinks as $link)
+                                                <li class="header__menu-item">
+                                                    @if(isset($page) && $page->getOriginal('alias') === $link['alias'])
+                                                        <span class="header__menu-link active">{{ $link['name'] }}</span>
+                                                    @else
+                                                        <a class="header__menu-link"
+                                                           href="{{ $link['href'] }}">
+                                                            {{ $link['name'] }}
+                                                        </a>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </nav>
                                 </div>
-                                <div class="header__mobile-menu-footer header__mobile-menu-item">
-                                    <div class="container">
-                                        <div class="row header__socials_phones">
+                            </div>
+                            <div class="header__mobile-menu-footer header__mobile-menu-item">
+                                <div class="container">
+                                    <div class="row header__socials_phones">
                                         <div class="header__socials">
-                            <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
-                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
-                            </a>
-                            <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
-                                   <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                             </a>
-                    </div>
+                                            <a href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
+                                                <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg"
+                                                     alt="">
+                                            </a>
+                                            <a href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
+                                                <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg"
+                                                     alt="">
+                                            </a>
+                                        </div>
 
                                         <div class="header__phone">
                                             <a class="header__phone-number"
@@ -449,97 +457,97 @@
                                             </a>
                                         </div>
                                     </div>
-                                        <div class="header__city">
+                                    <div class="header__city">
 
-                                        </div>
-                                        <div class="header__time">
-                                            <div class="icon icon-time"></div>
-                                            {{ ShopHelper::getSchedule(true) }}
-                                        </div>
+                                    </div>
+                                    <div class="header__time">
+                                        <div class="icon icon-time"></div>
+                                        {{ ShopHelper::getSchedule(true) }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="header__mobile-logo">
-                        <div class="header__logo">
-                            @if($current_url === $localized_url)
-                                <a>
-                                    {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
-                                </a>
-                            @else
-                                <a href="{{ $localized_url }}">
-                                    {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="header__mobile-icons">
-                        <div class="header__socials" style="gap: 0; align-items: start; margin-top: -5px;">
-                            <a style="width: 30px" href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
-                                  <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                </div>
+                <div class="header__mobile-logo">
+                    <div class="header__logo">
+                        @if($current_url === $localized_url)
+                            <a>
+                                {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
                             </a>
-                            <a style="width: 30px" href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
-                                   <img  src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
-                             </a>
+                        @else
+                            <a href="{{ $localized_url }}">
+                                {!! Html::image(ShopHelper::getLogoUrl('header'), 'header-logo') !!}
+                            </a>
+                        @endif
                     </div>
-                        <div class="phone">
-                            <a class="icon icon-phone" data-fancybox="" data-src="#modal-phone"></a>
-                        </div>
-                        <div class="search">
-                            <div class="icon icon-search"></div>
-                            <div class="header__search">
-                                <div class="header__mobile-title mobmenu__title">
-                                    <span class="title">@lang('frontend.search')</span>
-                                    <div class="icon icon-x-circle"></div>
-                                </div>
-                                {!! Form::open([
-                                    'url'    => route('frontend.page', PageAlias::PAGE_SEARCH),
-                                    'method' => 'GET',
-                                ]) !!}
-                                {!! Form::search('search') !!}
-                                {!! Form::button(null, ['type' => 'submit', 'class' => 'icon icon-search']) !!}
-                                {!! Form::close() !!}
+                </div>
+                <div class="header__mobile-icons">
+                    <div class="header__socials" style="gap: 0; align-items: start; margin-top: -5px;">
+                        <a style="width: 30px" href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
+                            <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
+                        </a>
+                        <a style="width: 30px" href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
+                            <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="phone">
+                        <a class="icon icon-phone" data-fancybox="" data-src="#modal-phone"></a>
+                    </div>
+                    <div class="search">
+                        <div class="icon icon-search"></div>
+                        <div class="header__search">
+                            <div class="header__mobile-title mobmenu__title">
+                                <span class="title">@lang('frontend.search')</span>
+                                <div class="icon icon-x-circle"></div>
                             </div>
+                            {!! Form::open([
+                                'url'    => route('frontend.page', PageAlias::PAGE_SEARCH),
+                                'method' => 'GET',
+                            ]) !!}
+                            {!! Form::search('search') !!}
+                            {!! Form::button(null, ['type' => 'submit', 'class' => 'icon icon-search']) !!}
+                            {!! Form::close() !!}
                         </div>
-                        <div class="cart">
-                            <a @unless(isset($page) && $page->getOriginal('alias') == PageAlias::PAGE_BASKET)
+                    </div>
+                    <div class="cart">
+                        <a @unless(isset($page) && $page->getOriginal('alias') == PageAlias::PAGE_BASKET)
                                href="{{ route('frontend.page', PageAlias::PAGE_BASKET) }}"
-                                    @endunless>
+                                @endunless>
                                 <span class="preview-tip js-head-cart-items-count js_hidden"
                                       data-count="{{ Cart::instance('default')->count() }}"></span>
-                                <span class="header__pannel-link icon icon-shopping-cart"></span>
-                            </a>
-                        </div>
+                            <span class="header__pannel-link icon icon-shopping-cart"></span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="header__mobile-bottom">
-                <div class="header__menu-item header__menu-dropbtn">
-                    <div class="header__menu-dropdown">
-                        <span class="header__menu-dropdowntext">{{ __('frontend.categories') }}</span>
-                        <span class="icon icon-arrow-down header__menu-dropdowndown"></span>
+        </div>
+        <div class="header__mobile-bottom">
+            <div class="header__menu-item header__menu-dropbtn">
+                <div class="header__menu-dropdown">
+                    <span class="header__menu-dropdowntext">{{ __('frontend.categories') }}</span>
+                    <span class="icon icon-arrow-down header__menu-dropdowndown"></span>
+                </div>
+                <div class="header__mobile-category-menu">
+                    <div class="header__mobile-title mobmenu__title">
+                        <div class="icon icon-arrow-long"></div>
+                        <span class="title">{{ __('frontend.categories') }}</span>
+                        <div class="icon icon-x-circle"></div>
                     </div>
-                    <div class="header__mobile-category-menu">
-                        <div class="header__mobile-title mobmenu__title">
-                            <div class="icon icon-arrow-long"></div>
-                            <span class="title">{{ __('frontend.categories') }}</span>
-                            <div class="icon icon-x-circle"></div>
-                        </div>
-                        <div class="menu__dropdown">
-                            <div class="container">
-                                <div class="menu__gropdown-inner">
-                                    <ul class="menu__dropdown-top">
-                                        {!! MenuHelper::getMenu('catalog-menu',
-                                                ['template' => 'catalog',
-                                                 'current_id' => isset($page) ? $page->id : '']) !!}
-                                    </ul>
-                                </div>
+                    <div class="menu__dropdown">
+                        <div class="container">
+                            <div class="menu__gropdown-inner">
+                                <ul class="menu__dropdown-top">
+                                    {!! MenuHelper::getMenu('catalog-menu',
+                                            ['template' => 'catalog',
+                                             'current_id' => isset($page) ? $page->id : '']) !!}
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         @endhandheld
     </header>
 
@@ -642,36 +650,44 @@
                 {{ Form::button(__('passwords.recover'), ['type' => 'submit']) }}
             </div>
             {!! Form::close() !!}
-            </div>
-
         </div>
     </div>
-
-    <div class="fancybox-content" id="modal-pass">
+    @if(session()->has('modal-success'))
+    <a href="javascript:" data-fancybox="" data-src="#modal-success"></a>
+    <div id="modal-success">
         <div class="modal__inner">
-            <div class="modal__title">
-                Замена пароля
-            </div>
             <div class="modal__content">
-                {{ Form::open(['route' => 'frontend.forms.change_password', 'class' => 'order__form pass-new__form modal__form js_change_password', 'id' => 'change-password', 'method' => 'POST']) }}
-                <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
-                    {{ Form::password('oldPassword', ['class' => 'form-control validate password', 'placeholder' => __('frontend/profile/index.old_password'), 'required']) }}
-                    <i class="icon icon-checkerror error-input"></i>
-                    <i class="icon icon-checkpass pass-input"></i>
-                </div>
-                <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
-                    {{ Form::password('newPassword', ['class' => 'form-control validate password', 'placeholder' => __('frontend/profile/index.new_password'), 'required']) }}
-                    <i class="icon icon-checkerror error-input"></i>
-                    <i class="icon icon-checkpass pass-input"></i>
-                </div>
-                <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
-                    {{ Form::password('newPassword_confirmation', ['class' => 'form-control validate password_1', 'placeholder' => __('frontend/profile/index.confirmation_password'), 'required']) }}
-                    <i class="icon icon-checkerror error-input"></i>
-                    <i class="icon icon-checkpass pass-input"></i>
-                </div>
-                {{ Form::button(__( 'frontend/profile/index.send'), ['class' => 'main-btn main-btn--purple', 'placeholder' => __( 'frontend/profile/index.send'), 'type' => 'submit', 'required']) }}
-                {{ Form::close() }}
+                {{session('modal-success')}}
             </div>
+        </div>
+    </div>
+    @endif
+</div>
+
+<div class="fancybox-content" id="modal-pass">
+    <div class="modal__inner">
+        <div class="modal__title">
+            Замена пароля
+        </div>
+        <div class="modal__content">
+            {{ Form::open(['route' => 'frontend.forms.change_password', 'class' => 'order__form pass-new__form modal__form js_change_password', 'id' => 'change-password', 'method' => 'POST']) }}
+            <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
+                {{ Form::password('oldPassword', ['class' => 'form-control validate password', 'placeholder' => __('frontend/profile/index.old_password'), 'required']) }}
+                <i class="icon icon-checkerror error-input"></i>
+                <i class="icon icon-checkpass pass-input"></i>
+            </div>
+            <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
+                {{ Form::password('newPassword', ['class' => 'form-control validate password', 'placeholder' => __('frontend/profile/index.new_password'), 'required']) }}
+                <i class="icon icon-checkerror error-input"></i>
+                <i class="icon icon-checkpass pass-input"></i>
+            </div>
+            <div class="form-field input-field" data-error="{{ __('frontend/profile/index.required_field') }}">
+                {{ Form::password('newPassword_confirmation', ['class' => 'form-control validate password_1', 'placeholder' => __('frontend/profile/index.confirmation_password'), 'required']) }}
+                <i class="icon icon-checkerror error-input"></i>
+                <i class="icon icon-checkpass pass-input"></i>
+            </div>
+            {{ Form::button(__( 'frontend/profile/index.send'), ['class' => 'main-btn main-btn--purple', 'placeholder' => __( 'frontend/profile/index.send'), 'type' => 'submit', 'required']) }}
+            {{ Form::close() }}
         </div>
     </div>
 </div>
