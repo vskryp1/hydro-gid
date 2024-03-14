@@ -11,7 +11,7 @@
         {
             return [
                 'region_id' => ['nullable', 'exists:regions,id'],
-                'place_id'  => ['required', 'exists:delivery_places,id', 'max:255'],
+                'place_id'  => ['required', 'max:255'],
                 'street'    => ['required', 'string', 'max:255'],
                 'house'     => ['required', 'string', 'max:255'],
             ];

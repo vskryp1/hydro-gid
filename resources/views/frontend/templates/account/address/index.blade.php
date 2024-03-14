@@ -23,7 +23,7 @@
                         </label>
                         {!! Form::select(
                             'place_id',
-                            $address->delivery_place ? $address->delivery_place->delivery_place : [],
+                            $address->delivery_place ? $address->delivery_place->delivery_place : [$address->place_id => $address->city],
                             $address->delivery_place->id ?? null,
                             [
                                 'id'    => 'inputCity_' . $i,
