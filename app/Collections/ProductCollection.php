@@ -28,8 +28,10 @@
 
 		    $this->map(function($product) use (&$data) {
 			    $page = $product->getMainCategoryAttribute();
-			    $data[$page->id]['page']                   = $page;
-			    $data[$page->id]['products'][$product->id] = $product;
+			    if(isset($page)) {
+                    $data[$page->id]['page'] = $page;
+                    $data[$page->id]['products'][$product->id] = $product;
+                }
 		    });
 
 		    ksort($data);
