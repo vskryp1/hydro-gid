@@ -287,7 +287,7 @@ class PageHelper
         } else {
             $products = ProductHelper::prepareActiveProductsWithFilters()
                 ->where(function ($query) use ($search) {
-                    $searchItems = explode('', $search);
+                    $searchItems = explode(' ', $search);
                     $i = 1;
                     foreach ($searchItems as $searchItem) {
                         if($i == 1){
