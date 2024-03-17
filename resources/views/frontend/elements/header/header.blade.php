@@ -484,10 +484,10 @@
                 </div>
                 <div class="header__mobile-icons">
                     <div class="header__socials" style="gap: 0; align-items: start; margin-top: -5px;">
-                        <a style="width: 30px" href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
+                        <a style="width: 28px" href="{{ ShopHelper::setting('telegram_link') }}" target="_blank">
                             <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/telegram.svg" alt="">
                         </a>
-                        <a style="width: 30px" href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
+                        <a style="width: 28px" href="{{ ShopHelper::setting('viber_link') }}" target="_blank">
                             <img src="https://skr-hydraulic.com.ua/assets/frontend/images/social/viber.svg" alt="">
                         </a>
                     </div>
