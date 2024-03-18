@@ -15,4 +15,5 @@
         'service_ordered'        => 'Услуга заказана',
         'thank_you_for_question' => 'Дякую за питання',
         'your_question'          => 'Задайте его нам!',
+        'ask_question_btn'       => 'Отправить',
     ];

@@ -1354,13 +1354,15 @@
   min-width: 146px;
 }
 
-
 @media only screen and (max-width: 1030px) {
   .filter-nav {
     width: 100%;
     position: static;
     margin-top: 20px;
   }
+  .product-info {
+    margin: 0 auto;
+    }
 }
 
 .about-prod-row {

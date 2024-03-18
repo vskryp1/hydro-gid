@@ -848,7 +848,7 @@ header{
     display: block;
     width: 100%;
     padding: 7px 0 8px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.25px;
@@ -1124,7 +1124,7 @@ header{
     align-items: center;
     justify-content: flex-end;
     &>div {
-      margin-left: 10px;
+      margin-left: 8px;
     }
     a {
       transition: all 0.3s ease;
@@ -1198,9 +1198,9 @@ header{
   }
 
   &-logo {
-    width: 25%;
+    width: 30%;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     .header__logo {
       width: 100%;
@@ -1222,7 +1222,7 @@ header{
           max-width: 100px;
         }
         @media (max-width: 420px) {
-          max-width: 80px;
+          max-width: 100px;
         }
       }
     }
@@ -1257,7 +1257,7 @@ header{
       color: #28347C;
       font-size: 24px;
       & + a{
-        margin-left: 16px;
+        margin-left: 6px;
       }
     }
   }
@@ -1526,6 +1526,14 @@ header{
 }
 
 
+@media (max-width: 1440px) {
+  .header__search{
+    max-width: 300px;
+  }
+  .header__menu-dropdown{
+    width: 260px;
+  }
+}
 @media (max-width: 1024px) {
   .header__calculate{
     margin: 15px 0 5px;

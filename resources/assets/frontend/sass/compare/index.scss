@@ -146,7 +146,7 @@ tbody span {
 
 .fixed-side {
   max-width: 290px;
-  min-width: 290px;
+  min-width: 200px;
 }
 
 .fixed-side.ttl {
@@ -182,6 +182,11 @@ thead tr:first-of-type {
   .filter-nav {
     display: block;
     padding: 0 20px;
+  }
+}
+@media only screen and (max-width: 560px) {
+  .table-scroll:after {
+    width: 100px;
   }
 }
 

@@ -115,11 +115,11 @@
                 elementToAppend.children().not('.list-menu').remove();
                 elementToAppend.append(data.html);
                 testWebP(function(supported) {
-                    if(supported){
-                        lazySrcset();
-                    } else{
+                //    if(supported){
+                //        lazySrcset();
+                 //   } else{
                         $('.lazy').Lazy();
-                    }
+                //    }
                 });
                 setTimeout(function() {
                     ratySort();

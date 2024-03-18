@@ -34,6 +34,7 @@
     $('.footer__column-title').on('click', function () {
         $(this).next(".footer__column-list").slideToggle();
         $(this).toggleClass('close');
+        $('.footer-column-more').toggleClass('visible');
     });
 
     $(".footer-column-more").click(function () {
