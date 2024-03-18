@@ -67,7 +67,7 @@
                                 @endforeach
                             @endisset
                         </div>
-                        <div class="top__banners">
+                    <!--    <div class="top__banners">
                             @foreach($stocks as $stock)
                                 <div class="dropdown__banner-item">
                                     <div class="banner__info">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

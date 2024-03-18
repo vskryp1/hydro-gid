@@ -139,7 +139,10 @@
 
         public function pages()
         {
-            return $this->belongsToMany(Page::class)->withPivot(['is_main'])->orderByDesc('is_main')->byPosition();
+            return $this->belongsToMany(Page::class)
+		->withPivot(['is_main'])
+		->orderByDesc('is_main')
+		->byPosition();
         }
 
         public function children()
