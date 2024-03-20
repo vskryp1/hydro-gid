@@ -224,6 +224,15 @@
   .stages__item{
     margin-top: 20px;
     width: 100%;
+    min-height: 54px;
+  }
+  .stages__item-number{
+    float: left;
+  }
+  .stages__item-text{
+    text-align: left;
+    margin-left: 70px;
+    padding-top: 10px
   }
   .stages__line{
     display: none;
