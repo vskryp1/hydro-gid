@@ -49,11 +49,11 @@
                     <div class="header__logo header__logo--bg">
                         @if($current_url === $localized_url)
                             <a class="header__logo-link">
-                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-header-ru.png') : asset('assets/frontend/images/logo-header-uk.png'), 'header-logo') !!}
+                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-header-ru_.png') : asset('assets/frontend/images/logo-header-uk_.png'), 'header-logo') !!}
                             </a>
                         @else
                             <a class="header__logo-link" href="{{ $localized_url }}">
-                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-header-ru.png') : asset('assets/frontend/images/logo-header-uk.png'), 'header-logo') !!}
+                                {!! Html::image(app()->getLocale() == 'ru' ? asset('assets/frontend/images/logo-header-ru_.png') : asset('assets/frontend/images/logo-header-uk_.png'), 'header-logo') !!}
                             </a>
                         @endif
                     </div>
