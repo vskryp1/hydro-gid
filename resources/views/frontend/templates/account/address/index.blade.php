@@ -100,8 +100,8 @@
                [],
                null,
                [
-               'class' => 'delivery-select form-control',
-               'data-url' => route('ajax.cart.delivery_place', [$data['courier_delivery']->id, true])
+                   'class' => 'delivery-select form-control',
+                   'data-url' => route('ajax.cart.delivery_place', [$data['courier_delivery']->id, true])
                ]
            ) }}
             <label for="inputStreet" class="personal__label">
