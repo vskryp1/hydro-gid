@@ -1762,3 +1762,23 @@ header{
     }
   }
 }
+@media screen and (max-width: 1024px) {
+  .header__mobile-category-menu .menu__dropdown {
+    overflow-y: auto;
+    padding-bottom: 20px;
+  }
+
+  .header__mobile-category-menu .menu__dropdown-wrapper .menu__dropdown-list {
+    position: static;
+    height: auto;
+  }
+
+  .header__mobile-category-menu .menu__dropdown-wrapper:after {
+    top: 12px !important;
+    transform: rotate(-180deg) !important;
+  }
+
+  .header__mobile-category-menu .menu__dropdown-wrapper.menu__dropdown-close:after {
+    transform: rotate(-90deg) !important;
+  }
+}

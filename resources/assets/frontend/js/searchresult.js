@@ -3,7 +3,7 @@ window.Slick = require('slick-carousel/slick/slick.js');
 window.Swal = require('sweetalert2');
 require('bootstrap');
 require('popper.js');
-require('select2/dist/js/select2.full.min');
+//require('select2/dist/js/select2.full.min');
 require('select2/dist/js/select2.js');
 require('select2/dist/js/i18n/ru.js');
 require('select2/dist/js/i18n/uk.js');
