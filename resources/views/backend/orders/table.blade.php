@@ -19,7 +19,13 @@
                 <td>{{$order->unique_id}}</td>
                 <td>{{$order->created_at}}</td>
                 <td>{{$order->user->name??'-'}}</td>
-                <td>{{$order->client->name??$order->tempClients->name}}</td>
+                <?php
+                    $name = '-';
+                    if(isset($order->client->name) || isset($order->tempClients->name)){
+                        $name = $order->client->name??$order->tempClients->name;
+                    }
+                ?>
+                <td>{{$name}}</td>
                 <td>
                     <a class="collapsed" data-toggle="collapse"
                        href="#collapse{{$order->unique_id}}">@lang('backend.show') / @lang('backend.hide')</a>

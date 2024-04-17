@@ -25,9 +25,8 @@
 
         public function register(RegisterRequest $request)
         {
-            event(new Registered($user = $this->create($request->all())));
-
-	        return redirect()->back(301)->with('modal-success', __('auth.success_register'));
+            event(new Registered($this->create($request->all())));
+            return redirect()->back(301)->with('modal-success', __('auth.success_register'));
         }
 
         protected function create(array $data): ?Client

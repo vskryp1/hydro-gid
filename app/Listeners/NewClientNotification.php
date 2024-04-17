@@ -2,7 +2,7 @@
 
     namespace App\Listeners;
 
-    use App\Notifications\NewClientEmail;
+    use App\Notifications\VerifyEmail;
     use Illuminate\Auth\Events\Registered;
     use Illuminate\Support\Facades\Notification;
     use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,6 +23,6 @@
          */
         public function handle(Registered $event): void
         {
-            Notification::send($event->user, new NewClientEmail($event->user));
+            Notification::send($event->user, new VerifyEmail($event->user));
         }
     }
