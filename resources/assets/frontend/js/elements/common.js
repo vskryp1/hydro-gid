@@ -435,6 +435,7 @@ var _wW = $(window).width();
                 }
                 else {
                     $(this).find('.menu__dropdown-list').addClass('open');
+я                    $('.menu__dropdown-wrapper').removeClass('menu__dropdown-close');
                     $(this).closest('.menu__dropdown-wrapper').addClass('menu__dropdown-close');
                 }
             });
