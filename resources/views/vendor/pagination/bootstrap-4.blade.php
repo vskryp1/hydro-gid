@@ -21,6 +21,11 @@
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
+                    @if($page == 1)
+                        @php
+                            $url = str_replace('?page=1', '', $url);
+                        @endphp
+                    @endif
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
                     @else
