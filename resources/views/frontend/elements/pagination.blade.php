@@ -1,6 +1,6 @@
 @isset($paginator)
     @if($paginator->hasPages())
-        <ul class="pagination" style="overflow: scroll;">
+        <ul class="pagination" style="overflow: auto;">
             @if(!$paginator->onFirstPage())
                 <li class="disabled">
                     <span class="arrow" aria-hidden="true">
