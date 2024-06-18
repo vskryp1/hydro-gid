@@ -36,9 +36,9 @@
         <div class="container">
             <div class="blog-one__inner">
                 <div class="blog-one__content article">
-                    <div class="article__title">
+                    <h1 class="article__title">
                         {{ $page->name }}
-                    </div>
+                    </h1>
                     @include('frontend.templates.blog_one.include.info')
                     
                     <?php  $page_add_fields = $page->page_template->page_additional_field; ?>
