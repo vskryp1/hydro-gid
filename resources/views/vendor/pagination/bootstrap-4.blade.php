@@ -1,13 +1,9 @@
 @if ($paginator->hasPages())
-    <ul class="pagination" role="navigation">
+    <ul class="pagination" role="navigation" style="overflow: auto">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                 <span class="page-link" aria-hidden="true">&lsaquo;</span>
-            </li>
-        @else
-            <li class="page-item">
-                <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
             </li>
         @endif
 
@@ -26,6 +22,12 @@
                             $url = str_replace('?page=1', '', $url);
                         @endphp
                     @endif
+                    @if ($page == 1 && $paginator->currentPage() > 1)
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $url }}" rel="prev"
+                               aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                        </li>
+                    @endif
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
                     @else
@@ -38,7 +40,8 @@
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next"
+                   aria-label="@lang('pagination.next')">&rsaquo;</a>
             </li>
         @else
             <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
