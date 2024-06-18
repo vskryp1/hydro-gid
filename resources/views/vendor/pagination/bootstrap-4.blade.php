@@ -71,5 +71,19 @@
                 <span class="page-link" aria-hidden="true">&rsaquo;</span>
             </li>
         @endif
+        @if ($paginator->hasMorePages() && $paginator->currentPage() != $paginator->lastPage())
+            <li class="page-item">
+                <a href="{{ $paginator->lastPageUrl() }}" class="page-link page-last">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <line x1="0.7" y1="0.90332" x2="0.7" y2="9.90332" stroke="black"
+                              stroke-width="0.9"/>
+                        <path
+                                d="M5.70625 1.63457L9.08125 5.00957C9.19375 5.12207 9.25 5.23457 9.25 5.40332C9.25 5.57207 9.19375 5.68457 9.08125 5.79707L5.70625 9.17207C5.48125 9.39707 5.14375 9.39707 4.91875 9.17207C4.69375 8.94707 4.69375 8.60957 4.91875 8.38457L7.9 5.40332L4.91875 2.42207C4.69375 2.19707 4.69375 1.85957 4.91875 1.63457C5.14375 1.40957 5.48125 1.40957 5.70625 1.63457Z"
+                                fill="black"/>
+                    </svg>
+                </a>
+            </li>
+        @endif
     </ul>
 @endif
