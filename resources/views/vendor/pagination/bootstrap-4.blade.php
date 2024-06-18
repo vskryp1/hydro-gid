@@ -73,7 +73,7 @@
         @endif
         @if ($paginator->hasMorePages() && $paginator->currentPage() != $paginator->lastPage())
             <li class="page-item">
-                <a href="{{ $paginator->lastPageUrl() }}" class="page-link page-last">
+                <a href="{{ $paginator->url($paginator->lastPage()) }}" class="page-link page-last">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <line x1="0.7" y1="0.90332" x2="0.7" y2="9.90332" stroke="black"
