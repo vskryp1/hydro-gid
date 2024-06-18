@@ -33,10 +33,22 @@
                                aria-label="@lang('pagination.previous')">&lsaquo;</a>
                         </li>
                     @endif
+                    @if ($paginator->currentPage() > 3 && $page === 2)
+                        <a class="pagination-item">...</a>
+                    @endif
+                    @if (  $paginator->currentPage() - $page < 3 && $page < $paginator->currentPage() )
+                        <a href="{{ $url }}" class="pagination-item">{{$page}}</a>
+                    @endif
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active" aria-current="page"><span class="page-link">{{ $page }}</span></li>
                     @else
                         <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                    @endif
+                    @if (  $page - $paginator->currentPage() < 3 && $page > $paginator->currentPage())
+                        <a href="{{ $url }}" class="pagination-item">{{$page}}</a>
+                    @endif
+                    @if ($paginator->currentPage() < $paginator->lastPage() - 2 && $page === $paginator->lastPage() - 1)
+                        <a class="pagination-item">...</a>
                     @endif
                 @endforeach
             @endif
