@@ -71,7 +71,7 @@
                 <span class="page-link" aria-hidden="true">&rsaquo;</span>
             </li>
         @endif
-        @if ($page === $paginator->lastPage()  && $paginator->currentPage() != $paginator->lastPage())
+        @if ($paginator->currentPage() != $paginator->lastPage())
             <li class="page-item">
                 <a href="{{ $paginator->lastPageUrl() }}" class="page-link page-last">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
