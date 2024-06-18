@@ -24,7 +24,12 @@
                     @endif
                     @if ($page == 1 && $paginator->currentPage() > 1)
                         <li class="page-item">
-                            <a class="page-link" href="{{ $url }}" rel="prev"
+                            @if($page == 1)
+                                @php
+                                    $previousPageUrl = str_replace('?page=1', '', $paginator->previousPageUrl());
+                                @endphp
+                            @endif
+                            <a class="page-link" href="{{ $previousPageUrl }}" rel="prev"
                                aria-label="@lang('pagination.previous')">&lsaquo;</a>
                         </li>
                     @endif
