@@ -27,6 +27,7 @@
     @parent
 
     {!! Html::style(mix('/assets/frontend/css/category.min.css')) !!}
+    <style>.page-item {white-space:nowrap;}</style>
 @endsection
 
 @section('scripts')
