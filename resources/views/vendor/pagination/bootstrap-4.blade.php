@@ -30,17 +30,17 @@
                             </a>
                         </li>
                     @endif
-                    @if ($page == 1 && $paginator->currentPage() > 1)
-                        <li class="page-item">
-                            @if($page == 1)
-                                @php
-                                    $previousPageUrl = str_replace('?page=1', '', $paginator->previousPageUrl());
-                                @endphp
-                            @endif
-                            <a class="page-link" href="{{ $previousPageUrl }}" rel="prev"
-                               aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                        </li>
-                    @endif
+{{--                    @if ($page == 1 && $paginator->currentPage() > 1)--}}
+{{--                        <li class="page-item">--}}
+{{--                            @if($page == 1)--}}
+{{--                                @php--}}
+{{--                                    $previousPageUrl = str_replace('?page=1', '', $paginator->previousPageUrl());--}}
+{{--                                @endphp--}}
+{{--                            @endif--}}
+{{--                            <a class="page-link" href="{{ $previousPageUrl }}" rel="prev"--}}
+{{--                               aria-label="@lang('pagination.previous')">&lsaquo;</a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                     @if ($paginator->currentPage() > 3 && $page === 2)
                         <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
                     @endif
