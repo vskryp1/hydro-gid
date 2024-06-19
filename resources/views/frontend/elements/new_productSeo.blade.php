@@ -78,8 +78,8 @@
       "offers": {
         "@type": "Offer",
         "url": "{{ url()->current() }}",
-        "priceCurrency": "{{ $product->currency()->first()->name }}",
-        "price": "{{ $product->price }}",
+        "priceCurrency": "UAH",
+        "price": "{{ $product->format_price }}",
         "priceValidUntil": "{{date('Y', time()) .'-12-31'}}",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "https://schema.org/InStock"
