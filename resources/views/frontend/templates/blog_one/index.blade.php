@@ -4,10 +4,10 @@
     preg_match_all('#<h3(.*)<\/h3>#Uis', $page->description, $resH3);
     $seo_description = '';
     if(isset($resH2[0][0])){
-        $seo_description .= strip_tags($resH2[0][0]) .' ';
+        $seo_description .= strip_tags($resH2[0][0]) .' ✓ ';
     }
     if(isset($resH3[0][0])){
-        $seo_description .= strip_tags($resH3[0][0]) .' ';
+        $seo_description .= strip_tags($resH3[0][0]) .' ✓ ';
     }
 
     $seo_description .= __('Блог компанії СКР-Гідравліка');
