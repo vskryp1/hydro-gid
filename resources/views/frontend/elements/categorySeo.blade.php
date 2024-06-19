@@ -9,16 +9,16 @@
         "@type": "AggregateOffer",
         "url": "{{$og_meta['og_url']}}",
         "priceCurrency": "UAH",
-        "lowPrice": "{{($page->getLowPrice()->format_price < 1) ? $page->getLowPrice()->format_price : 1 }}",
+        "lowPrice": "{{($page->getLowPrice()->format_price == 0) ? 1 : $page->getLowPrice()->format_price }}",
         "highPrice": "{{$page->getHighPrice()->format_price}}",
         "offerCount": "{{$page->getOfferCount()}}"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.7",
+        "ratingValue": "{{$page->getRatingValue()}}",
         "bestRating": "5",
         "worstRating": "1",
-        "ratingCount": "12"
+        "ratingCount": "{{$page->getRatingCount()}}"
       }
     }
 </script>
