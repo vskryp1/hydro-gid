@@ -248,4 +248,19 @@
                     ];
                 });
         }
+
+
+        public function getOfferCount()
+        {
+            return $this->belongsToMany(Product::class)->onlyActive()->count();
+        }
+        public function getLowPrice()
+        {
+            return $this->belongsToMany(Product::class)->orderBy('price')->onlyActive()->first();
+        }
+public function getHighPrice()
+        {
+            return $this->belongsToMany(Product::class)->orderBy('price', 'desc')->onlyActive()->first();
+        }
+
     }

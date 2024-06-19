@@ -22,6 +22,9 @@
 @endsection
 
 @include('frontend.elements.ogMeta')
+@section('productSeo')
+@include('frontend.elements.categorySeo')
+@endsection
 
 @section('styles')
     @parent
