@@ -8,7 +8,11 @@
 @php $i = 0; @endphp
 @foreach($product->images as $image)
 @php if($i == 2) break; @endphp
-        "{{$image->getUrl('prod_sm')}}"@if(count($product->images) > 1 && $i < 2), @endif
+@if(count($product->images) > 1 && $i < 1)
+        "{{$image->getUrl('prod_sm')}}",
+@else
+        "{{$image->getUrl('prod_sm')}}"
+@endif
 @php $i++; @endphp
 @endforeach
 @else
