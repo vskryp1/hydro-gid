@@ -11,7 +11,7 @@
 @endsection
 @include('frontend.elements.ogMeta')
 @section('productSeo')
-    @include('frontend.elements.productSeo')
+    @include('frontend.elements.new_productSeo')
 @endsection
 
 @section('styles')
