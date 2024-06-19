@@ -296,11 +296,13 @@ class Page extends Model implements TranslatableContract
 
     public function getRatingCount()
     {
-        return $this->belongsToMany(Product::class)->orderBy('price', 'desc')->onlyActive()->first();
+        return $this->belongsToMany(Product::class)->avg('rating');
     }
 
     public function getRatingValue()
     {
-        return $this->belongsToMany(Product::class)->orderBy('price', 'desc')->onlyActive()->first();
+        $rating = $this->belongsToMany(Product::class)->avg('rating');
+
+        return isset($rating) ? round($rating, 1, PHP_ROUND_HALF_UP) : 5;
     }
 }
