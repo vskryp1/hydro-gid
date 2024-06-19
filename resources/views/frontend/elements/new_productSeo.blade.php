@@ -7,7 +7,7 @@
 @if(isset($product->images) && count($product->images) > 0)
 @php $i = 0; @endphp
 @foreach($product->images as $image)
-@php if($i==10) break; @endphp
+@php if($i==2) break; @endphp
         "{{$image->getUrl('prod_sm')}}"
 @php $i++; @endphp
 @endforeach
