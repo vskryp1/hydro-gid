@@ -43,13 +43,13 @@
       "@type": "Product",
       "name": "{{ $product->name }}",
       "image": [
-    @if(isset($product->images) && count($product->images) > 0)
-        @foreach($product->images as $image)
-            "{{$image->getUrl('prod_sm')}}"
-        @endforeach
-    @else
-        "{{ $product->cover->getUrl('prod_sm') }}",
-    @endif
+        @if(isset($product->images) && count($product->images) > 0)
+            @foreach($product->images as $image)
+                "{{$image->getUrl('prod_sm')}}"
+            @endforeach
+        @else
+            "{{ $product->cover->getUrl('prod_sm') }}",
+        @endif
        ],
       "description": "{{ $product->description ?? $seo_meta['seo_description'] }}",
       "sku": "{{ $product->sku }}",
