@@ -5,8 +5,11 @@
       "name": "{{ $product->name }}",
       "image": [
 @if(isset($product->images) && count($product->images) > 0)
+@php $i = 0; @endphp
 @foreach($product->images as $image)
+@php if($i==10) break; @endphp
         "{{$image->getUrl('prod_sm')}}"
+@php $i++; @endphp
 @endforeach
 @else
         "{{ $product->cover->getUrl('prod_sm') }}",
@@ -19,6 +22,7 @@
         "@type": "Brand",
         "name": "{{ ShopHelper::setting("site_name") }}"
       },
+@if($product->reviews()->count())
       "review": {
         "@type": "Review",
         "reviewRating": {
@@ -31,6 +35,7 @@
           "name": "Ім’я відгука"
         }
       },
+@endif
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "{{ $product->product_reviews->isEmpty() ? $product->rating : round($product->product_reviews->average('rating')) }}",
