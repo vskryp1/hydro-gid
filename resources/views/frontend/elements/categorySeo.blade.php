@@ -9,7 +9,7 @@
         "@type": "AggregateOffer",
         "url": "{{$og_meta['og_url']}}",
         "priceCurrency": "UAH",
-        "lowPrice": "{{$page->getLowPrice()->format_price}}",
+        "lowPrice": "{{($page->getLowPrice()->format_price < 1) ? $page->getLowPrice()->format_price : 1 }}",
         "highPrice": "{{$page->getHighPrice()->format_price}}",
         "offerCount": "{{$page->getOfferCount()}}"
       },
