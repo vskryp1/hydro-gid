@@ -9,9 +9,9 @@
         "@type": "AggregateOffer",
         "url": "{{$og_meta['og_url']}}",
         "priceCurrency": "UAH",
-        "lowPrice": "{{($page->getLowPrice()->format_price == 0) ? 1 : $page->getLowPrice()->format_price }}",
-        "highPrice": "{{$page->getHighPrice()->format_price}}",
-        "offerCount": "{{$page->getOfferCount()}}"
+        "lowPrice": "{{$page->countAndPricesForSeoCategories['lowPrice']}}",
+        "highPrice": "{{$page->countAndPricesForSeoCategories['highPrice']}}",
+        "offerCount": "{{$page->countAndPricesForSeoCategories['offerCount']}}"
       },
       "aggregateRating": {
         "@type": "AggregateRating",

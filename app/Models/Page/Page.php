@@ -251,8 +251,7 @@ class Page extends Model implements TranslatableContract
             });
     }
 
-
-    public function getOfferCount()
+    public function getCountAndPricesForSeoCategoriesAttribute(): array
     {
         $categories = CategoryHelper::getPageCategories($this);
         $products = ProductHelper::prepareActiveProductsWithFilters()
@@ -262,36 +261,21 @@ class Page extends Model implements TranslatableContract
                 function ($pages) use ($categories) {
                     return $pages->whereIn('page_id', $categories);
                 }
-            )->count();
-        return $products;
-    }
+            );
 
-    public function getLowPrice()
-    {
-        $categories = CategoryHelper::getPageCategories($this);
-        $products = ProductHelper::prepareActiveProductsWithFilters()
-            ->onlyActive()
-            ->whereHas(
-                'pages',
-                function ($pages) use ($categories) {
-                    return $pages->whereIn('page_id', $categories);
-                }
-            )->orderBy('price')->first();
-        return $products;
-    }
+        $countProd = clone $products;
 
-    public function getHighPrice()
-    {
-        $categories = CategoryHelper::getPageCategories($this);
-        $products = ProductHelper::prepareActiveProductsWithFilters()
-            ->onlyActive()
-            ->whereHas(
-                'pages',
-                function ($pages) use ($categories) {
-                    return $pages->whereIn('page_id', $categories);
-                }
-            )->orderBy('price', 'desc')->first();
-        return $products;
+        $lowProd = clone $products;
+        $lowPriceProd = clone $lowProd->orderBy('price')->first();
+
+        $highProd = clone $products;
+        $highPriceProd = clone $highProd->orderBy('price', 'desc')->first();
+
+        return [
+            'offerCount' => $countProd->count(),
+            'lowPrice' => ($lowPriceProd->format_price == 0) ? 1 : $lowPriceProd->format_price,
+            'highPrice' => $highPriceProd->format_price,
+        ];
     }
 
     public function getRatingCount()
