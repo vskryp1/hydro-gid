@@ -22,19 +22,19 @@
                 </li>
             @endforeach
         </ul>
-        <div class="star-box">
-            @if($product->rating_calculate)
-                <div data-mark="{{ round($product->product_reviews->average('rating')) }}"
-                     data-star-on="{{ url('/assets/frontend/images/on.svg') }}"
-                     data-star-off="{{ url('/assets/frontend/images/off.svg') }}"
-                     class="star js_review star-fill hidden-mob"></div>
-            @else
-                <div data-mark="{{ $product->rating }}"
-                     data-star-on="{{ url('/assets/frontend/images/on.svg') }}"
-                     data-star-off="{{ url('/assets/frontend/images/off.svg') }}"
-                     class="star js_review star-fill hidden-mob"></div>
-            @endif
-        </div>
+{{--        <div class="star-box">--}}
+{{--            @if($product->rating_calculate)--}}
+{{--                <div data-mark="{{ round($product->product_reviews->average('rating')) }}"--}}
+{{--                     data-star-on="{{ url('/assets/frontend/images/on.svg') }}"--}}
+{{--                     data-star-off="{{ url('/assets/frontend/images/off.svg') }}"--}}
+{{--                     class="star js_review star-fill hidden-mob"></div>--}}
+{{--            @else--}}
+{{--                <div data-mark="{{ $product->rating }}"--}}
+{{--                     data-star-on="{{ url('/assets/frontend/images/on.svg') }}"--}}
+{{--                     data-star-off="{{ url('/assets/frontend/images/off.svg') }}"--}}
+{{--                     class="star js_review star-fill hidden-mob"></div>--}}
+{{--            @endif--}}
+{{--        </div>--}}
 
         @if(!$product->is_disable_price && $product->original_price > 0 && $product->price > 0)
             @include('frontend.elements.product.price', ['product' => $product])

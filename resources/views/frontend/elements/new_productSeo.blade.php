@@ -26,17 +26,17 @@
         "@type": "Brand",
         "name": "{{ ShopHelper::setting("site_name") }}"
       },
-@if($product->reviews()->count())
+@if($product->reviews()->count() && ($review = $product->productReviewsLastSeo()) )
       "review": {
         "@type": "Review",
         "reviewRating": {
           "@type": "Rating",
-          "ratingValue": "Оцінка відгука",
+          "ratingValue": "{{$review->rating}}",
           "bestRating": "5"
         },
         "author": {
           "@type": "Person",
-          "name": "Ім’я відгука"
+          "name": "{{$review->username}}"
         }
       },
 @endif

@@ -191,23 +191,23 @@
                                 <div class="prod-status">{{ $product->sale_type->description }}</div>
                             </div>
                             <div class="column-right">
-                                <div class="star-box">
-                                    @if($product->rating_calculate && $reviews->count())
-                                        <div data-mark="{{ round($product->product_reviews->average('rating')) }}"
-                                             data-star-on="{{ asset('/assets/frontend/images/on.svg') }}"
-                                             data-star-off="{{ asset('/assets/frontend/images/off.svg') }}"
-                                             class="star js_review star-fill hidden-mob"></div>
-                                    @else
-                                        <div data-mark="{{ $product->rating }}"
-                                             data-star-on="{{ asset('/assets/frontend/images/on.svg') }}"
-                                             data-star-off="{{ asset('/assets/frontend/images/off.svg') }}"
-                                             class="star js_review star-fill hidden-mob"></div>
-                                    @endif
-                                    <a href="#scroll-review" class="review-qw js_scroll-review">
-                                        {{ $product->product_reviews->count() }}
-                                        {{ trans_choice('frontend/product/index.reviews_trans', $product->product_reviews->count(), [], App::getLocale()) }}
-                                    </a>
-                                </div>
+{{--                                <div class="star-box">--}}
+{{--                                    @if($product->rating_calculate && $reviews->count())--}}
+{{--                                        <div data-mark="{{ round($product->product_reviews->average('rating')) }}"--}}
+{{--                                             data-star-on="{{ asset('/assets/frontend/images/on.svg') }}"--}}
+{{--                                             data-star-off="{{ asset('/assets/frontend/images/off.svg') }}"--}}
+{{--                                             class="star js_review star-fill hidden-mob"></div>--}}
+{{--                                    @else--}}
+{{--                                        <div data-mark="{{ $product->rating }}"--}}
+{{--                                             data-star-on="{{ asset('/assets/frontend/images/on.svg') }}"--}}
+{{--                                             data-star-off="{{ asset('/assets/frontend/images/off.svg') }}"--}}
+{{--                                             class="star js_review star-fill hidden-mob"></div>--}}
+{{--                                    @endif--}}
+{{--                                    <a href="#scroll-review" class="review-qw js_scroll-review">--}}
+{{--                                        {{ $product->product_reviews->count() }}--}}
+{{--                                        {{ trans_choice('frontend/product/index.reviews_trans', $product->product_reviews->count(), [], App::getLocale()) }}--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         @if($packages)

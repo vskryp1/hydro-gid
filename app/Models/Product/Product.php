@@ -177,6 +177,11 @@
             return $this->reviews()->onlyAboutSpecificProduct($this)->onlyActive();
         }
 
+        public function productReviewsLastSeo()
+        {
+            return $this->reviews()->orderByDesc('created_at')->orderByDesc('rating')->onlyAboutSpecificProduct($this)->onlyActive()->first();
+        }
+
         public function parent()
         {
             return $this->belongsTo(Product::class);
