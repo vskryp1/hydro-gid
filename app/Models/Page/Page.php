@@ -263,7 +263,12 @@ class Page extends Model implements TranslatableContract
                 }
             );
 
-if($products){
+        if (!$products->count() > 1)
+            return [
+                'offerCount' => '',
+                'lowPrice' => '',
+                'highPrice' => '',
+            ];
 
         $lowProd = ProductHelper::prepareActiveProductsWithFilters()
             ->onlyActive()
@@ -282,17 +287,13 @@ if($products){
                     return $pages->whereIn('page_id', $categories);
                 }
             )->orderBy('price', 'desc')->first();
+
         return [
             'offerCount' => $products->count(),
-            'lowPrice' => ($lowProd->format_price == 0) ? 1 : $lowProd->format_price,
-            'highPrice' => $highProd->format_price,
+            'lowPrice' => ($lowProd->price == 0) ? 1 : $lowProd->price,
+            'highPrice' => $highProd->price,
         ];
 
-
-}
-        return [
-            'offerCount' => $products->count(),
-        ];
     }
 
     public function getRatingCount()
