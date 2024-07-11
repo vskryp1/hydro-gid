@@ -263,12 +263,13 @@ class Page extends Model implements TranslatableContract
                 }
             );
 
-        if (!$products->count() > 1)
+        if ($products->count() < 1){
             return [
                 'offerCount' => '',
                 'lowPrice' => '',
                 'highPrice' => '',
             ];
+        }
 
         $lowProd = ProductHelper::prepareActiveProductsWithFilters()
             ->onlyActive()
@@ -290,10 +291,9 @@ class Page extends Model implements TranslatableContract
 
         return [
             'offerCount' => $products->count(),
-            'lowPrice' => ($lowProd->price == 0) ? 1 : $lowProd->price,
-            'highPrice' => $highProd->price,
+            'lowPrice' => ($lowProd->price == 0) ? 1 : $lowProd->format_price,
+            'highPrice' => $highProd->format_price,
         ];
-
     }
 
     public function getRatingCount()

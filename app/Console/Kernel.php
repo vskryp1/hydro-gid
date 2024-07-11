@@ -43,7 +43,8 @@
             $schedule->command('sitemap:image')->dailyAt(config('app.sitemap_image_generate'));
 
             // generate sitemap 
-//            $schedule->command('sitemap:')->dailyAt(config('app.sitemap_image_generate'));
+            $schedule->command('sitemap:')->dailyAt(config('app.sitemap_image_generate'));
+//            $schedule->command('sitemap:')->dailyAt('8:50');
 
             //update new post cities
             $schedule->job(new GetCitiesNPJob(config('app.locale')))->dailyAt(config('app.np_get_time'));
