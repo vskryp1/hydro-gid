@@ -263,18 +263,35 @@ class Page extends Model implements TranslatableContract
                 }
             );
 
-        $countProd = clone $products;
+if($products){
 
-        $lowProd = clone $products;
-        $lowPriceProd = clone $lowProd->orderBy('price')->first();
+        $lowProd = ProductHelper::prepareActiveProductsWithFilters()
+            ->onlyActive()
+            ->whereHas(
+                'pages',
+                function ($pages) use ($categories) {
+                    return $pages->whereIn('page_id', $categories);
+                }
+            )->orderBy('price')->first();
 
-        $highProd = clone $products;
-        $highPriceProd = clone $highProd->orderBy('price', 'desc')->first();
-
+        $highProd = ProductHelper::prepareActiveProductsWithFilters()
+            ->onlyActive()
+            ->whereHas(
+                'pages',
+                function ($pages) use ($categories) {
+                    return $pages->whereIn('page_id', $categories);
+                }
+            )->orderBy('price', 'desc')->first();
         return [
-            'offerCount' => $countProd->count(),
-            'lowPrice' => ($lowPriceProd->format_price == 0) ? 1 : $lowPriceProd->format_price,
-            'highPrice' => $highPriceProd->format_price,
+            'offerCount' => $products->count(),
+            'lowPrice' => ($lowProd->format_price == 0) ? 1 : $lowProd->format_price,
+            'highPrice' => $highProd->format_price,
+        ];
+
+
+}
+        return [
+            'offerCount' => $products->count(),
         ];
     }
 
