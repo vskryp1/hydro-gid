@@ -248,9 +248,9 @@
                     }
                 }
             }
-            if($request->products){
-                $page->products()->sync($request->products);
-            }
+//            if($request->products){
+//                $page->products()->sync($request->products);
+//            }
             event(new UrlWasBorn($page));
             Cache::tags('pages')->flush();
             return redirect(
