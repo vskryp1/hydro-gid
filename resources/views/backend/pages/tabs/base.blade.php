@@ -34,9 +34,9 @@
         <label for="validationCustom03">@lang('backend.template')</label>
         {!! Form::select('page_template_id', $templates, null,['class'=>'form-control', 'required']) !!}
     </div>
-    <div class="form-group">
-        <label>@lang('backend.products')</label>
-        {!! Form::select('products[]', $products, $page->products ?? [], ['class'=>'form-control select2 js_categories', 'multiple' => "multiple"]) !!}
-    </div>
+{{--    <div class="form-group">--}}
+{{--        <label>@lang('backend.products')</label>--}}
+{{--        {!! Form::select('products[]', $products, $page->products ?? [], ['class'=>'form-control select2 js_categories', 'multiple' => "multiple"]) !!}--}}
+{{--    </div>--}}
     <div class="clearfix"></div>
 </div>

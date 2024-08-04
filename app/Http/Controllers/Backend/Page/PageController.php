@@ -154,8 +154,8 @@
                 $parent                  = $parent->parent_page_id != 1 ? $parent->parent()->first() : null;
             }
             $breadcrumbs = array_reverse($breadcrumb, true);
-            if (!Cache::get('products'))
-                Cache::put('products', Product::onlyActive()->limit(10)->get()->pluck('name', 'id'), 8600);
+//            if (!Cache::get('products'))
+//                Cache::put('products', Product::onlyActive()->limit(10)->get()->pluck('name', 'id'), 8600);
 
 
             return view('backend.pages.edit', [
@@ -165,7 +165,7 @@
                 'templates'       => PageTemplate::onlyActive()->get()->pluck('name', 'id'),
                 'page_add_fields' => $page->page_template ? $page->page_template->page_additional_field : [],
                 'pages'           => Page::where('id', '<>', $page->id)->get(),
-                'products'        => Cache::get('products'),
+//                'products'        => Cache::get('products'),
             ]);
 
 
