@@ -379,10 +379,12 @@
         protected function hasMoreProducts()
         {
             $productIds = $this->products->pluck('id');
+            $totalProducts = $this->products->count();
             $this->recheckFilters();
             $page = $_GET['page'] ?? 1;
             $this->products = $this->products->orderBy('is_disable_price', 'ASC')->paginate($this->getLimit());
-            $this->showMoreAvailable = $page < $this->products->lastPage();
+            $this->showMoreAvailable = $totalProducts > $this->offset;
+            //$this->showMoreAvailable = $page < $this->products->lastPage();
         }
 
         public function getLimit()
