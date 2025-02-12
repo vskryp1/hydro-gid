@@ -5,6 +5,7 @@
     use App\Models\Filters\Filter;
     use App\Singletons\SeoMetaData;
     use Cache;
+    use Illuminate\Pagination\Paginator;
 
     class FilterHelper
     {
@@ -375,7 +376,7 @@
 
             return get_object_vars($this);
         }
-
+/*
         protected function hasMoreProducts()
         {
             $productIds = $this->products->pluck('id');
@@ -383,6 +384,25 @@
             $page = $_GET['page'] ?? 1;
             $this->products = $this->products->orderBy('is_disable_price', 'ASC')->paginate($this->getLimit());
             $this->showMoreAvailable = $page < $this->products->lastPage();
+        }
+*/
+
+        protected function hasMoreProducts()
+        {
+            $currentPage = (int)ceil(((int)$this->offset + (int)$this->getLimit()) / (int)$this->getLimit());
+
+            if($currentPage > 1){
+                Paginator::currentPageResolver(function () use ($currentPage) {
+                    return $currentPage;
+                });
+            }
+
+            $productIds = $this->products->pluck('id');
+            $totalProducts = $this->products->count();
+            $this->recheckFilters();
+            $page = $_GET['page'] ?? 1;
+            $this->products = $this->products->orderBy('is_disable_price', 'ASC')->paginate($this->getLimit());
+            $this->showMoreAvailable = $totalProducts > ((int)$this->offset + (int)$this->getLimit());
         }
 
         public function getLimit()

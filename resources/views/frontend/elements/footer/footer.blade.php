@@ -33,9 +33,9 @@
                             {!! Html::image('/assets/frontend/images/instagram.svg', 'instagram') !!}
                         </a>
                     @endif
-                    @if(ShopHelper::setting('linkedin_link'))
-                        <a href="{{ ShopHelper::setting('linkedin_link') }}" target="_blank" rel="noreferrer nofollow">
-                            {!! Html::image('/assets/frontend/images/linkedin.svg', 'linkedin') !!}
+                    @if(ShopHelper::setting('youtube-link'))
+                        <a href="{{ ShopHelper::setting('youtube-link') }}" target="_blank" rel="noreferrer nofollow">
+                            {!! Html::image('/assets/frontend/images/youtube_f.svg', 'linkedin') !!}
                         </a>
                     @endif
                 </div>
