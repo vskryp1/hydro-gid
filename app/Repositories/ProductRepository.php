@@ -184,28 +184,45 @@
          */
         public function saveImages($product)
         {
-           // $product->images()->delete();
-            if (isset($this->data['images']) && is_array($this->data['images'])) {
-                $pos = 0;
-                foreach ($this->data['images'] as $image) {
+            if (!isset($this->data['images']) || !is_array($this->data['images'])) {
+                $product->images()->delete();
+                return;
+            }
 
-                    if (!is_null($image['image'])) {
-                        $filePath = collect([ 'products', $product->id, $image['image']])->implode(DIRECTORY_SEPARATOR);
+            $existingImages = $product->images()->get()->keyBy('image');
 
-                        $fff = new ResizeImageJob(
-                                $filePath,
-                                config('customimagecache.types.products'),
-                                'products'
-                            );
-
-                        $fff->handle();
-
-                        $image['product_id'] = $product->id;
-                        $image['cover']      = $pos == 0;
-                        $image['position']   = $pos++;
-                        ProductImage::create($image);
-                    }
+            foreach ($this->data['images'] as $position => $image) {
+                if (!isset($image['image']) || is_null($image['image']) || $image['image'] === '') {
+                    continue;
                 }
+
+                $filePath = collect(['products', $product->id, $image['image']])->implode(DIRECTORY_SEPARATOR);
+                $resizeImageJob = new ResizeImageJob(
+                    $filePath,
+                    config('customimagecache.types.products'),
+                    'products'
+                );
+                $resizeImageJob->handle();
+
+                $imageData = [
+                    'product_id' => $product->id,
+                    'image' => $image['image'],
+                    'cover' => $position === 0,
+                    'position' => $position,
+                ];
+
+                $productImage = $existingImages->pull($image['image']);
+                if ($productImage) {
+                    $productImage->fill(array_merge($imageData, $image));
+                    $productImage->save();
+                    continue;
+                }
+
+                ProductImage::create(array_merge($imageData, $image));
+            }
+
+            if ($existingImages->isNotEmpty()) {
+                $product->images()->whereIn('id', $existingImages->pluck('id')->all())->delete();
             }
         }
 
